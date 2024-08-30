@@ -1,0 +1,22 @@
+[
+    {
+        "amount": "2.00 USDC",
+        "date": "2023-11-22",
+        "against": "vitalik.eth"
+    },
+    {
+        "amount": "50.00 USDC",
+        "date": "2023-12-01",
+        "against": "marvin.eth"
+    },
+    {
+        "amount": "8.00 USDC",
+        "date": "2023-11-25",
+        "against": "lemon.eth"
+    },
+    {
+        "amount": "8.00 USDC",
+        "date": "2023-12-05",
+        "against": "ratita.eth"
+    }
+]

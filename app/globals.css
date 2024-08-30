@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+
+    --radius: 0.5rem;
+  }
+}
+body {
+  background: #141414;
+  pointer-events: all !important;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  .gradient-border {
+    border-radius: 4px;
+    border: 3px solid var(--Orange-Linear, #f9b208);
+    border-image: linear-gradient(to bottom, #f9b208, #c14003) 1;
+  }
+
+  .gradient-border-fino {
+    border-radius: 25px;
+    border: 1px solid var(--Orange-Linear, #f9b208);
+    border-image: linear-gradient(to bottom, #f9b208, #c14003) 1;
+  }
+
+  .gradient-border-left {
+    border-radius: 4px;
+    border-left: 3px solid var(--Orange-Linear, #f9b208);
+    border-image: linear-gradient(to bottom, #f9b208, #c14003) 1;
+  }
+
+  .div-oblicuo {
+    clip-path: polygon(
+      2.2% 0,
+      100% 0,
+      100% 0%,
+      100% 88.8%,
+      97.8% 100%,
+      0% 100%,
+      0% 12.2%
+    );
+  }
+
+  .div-oblicuo-cajita {
+    clip-path: polygon(
+      9.5% 0,
+      /* horizontal superior izquierda */ 90% 0,
+      100% 0%,
+      100% 71%,
+      /* lateral inferior derecho*/ 90.5% 100%,
+      /* horizontal inferior derecha */ 0% 100%,
+      0% 31% /* lateral inferior izquierdo */
+    );
+  }
+
+  .div-oblicuo-inventory {
+    clip-path: polygon(
+      2.5% 0,
+      /* horizontal superior izquierda */ 100% 0,
+      100% 0%,
+      100% 96.8%,
+      /* lateral inferior derecho*/ 97.5% 100%,
+      /* horizontal inferior derecha */ 0% 100%,
+      0% 3.4% /* lateral inferior izquierdo */
+    );
+  }
+
+  .div-oblicuo-final-character {
+    clip-path: polygon(
+      0% 0,
+      /* esquina superior izquierda */ 0% 0,
+      /* repetir esquina superior izquierda */ 100% 0%,
+      /* esquina superior derecha */ 100% 100%,
+      /* esquina inferior derecha */ 100% 100%,
+      /* nueva posición para cortar */ 0% 90%,
+      /* esquina inferior izquierda */ 0% 0%
+        /* repetir esquina superior izquierda */
+    );
+  }
+
+  .gradient-button {
+    @apply bg-gradient-to-bl from-arena-orange/5 to-amber-400/5;
+    @apply text-arena-orange font-bold;
+  }
+
+  .gradient-text-victory {
+    background: linear-gradient(180deg, #00aa58, #f27d1e);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  .gradient-text-defeat {
+    background: linear-gradient(180deg, #c40101, #f27d1e);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .gradient-text-name-character {
+    background: linear-gradient(180deg, #f9b208, #c14003);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .animate-gradient {
+    background-size: 400%;
+    -webkit-animation: animatedgradient 15s cubic-bezier(0.25, 0.8, 0.25, 1)
+      infinite;
+    -moz-animation: animatedgradient 15s cubic-bezier(0.25, 0.8, 0.25, 1)
+      infinite;
+    animation: animatedgradient 15s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+  }
+
+  @keyframes animatedgradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    25% {
+      background-position: 25% 50%;
+    }
+    50% {
+      background-position: 50% 50%;
+    }
+    75% {
+      background-position: 75% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
