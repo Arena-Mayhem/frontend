@@ -1,7 +1,7 @@
 import Stage from "@/components/Challenge/Stage";
 import Navbar from "@/components/Navigation/Navbar";
 
-export default function Challenge() {
+export default function PageChallenge() {
   return (
     <>
       <Navbar />

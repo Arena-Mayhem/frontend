@@ -6,12 +6,13 @@ import { Fragment } from "react";
 export default function NavBarChallenge() {
   const pathname = usePathname();
   const isActive = (path: string) => path === pathname;
+
   return (
     <div className="flex flex-col">
       <ActiveRoute
-        isActive={isActive("/challenge")}
+        isActive={isActive("/challenge") || pathname === "/"}
         path="/challenge"
-        title="ON GOING"
+        title="ONGOING"
         description={
           <Fragment>
             Active challenges. Pay the entrance fee and enter <br /> a duel

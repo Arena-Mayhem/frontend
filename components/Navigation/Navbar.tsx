@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, useState } from "react";
+import { Fragment, PropsWithChildren, useState } from "react";
 import { ImMenu } from "react-icons/im";
 import { Button } from "../ui/button";
 import { ButtonWallet } from "../ui/button-connectwallet";
@@ -12,41 +12,29 @@ import asset_logo from "@/public/logasion.png";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const isActive = (path: string) => path === pathname;
+  const isRootPath = pathname === "/";
 
   const LINKS = (
     <Fragment>
-      <div className="flex  w-full flex-row  justify-center flex-wrap top-0 items-center">
-        <div className="flex items-center gap-4 md:gap-8 lg:gap-16">
+      <div className="flex w-full items-center">
+        <div className="flex px-4 w-[calc(50vw-10rem)] items-center justify-center gap-4 md:gap-8 lg:gap-16">
           {/*check if active route is challenge, or challenge/history, if so then mark as active*/}
-          <Button
-            variant={"simple"}
-            className={
-              isActive("/challenge") || isActive("/challenge/history")
-                ? "text-arena-orange"
-                : ""
-            }
-            asChild
+          <NavItem
+            href="/challenge"
+            isActive={isRootPath || pathname.startsWith("/challenge")}
           >
-            <Link href="/challenge">Challenges</Link>
-          </Button>
-          <Button
-            variant={"simple"}
-            className={
-              isActive("/character") ||
-              isActive("/character/inventory") ||
-              isActive("/character/inventory/weapons") ||
-              isActive("/character/inventory/potions")
-                ? "text-arena-orange"
-                : ""
-            }
-            asChild
+            Challenges
+          </NavItem>
+          <NavItem
+            href="/character"
+            isActive={pathname.startsWith("/character")}
           >
-            <Link href="/character">Character</Link>
-          </Button>
+            Character
+          </NavItem>
         </div>
+
         <div className="flex flex-grow items-center justify-center gap-4 md:gap-8 lg:gap-16 h-[80px] ">
-          <Link className="w-[301px] relative h-full" href="/">
+          <Link className="w-[18rem] relative h-full" href="/">
             <Image
               src={asset_logo}
               alt=""
@@ -55,32 +43,16 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <div className="flex items-center  gap-4 md:gap-8 lg:gap-16">
-          <Button
-            variant={"simple"}
-            className={
-              isActive("/assets") || isActive("/assets/balance")
-                ? "text-arena-orange"
-                : ""
-            }
-            asChild
+        <div className="flex px-4 w-[calc(50vw-10rem)] items-center justify-center gap-4 md:gap-8 lg:gap-16">
+          <NavItem href="/assets" isActive={pathname.startsWith("/assets")}>
+            Assets
+          </NavItem>
+          <NavItem
+            href="/marketplace"
+            isActive={pathname.startsWith("/marketplace")}
           >
-            <Link href="/assets">Assets</Link>
-          </Button>
-          <Button
-            variant={"simple"}
-            className={
-              isActive("/marketplace") ||
-              isActive("/marketplace/weapons") ||
-              isActive("/marketplace/potions") ||
-              isActive("/marketplace/random")
-                ? "text-arena-orange"
-                : ""
-            }
-            asChild
-          >
-            <Link href="/marketplace">Marketplace</Link>
-          </Button>
+            Marketplace
+          </NavItem>
 
           <ButtonWallet />
         </div>
@@ -92,7 +64,7 @@ export default function Navbar() {
   return (
     <section className=" w-full  flex-shrink-0 justify-center  top-0 z-[1] flex flex-col lg:flex-row ">
       <nav className="!z-50 bg-arena-bg shadow-padentro border-b-[0.1px] border-white/20 flex justify-center w-full">
-        <div className="items-center gap-16 justify-center hidden lg:flex">
+        <div className="items-center max-w-screen-2xl mx-auto gap-16 justify-center hidden lg:flex">
           {LINKS}
         </div>
         <button
@@ -111,5 +83,24 @@ export default function Navbar() {
         {LINKS}
       </section>
     </section>
+  );
+}
+
+function NavItem({
+  href,
+  children,
+  isActive,
+}: PropsWithChildren<{
+  href: string;
+  isActive?: boolean;
+}>) {
+  return (
+    <Button
+      variant="simple"
+      className={isActive ? "text-arena-orange" : ""}
+      asChild
+    >
+      <Link href={href}>{children}</Link>
+    </Button>
   );
 }

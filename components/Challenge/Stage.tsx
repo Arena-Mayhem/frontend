@@ -12,7 +12,7 @@ import { useBattleHistory } from "@/lib/cartesi";
 export default function Stage() {
   const pathname = usePathname();
   const isActive = (path: string) => path === pathname;
-  const isOngoing = isActive("/challenge");
+  const isOngoing = isActive("/challenge") || pathname === "/";
   const { isConnected } = useAccount();
 
   const { data } = useBattleHistory();

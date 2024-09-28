@@ -3,7 +3,7 @@ import Image from "next/image";
 import ChallengeInfo from "./ChallengeInfo";
 import JoinChallenge from "./JoinChallenge";
 
-export default function Cards() {
+function ActiveChallenges() {
   return (
     <>
       <div className="flex items-center justify-center py-8 w-full pb-8 mx-8">
@@ -14,6 +14,7 @@ export default function Cards() {
     </>
   );
 }
+
 function Actives({ character }: { character: string }) {
   return (
     <div className="bg-arena-bg p-8 border border-b-[0.1px] border-white/20 rounded-lg w-full  shadow-padentro ">
@@ -58,3 +59,5 @@ function Actives({ character }: { character: string }) {
     </div>
   );
 }
+
+export default ActiveChallenges;
