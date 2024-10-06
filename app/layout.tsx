@@ -5,7 +5,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { Cinzel } from "next/font/google";
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
-import { localhost, hardhat, anvil } from "wagmi/chains";
+import { localhost, hardhat, anvil, holesky } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -18,7 +18,7 @@ const cinzel = Cinzel({
 const config = getDefaultConfig({
   appName: "arena-mayhem",
   projectId: "f5dc276367eb7e124550036ec4aab6df",
-  chains: [localhost, hardhat, anvil],
+  chains: [localhost, hardhat, anvil, holesky],
   // using localhost chain for development
   ssr: true,
   // If your dApp uses server side rendering (SSR)

@@ -7,6 +7,7 @@ import NavBarAssets from "./NavBarAssets";
 import { usePathname } from "next/navigation";
 import { useAccount } from "wagmi";
 import NoAddress from "../Character/NoAddress";
+import ModalCustomAsset from "../Character/ModalCustomAsset";
 
 export default function Stage() {
   const pathname = usePathname();
@@ -15,7 +16,11 @@ export default function Stage() {
   const { isConnected } = useAccount();
   return (
     <>
-      <StageBar image="/assets.png" title="ASSETS" />
+      <StageBar
+        image="/assets.png"
+        title="ASSETS"
+        action={<ModalCustomAsset />}
+      />
       <div className="flex md:flex-row flex-col">
         <NavBarAssets />
         {isOngoing && isConnected ? (

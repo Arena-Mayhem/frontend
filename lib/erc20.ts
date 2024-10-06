@@ -8,8 +8,7 @@ import {
 import { ONE_SECOND_IN_MS, ZERO_BN } from "./constants";
 import { toast } from "sonner";
 import { noOp } from "./utils";
-import { ADDRESSES } from "@/components/Assets/DashboardAssets";
-import type { DepositToken } from "./balances";
+import { useTokenData } from "./tokens";
 
 export const useErc20Approve = (
   tokenAddress: Address,
@@ -47,9 +46,7 @@ export const useErc20Allowance = (
   const OWNER: any = owner === "connected" ? address : owner;
   const SPENDER: any = spender === "connected" ? address : spender;
 
-  const TOKEN = Object.entries(ADDRESSES).find(
-    ([, { address }]) => address === tokenAddress,
-  )?.[1];
+  const TOKEN = useTokenData(tokenAddress);
 
   const balance = useReadContract({
     address: tokenAddress,
@@ -71,8 +68,10 @@ export const useErc20Allowance = (
   };
 };
 
-export const useWalletBalance = (token: DepositToken) => {
-  const isETHDeposit = token === "ETH";
+export const useWalletBalance = (token: Address) => {
+  const tokenData = useTokenData(token);
+
+  const isETHDeposit = tokenData?.symbol === "ETH";
   const isERC20Deposit = !isETHDeposit;
 
   const { address: account } = useAccount();

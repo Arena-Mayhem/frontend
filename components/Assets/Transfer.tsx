@@ -1,4 +1,4 @@
-import { formatUnits, isAddress, parseUnits } from "viem";
+import { type Address, formatUnits, isAddress, parseUnits } from "viem";
 import { toast } from "sonner";
 
 import {
@@ -11,27 +11,24 @@ import {
 import { Button } from "@/components/ui/button";
 import ConfirmDeposit from "./ConfirmDeposit";
 
-import { IoMdClose } from "react-icons/io";
 import { useRkAccountModal } from "@/components/ui/button-connectwallet";
-import { useAccountDeposits, type DepositToken } from "@/lib/balances";
-import { ADDRESSES } from "./DashboardAssets";
+import { useAccountDeposits } from "@/lib/balances";
 import { useFormattedInputHandler } from "@/lib/input";
 import { ZERO_BN } from "@/lib/constants";
 import { useAddCartesiInput } from "@/lib/cartesi";
 import { useAccount } from "wagmi";
 import { useState } from "react";
+import { useTokenData } from "@/lib/tokens";
 
-export default function Transfer({ token }: { token: DepositToken }) {
-  const [recipient, setRecipient] = useState("");
+export default function Transfer({ token }: { token: Address }) {
   const { address: account } = useAccount();
-  const isETHTransaction = token === "ETH";
+  const tokenData = useTokenData(token);
+
+  const [recipient, setRecipient] = useState("");
+  const isETHTransaction = tokenData?.symbol === "ETH";
   const isERC20Transaction = !isETHTransaction;
 
-  const TOKEN = Object.entries(ADDRESSES).find(
-    ([, { address }]) => address === token,
-  )?.[1];
-
-  const DECIMALS = TOKEN?.decimals || 18;
+  const DECIMALS = tokenData?.decimals || 18;
 
   const inputHandler = useFormattedInputHandler({
     decimals: DECIMALS,
@@ -41,8 +38,8 @@ export default function Transfer({ token }: { token: DepositToken }) {
 
   const { data: deposits } = useAccountDeposits(token);
   const VALUE = inputHandler.formattedValue;
-  const SYMBOL = TOKEN?.symbol || "ETH";
-  const IMAGE = TOKEN?.imageURL || "/eth.png";
+  const SYMBOL = tokenData?.symbol || "ETH";
+  const IMAGE = tokenData?.imageURL || "/eth.png";
 
   const DEPOSIT_BALANCE = deposits?.amount || ZERO_BN;
 
@@ -63,7 +60,7 @@ export default function Transfer({ token }: { token: DepositToken }) {
       method: isERC20Transaction ? "erc20_transfer" : "ether_transfer",
       from: account,
       to: recipient,
-      erc20: isERC20Transaction ? TOKEN?.address : null,
+      erc20: isERC20Transaction ? token : null,
       amount: VALUE.toString(),
     });
   }

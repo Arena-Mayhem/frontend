@@ -1,17 +1,18 @@
 "use client";
 
+import type { Address } from "viem";
+
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Image from "next/image";
 import Withdraw from "./Withdraw";
 import Transfer from "./Transfer";
-import type { DepositToken } from "@/lib/balances";
 
-export default function DropMenuAssets({ token }: { token: DepositToken }) {
+export default function DropMenuAssets({ token }: { token: Address }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

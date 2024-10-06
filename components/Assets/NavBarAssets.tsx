@@ -30,6 +30,18 @@ export default function NavBarChallenge() {
           </Fragment>
         }
       />
+
+      <ActiveRoute
+        isActive={pathname.startsWith("/assets/faucet")}
+        path="/assets/faucet"
+        title="Token Faucet"
+        description={
+          <Fragment>
+            Use the faucet to get some free tokens. <br /> You can only use it
+            once a day.
+          </Fragment>
+        }
+      />
     </div>
   );
 }

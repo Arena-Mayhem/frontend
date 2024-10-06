@@ -1,4 +1,4 @@
-import { formatUnits, parseUnits } from "viem";
+import { type Address, formatUnits, parseUnits } from "viem";
 import { toast } from "sonner";
 
 import {
@@ -13,45 +13,40 @@ import Image from "next/image";
 import ConfirmDeposit from "./ConfirmDeposit";
 import { useDepositERC20Token, useDepositETH } from "@/lib/cartesi";
 
-import { IoMdClose } from "react-icons/io";
 import { useRkAccountModal } from "@/components/ui/button-connectwallet";
-import { type DepositToken } from "@/lib/balances";
-import { ADDRESSES } from "./DashboardAssets";
 import { useFormattedInputHandler } from "@/lib/input";
 import { ZERO_BN } from "@/lib/constants";
+import { useTokenData } from "@/lib/tokens";
 
 export default function Deposit({
   token,
   balance,
 }: {
-  token: DepositToken;
+  token: Address;
   balance: {
     value: bigint;
     decimals: number;
   };
 }) {
-  const isETHDeposit = token === "ETH";
+  const tokenData = useTokenData(token);
+  const isETHDeposit = tokenData?.symbol === "ETH";
   const isERC20Deposit = !isETHDeposit;
 
-  const TOKEN = Object.entries(ADDRESSES).find(
-    ([, { address }]) => address === token,
-  )?.[1];
-
-  const DECIMALS = TOKEN?.decimals || 18;
+  const DECIMALS = tokenData?.decimals || 18;
 
   const inputHandler = useFormattedInputHandler({
     decimals: DECIMALS,
   });
 
   const VALUE = inputHandler.formattedValue;
-  const SYMBOL = TOKEN?.symbol || "ETH";
-  const IMAGE = TOKEN?.imageURL || "/eth.png";
+  const SYMBOL = tokenData?.symbol || "ETH";
+  const IMAGE = tokenData?.imageURL || "/eth.png";
 
   const { openAccountModal, isConnected } = useRkAccountModal();
   const { depositETH } = useDepositETH(VALUE);
   const { depositToken, requiresApproval } = useDepositERC20Token({
-    token: TOKEN?.address,
     amount: VALUE,
+    token,
   });
 
   function handleDeposit() {

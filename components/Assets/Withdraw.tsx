@@ -1,4 +1,4 @@
-import { formatUnits, parseUnits } from "viem";
+import { type Address, formatUnits, parseUnits } from "viem";
 import { toast } from "sonner";
 
 import {
@@ -12,23 +12,21 @@ import { Button } from "@/components/ui/button";
 import ConfirmDeposit from "./ConfirmDeposit";
 
 import { useRkAccountModal } from "@/components/ui/button-connectwallet";
-import { useAccountDeposits, type DepositToken } from "@/lib/balances";
-import { ADDRESSES } from "./DashboardAssets";
+import { useAccountDeposits } from "@/lib/balances";
 import { useFormattedInputHandler } from "@/lib/input";
 import { ZERO_BN } from "@/lib/constants";
 import { useAddCartesiInput } from "@/lib/cartesi";
 import { useAccount } from "wagmi";
+import { useTokenData } from "@/lib/tokens";
 
-export default function Withdraw({ token }: { token: DepositToken }) {
+export default function Withdraw({ token }: { token: Address }) {
   const { address: account } = useAccount();
-  const isETHDeposit = token === "ETH";
+  const tokenData = useTokenData(token);
+
+  const isETHDeposit = tokenData?.symbol === "ETH";
   const isERC20Deposit = !isETHDeposit;
 
-  const TOKEN = Object.entries(ADDRESSES).find(
-    ([, { address }]) => address === token,
-  )?.[1];
-
-  const DECIMALS = TOKEN?.decimals || 18;
+  const DECIMALS = tokenData?.decimals || 18;
 
   const inputHandler = useFormattedInputHandler({
     decimals: DECIMALS,
@@ -38,8 +36,8 @@ export default function Withdraw({ token }: { token: DepositToken }) {
 
   const { data: deposits } = useAccountDeposits(token);
   const VALUE = inputHandler.formattedValue;
-  const SYMBOL = TOKEN?.symbol || "ETH";
-  const IMAGE = TOKEN?.imageURL || "/eth.png";
+  const SYMBOL = tokenData?.symbol || "ETH";
+  const IMAGE = tokenData?.imageURL || "/eth.png";
 
   const DEPOSIT_BALANCE = deposits?.amount || ZERO_BN;
 
@@ -55,7 +53,7 @@ export default function Withdraw({ token }: { token: DepositToken }) {
     addCartesiInput({
       method: isERC20Deposit ? "erc20_withdraw" : "ether_withdraw",
       from: account,
-      erc20: isERC20Deposit ? TOKEN?.address : null,
+      erc20: isERC20Deposit ? token : null,
       amount: VALUE.toString(),
     });
   }

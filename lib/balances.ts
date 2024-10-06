@@ -2,14 +2,17 @@ import type { Address } from "viem";
 import useSWR from "swr";
 import { useAccount } from "wagmi";
 import { ONE_SECOND_IN_MS } from "./constants";
+import { useTokenData } from "./tokens";
 
 export const BASE_URL_INSPECT = "http://localhost:8080";
-export type DepositToken = Address | "ETH";
 
-export const useAccountDeposits = (token: DepositToken) => {
+export const useAccountDeposits = (token: Address) => {
   const { address: account, isConnected } = useAccount();
-  const isETHToken = token === "ETH";
-  const isERC20Token = token !== "ETH";
+
+  const tokenData = useTokenData(token);
+
+  const isETHToken = tokenData?.symbol === "ETH";
+  const isERC20Token = !isETHToken;
 
   const ethResult = useSWR(
     isConnected && isETHToken
