@@ -52,13 +52,13 @@ export default function ModalCustomAsset() {
           [
             ...tokens,
             {
-              address: address,
+              address,
               decimals,
               symbol,
             },
           ].filter(
-            ({ address }, index) =>
-              tokens.findIndex((t) => t.address === address) === index,
+            ({ address }, index, arr) =>
+              arr.findIndex((t) => t.address === address) === index,
             // Remove duplicates from the array
           ),
         );
