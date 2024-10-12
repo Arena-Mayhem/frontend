@@ -1,7 +1,15 @@
 import { Button } from "../ui/button";
 import Image from "next/image";
 
-export default function JoinChallenge({ amount }: { amount: string }) {
+export default function JoinChallenge({
+  amount,
+  onAction,
+  isGameStart,
+}: {
+  amount: string;
+  onAction?: () => void;
+  isGameStart?: boolean;
+}) {
   return (
     <>
       <div
@@ -17,10 +25,11 @@ export default function JoinChallenge({ amount }: { amount: string }) {
           className="m-12 w-full "
         >
           <Button
-            className="gradient-button px-4 py-8  text-arena-orange text-lg"
+            onClick={onAction}
+            className="gradient-button px-4 py-8 text-arena-orange text-lg"
             variant="arena-main"
           >
-            JOIN CHALLENGE
+            <span>{isGameStart ? "START MATCH" : "JOIN CHALLENGE"}</span>
             <Image src="/mayor.svg" alt="arrow" width={20} height={20} />
           </Button>
           <p className="text-white pt-4 text-center text-sm font-bold">

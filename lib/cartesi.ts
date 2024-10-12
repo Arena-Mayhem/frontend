@@ -1,9 +1,7 @@
 import { type Address, bytesToHex, parseAbi, toBytes } from "viem";
 import { useWriteContract } from "wagmi";
 import { useErc20Allowance, useErc20Approve } from "./erc20";
-import { ONE_SECOND_IN_MS, ZERO_BN } from "./constants";
-import useSWR from "swr";
-import { BASE_URL_INSPECT } from "./balances";
+import { ZERO_BN } from "./constants";
 
 export const ADDRESSES_INPUT_BOX = "0x59b22D57D4f067708AB0c00552767405926dc768";
 export const ADDRESSES_DAPP = "0xab7528bb862fb57e8a2bcd567a2e929a0be56a5e";
@@ -17,6 +15,15 @@ const ABI = parseAbi([
   "function depositEther(address _dapp, bytes _execLayerData) external payable",
   "function depositERC20Tokens(address _token, address _dapp, uint256 _amount, bytes _execLayerData) external",
 ]);
+
+export type FighterData = {
+  name: string;
+  weapon: string;
+  hp: number;
+  atk: number;
+  def: number;
+  spd: number;
+};
 
 export const useDepositETH = (amount: bigint) => {
   const { writeContract, ...write } = useWriteContract();
@@ -79,6 +86,7 @@ export const useAddCartesiInput = () => {
   const { writeContract, error, ...write } = useWriteContract();
 
   console.debug({ error });
+
   return {
     ...write,
     addCartesiInput: async (
@@ -87,9 +95,11 @@ export const useAddCartesiInput = () => {
           | "accept_challenge"
           | "ether_withdraw"
           | "erc20_withdraw"
-          | "ether_transfer"
           | "erc20_transfer"
-          | "create_challenge";
+          | "ether_transfer"
+          | "start_match"
+          | "create_challenge"
+          | "create_challenge_eth";
       } & Record<string, any>,
     ) => {
       console.debug({ payload });
@@ -109,6 +119,7 @@ export const useCreateChallenge = () => {
 
   return {
     createChallenge: async ({
+      isETHChallenge,
       fighterHash,
       amount,
       token,
@@ -116,38 +127,54 @@ export const useCreateChallenge = () => {
       fighterHash: string;
       token: Address;
       amount: bigint;
+      isETHChallenge?: boolean;
     }) => {
       await addCartesiInput({
-        method: "create_challenge",
+        method: isETHChallenge ? "create_challenge_eth" : "create_challenge",
         fighter_hash: fighterHash,
-        token,
+        token: isETHChallenge ? null : token,
         amount: amount.toString(),
       });
     },
   };
 };
 
-export const useBattleHistory = () => {
-  return useSWR(`${BASE_URL_INSPECT}/inspect/battles`, {
-    fetcher: async (key: string) => {
-      // Early exit if key is falsy
+export const useJoinChallenge = () => {
+  const { addCartesiInput } = useAddCartesiInput();
 
-      const res = await fetch(key);
-      const payload = (await res.json()) as {
-        status?: string;
-        reports?: Array<{
-          payload: string;
-        }>;
-      };
-
-      const data = payload?.reports?.[0].payload;
-
-      if (data) {
-        return JSON.parse(Buffer.from(data.substr(2), "hex").toString("utf8"));
-      }
-
-      return null;
+  return {
+    joinChallenge: async ({
+      challenge_id,
+      fighter,
+    }: {
+      fighter: FighterData;
+      challenge_id: number;
+    }) => {
+      await addCartesiInput({
+        method: "accept_challenge",
+        challenge_id,
+        fighter,
+      });
     },
-    refreshInterval: ONE_SECOND_IN_MS * 5, // 5 seconds
-  });
+  };
+};
+
+export const useStartMatch = () => {
+  const { addCartesiInput } = useAddCartesiInput();
+
+  return {
+    startMatch: async ({
+      challenge_id,
+      fighter,
+    }: {
+      fighter: FighterData;
+      challenge_id: number;
+    }) => {
+      await addCartesiInput({
+        method: "start_match",
+        challenge_id,
+        fighter,
+      });
+    },
+  };
 };

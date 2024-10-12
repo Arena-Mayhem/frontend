@@ -8,22 +8,27 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Querypj from "./Querypj";
+import ModalPlayer, { type GenericOnChangeHandlers } from "./ModalPlayer";
 
-const images = ["/champsword.png", "/champ.png", "/dolvin.jpg", "/colin.jpg"];
+const images = ["/shaman.png", "/wizard.png", "/ogro.png"];
 
-export function Choosepj() {
+export function Choosepj(props: Partial<GenericOnChangeHandlers>) {
   return (
     <Carousel>
       <p className="text-white">
-        {" "}
-        Select the warrior who will fight in this challenge{" "}
+        Select the warrior who will fight in this challenge
       </p>
       <br />
       <CarouselContent>
         {images.map((imageUrl, index) => (
           <CarouselItem key={index}>
-            <Querypj />
+            <ModalPlayer
+              type="fighter"
+              avatar={imageUrl}
+              victories="10"
+              amount_defeats="32"
+              {...props}
+            />
           </CarouselItem>
         ))}
       </CarouselContent>

@@ -1,5 +1,13 @@
 "use client";
 
+import type { SwordTypes } from "@/lib/types";
+import type { Token } from "@/lib/atoms";
+
+import { useState } from "react";
+import { toast } from "sonner";
+import Link from "next/link";
+import { sha256, toBytes, zeroAddress } from "viem";
+
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -8,12 +16,9 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog-selectchamp";
 import { Button } from "@/components/ui/button";
-import { Choosepj } from "./Choosepj";
-import Link from "next/link";
-import { Cancel } from "@radix-ui/react-alert-dialog";
 import { useCreateChallenge } from "@/lib/cartesi";
-import { sha256, toBytes, type Address } from "viem";
-import { toast } from "sonner";
+import { Choosepj } from "./Choosepj";
+import { Cancel } from "@radix-ui/react-alert-dialog";
 
 export const ActionContinue = ({ onClick }: { onClick?: any }) => (
   <div className="w-full justify-end py-8 px-4 flex">
@@ -31,41 +36,41 @@ export default function SelectChamp({
   token,
   amount,
 }: {
-  token: Address;
+  token: Token;
   amount: bigint;
 }) {
+  console.debug({ token, amount });
   const { createChallenge } = useCreateChallenge();
+
+  const [name, setName] = useState("Leonardo");
+  const [weapon, setWeapon] = useState<SwordTypes>("sword");
+  const [fighter, setFighter] = useState({
+    hp: 0,
+    atk: 0,
+    def: 0,
+    spd: 0,
+  });
+
+  const setPartialFighter = (config: Partial<typeof fighter>) =>
+    setFighter((prev) => ({ ...prev, ...config }));
 
   function handleCreateChallenge() {
     if (!token) return toast.error("Select a token");
     if (!amount) return toast.error("Enter a valid amount");
 
-    const fighter = {
-      name: "fighter",
-      weapon: "weapon",
-      hp: 100,
-      atk: 10,
-      def: 10,
-      spd: 10,
-    };
-
     const fighterHash = sha256(
       toBytes(
-        [
-          fighter.name,
-          fighter.weapon,
-          fighter.hp,
-          fighter.atk,
-          fighter.def,
-          fighter.spd,
-        ].join("-"),
+        [name, weapon, fighter.hp, fighter.atk, fighter.def, fighter.spd].join(
+          "-",
+        ),
       ),
       "hex",
     );
 
     createChallenge({
       amount,
-      token,
+      isETHChallenge: token.address === zeroAddress,
+      token: token.address,
       fighterHash,
     });
   }
@@ -80,7 +85,28 @@ export default function SelectChamp({
         <AlertDialogTitle className="gradient-text-name-character text-5xl">
           Select your warrior
         </AlertDialogTitle>
-        <Choosepj />
+        <Choosepj
+          onChangeAtack={(atk) =>
+            setPartialFighter({
+              atk,
+            })
+          }
+          onChangeDefense={(def) =>
+            setPartialFighter({
+              def,
+            })
+          }
+          onChangeHealth={(hp) =>
+            setPartialFighter({
+              hp,
+            })
+          }
+          onChangeSpeed={(spd) =>
+            setPartialFighter({
+              spd,
+            })
+          }
+        />
         <div className="flex gap-3   flex-row justify-end items-center">
           <Cancel asChild>
             <Button asChild className="w-56 py-5" variant="arena-main">

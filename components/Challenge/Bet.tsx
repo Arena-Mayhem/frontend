@@ -1,22 +1,24 @@
 "use client";
 
+import type { Token } from "@/lib/atoms";
+
 import { Fragment, useState } from "react";
 import { SelectToken } from "./Select";
 import { useFormattedInputHandler } from "@/lib/input";
-import type { Address } from "viem";
+import { TOKEN_ETH } from "@/lib/tokens";
 
 export default function Bet({
   children,
 }: {
   children: (props: {
     isValidBet: boolean;
-    token: Address;
+    token: Token;
     value: bigint;
   }) => JSX.Element;
 }) {
-  const [token, setToken] = useState("ETH");
+  const [token, setToken] = useState<Token>(TOKEN_ETH);
   const formatted = useFormattedInputHandler({
-    decimals: 18,
+    decimals: token.decimals,
   });
 
   const isValidBet = formatted.value > 0;
@@ -42,12 +44,12 @@ export default function Bet({
             type="text"
           />
         </label>
-        <SelectToken selected={token} onSelect={setToken} />
+        <SelectToken selectedToken={token} onSelect={setToken} />
       </div>
 
       {children({
         isValidBet,
-        token: token as any,
+        token,
         value: formatted.formattedValue,
       })}
     </Fragment>

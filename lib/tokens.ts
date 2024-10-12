@@ -1,6 +1,13 @@
 import { type Address, zeroAddress } from "viem";
 import { type Token, useCustomTokens } from "./atoms";
 
+export const TOKEN_ETH = {
+  imageURL: "/eth.png",
+  address: zeroAddress,
+  decimals: 18,
+  symbol: "ETH",
+};
+
 const TOKENS: Array<Token> = [
   {
     imageURL: "/usdc.png",
@@ -14,12 +21,7 @@ const TOKENS: Array<Token> = [
     decimals: 18,
     symbol: "DAI",
   },
-  {
-    imageURL: "/eth.png",
-    address: zeroAddress,
-    decimals: 18,
-    symbol: "ETH",
-  },
+  TOKEN_ETH,
 ];
 
 export const useTokenList = (): Array<Token> => {

@@ -21,3 +21,8 @@ export function toPrecision(n: number | string, precision: number = 1) {
   }
   return `${whole}.${decimal}`;
 }
+
+export const toFinitePositive = (n: any) => {
+  const num = Number(n);
+  return Number.isFinite(num) && num > 0 ? num : 0;
+};

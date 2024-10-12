@@ -7,6 +7,12 @@ import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
 import { localhost, hardhat, anvil, holesky } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import {
+  Client,
+  Provider as URLQProvider,
+  cacheExchange,
+  fetchExchange,
+} from "urql";
 import { Toaster } from "@/components/ui/sonner";
 
 const cinzel = Cinzel({
@@ -26,6 +32,11 @@ const config = getDefaultConfig({
 
 const queryClient = new QueryClient();
 
+const urqlClient = new Client({
+  url: "http://localhost:8080/graphql",
+  exchanges: [cacheExchange, fetchExchange],
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,11 +46,13 @@ export default function RootLayout({
     <html suppressHydrationWarning lang="en">
       <body className={cinzel.className}>
         <Toaster />
-        <WagmiProvider config={config}>
-          <QueryClientProvider client={queryClient}>
-            <RainbowKitProvider>{children}</RainbowKitProvider>
-          </QueryClientProvider>
-        </WagmiProvider>
+        <URLQProvider value={urqlClient}>
+          <WagmiProvider config={config}>
+            <QueryClientProvider client={queryClient}>
+              <RainbowKitProvider>{children}</RainbowKitProvider>
+            </QueryClientProvider>
+          </WagmiProvider>
+        </URLQProvider>
       </body>
     </html>
   );
