@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import ChallengeInfo from "./ChallengeInfo";
 import JoinChallenge from "./JoinChallenge";
-import { type GameData, useChallenges } from "@/lib/queries";
+import { type GameData, useChallenges, useReports } from "@/lib/queries";
 import { useTokenData } from "@/lib/tokens";
 import { formatUnits, zeroAddress } from "viem";
 import { beautifyAddress } from "@/components/ui/button-connectwallet";
@@ -10,7 +10,9 @@ import { useJoinChallenge, useStartMatch } from "@/lib/cartesi";
 
 function ActiveChallenges() {
   const { challenges } = useChallenges();
+  const { data } = useReports();
 
+  console.debug({ challenges, reports: data });
   return (
     <>
       <div className="flex items-center justify-center py-8 w-full pb-8 mx-8">
@@ -37,11 +39,11 @@ function Actives(props: GameData) {
     const GAME_STATE = {
       challenge_id: props.id,
       fighter: {
-        atk: 10,
+        spd: 15,
+        atk: 35,
         def: 25,
         hp: 25,
-        spd: 15,
-        name: "Leonardito",
+        name: "Leonardo",
         weapon: "sword",
       },
     };

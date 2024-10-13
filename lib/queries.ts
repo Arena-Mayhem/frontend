@@ -24,14 +24,56 @@ export const QUERY_NOTICES = gql`
   }
 `;
 
+export const QUERY_REPORTS = gql`
+  {
+    reports {
+      edges {
+        node {
+          payload
+          index
+        }
+      }
+    }
+  }
+`;
+
+const payloadToJson = (payload?: string) => {
+  try {
+    const RAW_JSON = Buffer.from((payload || "").substr(2), "hex").toString(
+      "utf8",
+    );
+    return JSON.parse(RAW_JSON);
+  } catch (e) {
+    return null;
+  }
+};
+
 export const useNotices = () => {
-  const [result, revalidate] = useQuery({
+  const [{ error, fetching: isLoading, data }, revalidate] = useQuery({
     query: QUERY_NOTICES,
   });
 
   return {
-    ...result,
-    isLoading: result.fetching,
+    data: (data?.notices?.edges || []).map(({ node }: { node: any }) =>
+      payloadToJson(node?.payload),
+    ),
+    error,
+    isLoading,
+    revalidate,
+  };
+};
+
+export const useReports = () => {
+  const [{ error, fetching: isLoading, data }, revalidate] = useQuery({
+    query: QUERY_REPORTS,
+  });
+
+  return {
+    data: (data?.reports?.edges || []).map(({ node }: { node: any }) =>
+      payloadToJson(node?.payload),
+    ),
+    error,
+    isLoading,
     revalidate,
   };
 };
@@ -40,21 +82,8 @@ export const useChallenges = () => {
   const { data = [] } = useNotices();
 
   return {
-    challenges: (data?.notices?.edges || [])
-      .map(({ node }: { node: { payload?: string } }) => {
-        const RAW_JSON = Buffer.from(
-          node?.payload?.substr(2) || "",
-          "hex",
-        ).toString("utf8");
-        try {
-          const data = JSON.parse(RAW_JSON);
-          if (data.fighter_hash) return data;
-        } catch (e) {
-          // no-op
-        }
-
-        return null;
-      })
-      .filter((challenge: any) => Boolean(challenge)) as Array<GameData>,
+    challenges: data.filter(({ fighter_hash }: any) =>
+      Boolean(fighter_hash),
+    ) as GameData[],
   };
 };

@@ -5,7 +5,7 @@ import Deposit from "./Deposit";
 import { ZERO_BN } from "@/lib/constants";
 import { useAccountDeposits } from "@/lib/balances";
 import { useWalletBalance } from "@/lib/erc20";
-import { useTokenData, useTokenList } from "@/lib/tokens";
+import { useTokenData, useTokenImage, useTokenList } from "@/lib/tokens";
 import { useImageForAddress } from "@/lib/images";
 
 export default function DashboardAssets() {
@@ -30,10 +30,7 @@ function AssetsCards({ address }: { address: Address }) {
 
   const DECIMALS = tokenData?.decimals || 18;
 
-  const { imageURL } = useImageForAddress({
-    address: tokenData?.address,
-    expectedImageURL: tokenData?.imageURL,
-  });
+  const { imageURL } = useTokenImage(tokenData);
 
   return (
     <div className="bg-arena-bg p-8 border border-b-[0.1px] border-white/20 rounded-lg w-full  shadow-padentro ">

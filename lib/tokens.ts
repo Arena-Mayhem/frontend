@@ -1,5 +1,8 @@
 import { type Address, zeroAddress } from "viem";
 import { type Token, useCustomTokens } from "./atoms";
+import useSWR from "swr";
+import { ONE_SECOND_IN_MS } from "./constants";
+import { useImageForAddress } from "./images";
 
 export const TOKEN_ETH = {
   imageURL: "/eth.png",
@@ -33,4 +36,43 @@ export const useTokenList = (): Array<Token> => {
 export const useTokenData = (address: Address) => {
   const tokens = useTokenList();
   return tokens.find((token) => token.address === address) || null;
+};
+
+export const useTrustWalletData = () => {
+  return useSWR<
+    Array<{
+      name: string;
+      symbol: string;
+      logoURI: string;
+    }>
+  >("trustwallet-data", {
+    fetcher: async () => {
+      const response = await fetch(
+        "https://raw.githubusercontent.com/trustwallet/assets/refs/heads/master/blockchains/ethereum/tokenlist.json",
+      );
+
+      return (await response.json())?.tokens || [];
+    },
+    keepPreviousData: true,
+    dedupingInterval: ONE_SECOND_IN_MS * 60 * 60, // 1 hour
+  });
+};
+
+export const useTokenImage = (token: Token | null) => {
+  const { data: tokens = [] } = useTrustWalletData();
+
+  const twData = tokens.find(
+    (twToken) =>
+      twToken.symbol?.toLocaleLowerCase() ===
+      token?.symbol?.toLocaleLowerCase(),
+  );
+
+  const { imageURL } = useImageForAddress({
+    address: token?.address,
+  });
+
+  return {
+    imageURL: token?.imageURL || twData?.logoURI || imageURL,
+    // First we try to get the image from the token, then from TrustWallet, then from the address
+  };
 };

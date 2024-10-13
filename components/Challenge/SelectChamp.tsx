@@ -58,6 +58,15 @@ export default function SelectChamp({
     if (!token) return toast.error("Select a token");
     if (!amount) return toast.error("Enter a valid amount");
 
+    console.debug([
+      name,
+      weapon,
+      fighter.hp,
+      fighter.atk,
+      fighter.def,
+      fighter.spd,
+    ]);
+
     const fighterHash = sha256(
       toBytes(
         [name, weapon, fighter.hp, fighter.atk, fighter.def, fighter.spd].join(
