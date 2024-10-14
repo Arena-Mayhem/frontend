@@ -1,138 +1,57 @@
 import Image from "next/image";
-import { Button } from "../ui/button";
+import type { WithClassName } from "@/lib/types";
+import {
+  type GameData,
+  useAcceptedChallenges,
+  useChallenges,
+} from "@/lib/queries";
+import { type Address, formatUnits } from "viem";
+
+import { formatDistance } from "date-fns";
+
+import { cn } from "@/lib/utils";
+import { useTokenData } from "@/lib/tokens";
+import { beautifyAddress } from "@/components/ui/button-connectwallet";
+
+import { Button } from "@/components/ui/button";
+
+import IconCup from "@/components/icons/IconCup";
+import IconSkull from "@/components/icons/IconSkull";
+
+import { FighterData } from "@/lib/cartesi";
+import { useAccount } from "wagmi";
 
 export default function History() {
+  const { challenges } = useChallenges();
+
   return (
-    <>
-      <div className="flex items-center justify-center py-8 w-full pb-8 mx-8">
-        <div className="flex flex-col items-center justify-center w-fit gap-6">
-          <Ended
-            character="/wizard.png"
-            victory_or_defeat="/cup.svg"
-            victories="8"
-            avatar="/tanos.png"
-            finished="2 hours ago"
-            trofeo="/cup.svg"
-            defeats="/defeats.svg"
-            amount_defeats="4"
-            character_type="wizard"
-            owner="marvin.eth"
-            status="VICTORY"
-            amount="15"
-            character_player2="/shaman.png"
-            amount_victories_player2="14"
-            avatar_player2="/tanos.png"
-            character_type_player2="SHAMAN"
-            amount_defeats_player2="9"
-            owner_player2="ratita.eth"
-          />
-          <Ended
-            character="/barak.png"
-            victory_or_defeat="/defeats.svg"
-            victories="2"
-            avatar="/tanos.png"
-            finished="4 hours ago"
-            trofeo="/cup.svg"
-            defeats="/defeats.svg"
-            amount_defeats="9"
-            character_type="BARAK"
-            owner="marvin.eth"
-            status="DEFEAT"
-            amount="7"
-            character_player2="/wizard.png"
-            amount_victories_player2="9"
-            avatar_player2="/tanos.png"
-            character_type_player2="WIZARD"
-            amount_defeats_player2="3"
-            owner_player2="stevejobs.eth"
-          />
-          <Ended
-            character="/wizard.png"
-            victory_or_defeat="/cup.svg"
-            victories="5"
-            avatar="/tanos.png"
-            finished="9 hours ago"
-            trofeo="/cup.svg"
-            defeats="/defeats.svg"
-            amount_defeats="9"
-            character_type="WIZARD"
-            owner="marvin.eth"
-            status="VICTORY"
-            amount="3"
-            character_player2="/wizard.png"
-            amount_victories_player2="1"
-            avatar_player2="/tanos.png"
-            character_type_player2="WIZARD"
-            amount_defeats_player2="2"
-            owner_player2="therealcatlover.eth"
-          />
-          <Ended
-            character="/barak.png"
-            victory_or_defeat="/cup.svg"
-            victories="8"
-            avatar="/tanos.png"
-            finished="12 hours ago"
-            trofeo="/cup.svg"
-            defeats="/defeats.svg"
-            amount_defeats="4"
-            character_type="barak"
-            owner="marvin.eth"
-            status="DEFEAT"
-            amount="1"
-            character_player2="/knight.png"
-            amount_victories_player2="14"
-            avatar_player2="/tanos.png"
-            character_type_player2="KNIGHT"
-            amount_defeats_player2="9"
-            owner_player2="ratita.eth"
-          />
-        </div>
+    <div className="flex items-center justify-center py-8 w-full pb-8 mx-8">
+      <div className="flex flex-col items-center justify-center w-fit gap-6">
+        {challenges
+          .filter(({ status }) => status === "finished")
+          .map((challenge) => (
+            <Ended {...challenge} key={`challenge-h-${challenge.id}`} />
+          ))}
       </div>
-    </>
+    </div>
   );
 }
-function Ended({
-  character,
-  avatar,
-  trofeo,
-  finished,
-  victory_or_defeat,
-  defeats,
-  victories,
-  owner,
-  amount_defeats,
-  character_type,
-  amount,
-  status,
-  character_player2,
-  avatar_player2,
-  amount_victories_player2,
-  owner_player2,
-  amount_defeats_player2,
-  character_type_player2,
-}: {
-  character: string;
-  avatar: string;
-  trofeo: string;
-  finished: string;
-  defeats: string;
-  victories: string;
-  victory_or_defeat: string;
-  owner: string;
-  amount_defeats: string;
-  character_type: string;
-  amount: string;
-  status: string;
-  character_player2: string;
-  avatar_player2: string;
-  amount_victories_player2: string;
-  owner_player2: string;
-  amount_defeats_player2: string;
-  character_type_player2: string;
-}) {
+
+function Ended(props: GameData) {
+  const { address } = useAccount();
+  const FORMATTED_ADDRESS = address?.toLocaleLowerCase();
+
+  const token = useTokenData(props?.token);
+
+  const VET_VALUE = formatUnits(BigInt(props.amount), token?.decimals || 18);
+  const IS_VICTORY = props?.winner?.address === FORMATTED_ADDRESS;
+
+  const PLAYER_1 = props?.players?.[0]!;
+  const PLAYER_2 = props?.players?.[1]!;
+
   return (
-    <div className="bg-arena-bg p-8 border border-b-[0.1px] border-white/20 rounded-lg w-full  shadow-padentro ">
-      <div className="div-oblicuo bg-arena-black  gradient-border relative ">
+    <div className="bg-arena-bg p-6 border border-b-[0.1px] border-white/20 rounded-lg w-full shadow-padentro">
+      <div className="relative px-5 pb-2 div-oblicuo bg-arena-black gradient-border">
         <img
           src="/square.svg"
           className="absolute top-0 left-0 pointer-events-none"
@@ -141,89 +60,29 @@ function Ended({
           src="/square.svg"
           className="absolute rotate-180 bottom-0 right-0 pointer-events-none"
         />
-        <div
-          aria-dev-note="caja-contenedora-de-los-cincos-elementos-principales"
-          className="  grid grid-cols-5 flex-shrink-0 pr-6 items-center justify-center  "
-        >
-          <div
-            aria-note-dev="caja-names-points"
-            className="flex flex-col mx-auto justify-center"
-          >
-            <div className="flex flex-row gap-2">
-              <Image
-                className="size-6 border-[1px] border-orange-700 rounded-full  "
-                src={avatar}
-                alt="champ"
-                width={24}
-                height={24}
-              />
-              <p className=" text-transparent bg-clip-text bg-300% bg-gradient-to-b from-arena-orange to-orange-700  text-sm">
-                {owner}
-              </p>
-            </div>
-            <p className="text-4xl text-white pt-4 font-bold">
-              {character_type}
-            </p>
-            <div className=" flex flex-row gap-4 pt-4 ">
-              <div className="flex flex-row items-center  gap-[5px]">
-                <Image
-                  className="size-6   "
-                  src={trofeo}
-                  alt="cup"
-                  width={24}
-                  height={24}
-                />
-                <p className="text-white text-xl">{victories}</p>
-              </div>
-              <div className="flex flex-row items-center gap-[5px]">
-                <Image
-                  className="size-6"
-                  src={defeats}
-                  alt="cup"
-                  width={24}
-                  height={24}
-                />
-                <p className="text-white  text-xl">{amount_defeats}</p>
-              </div>
-            </div>
-          </div>
-          <div
-            aria-dev-note="caja-imagen"
-            className=" flex items-center mx-auto justify-center w-full overflow-hidden  relative"
-          >
-            <Image
-              className="object-cover  w-full h-full "
-              src={character}
-              alt="champsword"
-              width={1000}
-              height={1000}
-            />
-          </div>
-          <div
-            aria-note-dev="caja de en medio, victoria o derrota"
-            className="flex items-center   flex-col pt-4"
-          >
-            <div className="size-12 mb-2">
-              <Image
-                src={victory_or_defeat}
-                alt="icon"
-                width={46}
-                height={40}
-              />
-            </div>
+        <div className="flex">
+          <PlayerInfo {...PLAYER_1} />
+
+          <div className="flex items-center flex-col pt-4">
+            <IconSkull className="size-12" />
+
             <p
-              className={`text-5xl font-bold ${status === "VICTORY" ? "gradient-text-victory" : "gradient-text-defeat"}`}
+              className={`text-4xl mt-2 font-bold ${IS_VICTORY ? "gradient-text-victory" : "gradient-text-defeat"}`}
             >
-              {status}
+              {IS_VICTORY ? "VICTORY" : "DEFEAT"}
             </p>
+
             <div className="flex gap-2 items-center pt-2 pb-4">
               <p
-                className={`border-r-[0.1px] text-sm px-2 ${status == "VICTORY" ? "text-green-500" : "text-red-500"} `}
+                className={`border-r-px whitespace-nowrap text-sm px-2 ${IS_VICTORY ? "text-green-500" : "text-red-500"} `}
               >
-                {" "}
-                {amount} USDC
+                <span className="text-lg">{IS_VICTORY ? "+" : "-"}</span>{" "}
+                {VET_VALUE} {token?.symbol || "ETH"}
               </p>
-              <p className="text-white/50 text-xs ">{finished}</p>
+
+              <p className="text-white/50 text-xs whitespace-nowrap">
+                {formatDistance(new Date(props?.timestamp), new Date())}
+              </p>
             </div>
 
             <Button
@@ -233,62 +92,68 @@ function Ended({
               WATCH
             </Button>
           </div>
-          <div
-            aria-dev-note="caja-imagen"
-            className=" flex items-center mx-auto justify-center w-full overflow-hidden  relative"
-          >
-            <Image
-              className="object-cover  w-full h-full "
-              src={character_player2}
-              alt="champsword"
-              width={400}
-              height={400}
-            />
+
+          <PlayerInfo
+            {...PLAYER_2}
+            className="flex-row-reverse [&_.Nickname]:items-end"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PlayerInfo({
+  className,
+  address,
+  name,
+}: WithClassName<
+  FighterData & {
+    address: Address;
+  }
+>) {
+  const { totalLost, totalWon } = useAcceptedChallenges(address);
+
+  return (
+    <div className={cn("flex items-center", className)}>
+      <div className="flex Nickname flex-col w-full">
+        <div className="flex flex-row gap-2">
+          <Image
+            className="size-6 shrink-0 border-px border-orange-700 rounded-full"
+            width={24}
+            height={24}
+            src="/tanos.png"
+            alt=""
+          />
+          <p className="text-transparent bg-clip-text bg-gradient-to-b from-arena-orange to-orange-700 text-sm">
+            {beautifyAddress(address)}
+          </p>
+        </div>
+
+        <p className="text-3xl text-white pt-4 font-bold">{name}</p>
+
+        <div className=" flex flex-row gap-4 pt-4">
+          <div className="flex flex-row items-center gap-2">
+            <IconCup />
+            <p className="text-white text-lg">{totalWon}</p>
           </div>
-          <div
-            aria-note-dev="caja-names-points"
-            className="flex flex-col w-full items-end mx-auto"
-          >
-            <div className="flex flex-row gap-2">
-              <Image
-                className="size-6 border-[1px] border-orange-700 rounded-full  "
-                src={avatar_player2}
-                alt="champ"
-                width={24}
-                height={24}
-              />
-              <p className=" text-transparent bg-clip-text bg-300% bg-gradient-to-b from-arena-orange to-orange-700  text-sm">
-                {owner_player2}
-              </p>
-            </div>
-            <p className="text-4xl text-white pt-4 font-bold">
-              {character_type_player2}
-            </p>
-            <div className=" flex flex-row gap-4 pt-4 ">
-              <div className="flex flex-row items-center  gap-[5px]">
-                <Image
-                  className="size-6   "
-                  src={trofeo}
-                  alt="cup"
-                  width={24}
-                  height={24}
-                />
-                <p className="text-white text-xl">{amount_victories_player2}</p>
-              </div>
-              <div className="flex flex-row items-center gap-[5px]">
-                <Image
-                  className="size-6   "
-                  src={defeats}
-                  alt="cup"
-                  width={24}
-                  height={24}
-                />
-                <p className="text-white  text-xl">{amount_defeats_player2}</p>
-              </div>
-            </div>
+
+          <div className="flex flex-row items-center gap-2">
+            <IconSkull />
+            <p className="text-white text-lg">{totalLost}</p>
           </div>
         </div>
       </div>
+
+      <figure className="shrink-0 size-40">
+        <Image
+          className="object-cover w-full h-full"
+          src={"/shaman.png"}
+          alt=""
+          width={400}
+          height={400}
+        />
+      </figure>
     </div>
   );
 }

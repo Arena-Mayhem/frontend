@@ -66,6 +66,9 @@ const config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      borderWidth: {
+        px: "1px",
+      },
       backgroundImage: {
         "arena-bg": "url('/tab.jpg') ",
         "status-bg": "url('/bg-status.svg') ",

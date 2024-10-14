@@ -1,8 +1,10 @@
 import Image from "next/image";
-import Profits from "./Profits";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+
+import IconCup from "@/components/icons/IconCup";
+
 import Losses from "./Losses";
+import Profits from "./Profits";
 import ShareTwitter from "./ShareTwitter";
 
 export default function Stats({
@@ -35,7 +37,7 @@ export default function Stats({
               <p className="text-white">Games: {games}</p>
             </div>
             <div className="flex items-center gap-2 px-4">
-              <Image src="/cup.svg" alt="assets" width={35} height={35} />
+              <IconCup />
               <p className="text-white">Wins: {wins}</p>
             </div>
           </div>

@@ -5,16 +5,18 @@ export default function JoinChallenge({
   amount,
   onAction,
   isGameStart,
+  isGameEnd,
 }: {
   amount: string;
   onAction?: () => void;
   isGameStart?: boolean;
+  isGameEnd?: boolean;
 }) {
   return (
     <>
       <div
         aria-note-dev="caja-join-challenge"
-        className="flex border-l  relative  items-center justify-center  div-oblicuo gradient-border-left  "
+        className="flex border-l relative items-center justify-center div-oblicuo gradient-border-left"
       >
         <img
           src="/square.svg"
@@ -26,14 +28,21 @@ export default function JoinChallenge({
         >
           <Button
             onClick={onAction}
-            className="gradient-button px-4 py-8 text-arena-orange text-lg"
+            disabled={isGameEnd}
+            className="gradient-button gap-2 px-6 py-8 text-arena-orange text-lg"
             variant="arena-main"
           >
-            <span>{isGameStart ? "START MATCH" : "JOIN CHALLENGE"}</span>
+            <span>
+              {isGameEnd
+                ? "FINISHED"
+                : isGameStart
+                  ? "START MATCH"
+                  : "JOIN CHALLENGE"}
+            </span>
             <Image src="/mayor.svg" alt="arrow" width={20} height={20} />
           </Button>
           <p className="text-white pt-4 text-center text-sm font-bold">
-            Posible profit: {amount}
+            {isGameEnd ? "Earned" : "Posible profit"}: {amount}
           </p>
         </div>
       </div>

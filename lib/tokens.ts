@@ -33,9 +33,11 @@ export const useTokenList = (): Array<Token> => {
   return [...customTokens, ...TOKENS];
 };
 
-export const useTokenData = (address: Address) => {
+export const useTokenData = (address?: Address | null) => {
   const tokens = useTokenList();
-  return tokens.find((token) => token.address === address) || null;
+  const TOKEN_ADDRESS = address === null ? zeroAddress : address;
+
+  return tokens.find(({ address }) => address === TOKEN_ADDRESS) || null;
 };
 
 export const useTrustWalletData = () => {
