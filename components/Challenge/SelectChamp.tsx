@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { useCreateChallenge } from "@/lib/cartesi";
 import { Choosepj } from "./Choosepj";
 import { Cancel } from "@radix-ui/react-alert-dialog";
+import { useHeroes } from "@/lib/heroes";
 
 export const ActionContinue = ({ onClick }: { onClick?: any }) => (
   <div className="w-full justify-end py-8 px-4 flex">
@@ -39,16 +40,16 @@ export default function SelectChamp({
   token: Token;
   amount: bigint;
 }) {
-  console.debug({ token, amount });
+  const { appendHero } = useHeroes();
   const { createChallenge } = useCreateChallenge();
 
   const [name, setName] = useState("Leonardo");
   const [weapon, setWeapon] = useState<SwordTypes>("sword");
   const [fighter, setFighter] = useState({
-    hp: 0,
+    spd: 0,
     atk: 0,
     def: 0,
-    spd: 0,
+    hp: 0,
   });
 
   const setPartialFighter = (config: Partial<typeof fighter>) =>
@@ -58,14 +59,17 @@ export default function SelectChamp({
     if (!token) return toast.error("Select a token");
     if (!amount) return toast.error("Enter a valid amount");
 
-    console.debug([
-      name,
-      weapon,
-      fighter.hp,
-      fighter.atk,
-      fighter.def,
-      fighter.spd,
-    ]);
+    if (Object.values(fighter).some((v) => v < 1)) {
+      return toast.error("Value should be greater than 0");
+    }
+
+    if (Object.values(fighter).some((v) => v > 40)) {
+      return toast.error("Single values should be less than 40");
+    }
+
+    if (Object.values(fighter).reduce((a, b) => a + b, 0) > 100) {
+      return toast.error("Sum of values should be less than 100");
+    }
 
     const fighterHash = sha256(
       toBytes(
@@ -75,6 +79,16 @@ export default function SelectChamp({
       ),
       "hex",
     );
+
+    appendHero({
+      atk: fighter.atk,
+      def: fighter.def,
+      hp: fighter.hp,
+      spd: fighter.spd,
+      name,
+      weapon,
+      fighterHash,
+    });
 
     createChallenge({
       amount,
@@ -127,6 +141,7 @@ export default function SelectChamp({
           <Button
             onClick={handleCreateChallenge}
             asChild
+            type="button"
             className="w-56 py-5"
             variant="arena-main"
           >

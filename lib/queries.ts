@@ -107,8 +107,6 @@ export const useReports = () => {
 export const useChallenges = () => {
   const { data = [] } = useNotices();
 
-  console.debug({ data });
-
   return {
     challenges: data
       .filter(({ fighter_hash }: any) => Boolean(fighter_hash))

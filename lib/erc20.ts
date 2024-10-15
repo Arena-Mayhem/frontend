@@ -1,4 +1,4 @@
-import { formatEther, erc20Abi, type Address, formatUnits } from "viem";
+import { erc20Abi, type Address, formatUnits } from "viem";
 import {
   useAccount,
   useBalance,

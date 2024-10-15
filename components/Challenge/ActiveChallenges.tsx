@@ -9,6 +9,7 @@ import { beautifyAddress } from "@/components/ui/button-connectwallet";
 import { useJoinChallenge, useStartMatch } from "@/lib/cartesi";
 
 import { formatDistance } from "date-fns";
+import { useHeroData } from "@/lib/heroes";
 
 function ActiveChallenges() {
   const { challenges } = useChallenges();
@@ -20,7 +21,10 @@ function ActiveChallenges() {
           {challenges
             .filter(({ status }) => status != "finished")
             .map((challenge) => (
-              <Actives key={`challenge-${challenge.id}`} {...challenge} />
+              <ActiveChallenge
+                key={`challenge-${challenge.id}`}
+                {...challenge}
+              />
             ))}
         </div>
       </div>
@@ -28,7 +32,8 @@ function ActiveChallenges() {
   );
 }
 
-function Actives(props: GameData) {
+function ActiveChallenge(props: GameData) {
+  const { data: hero } = useHeroData(props.fighter_hash);
   const { joinChallenge } = useJoinChallenge();
   const { startMatch } = useStartMatch();
   const token = useTokenData(props.token);
@@ -37,7 +42,9 @@ function Actives(props: GameData) {
   const isGameAccepted = props.status === "accepted";
 
   function handleJoinChallenge() {
-    const GAME_STATE = {
+    console.debug({ hero });
+    const JOIN_GAME_STATE = {
+      // We must show the fighter modal here
       challenge_id: props.id,
       fighter: {
         spd: 15,
@@ -49,8 +56,14 @@ function Actives(props: GameData) {
       },
     };
 
-    if (isGameAccepted) return startMatch(GAME_STATE);
-    joinChallenge(GAME_STATE);
+    if (isGameAccepted) {
+      return startMatch({
+        challenge_id: props.id,
+        fighter: hero || JOIN_GAME_STATE.fighter,
+      });
+    }
+
+    joinChallenge(JOIN_GAME_STATE);
   }
 
   return (
@@ -81,16 +94,15 @@ function Actives(props: GameData) {
             />
           </div>
           <ChallengeInfo
-            victories="9"
             avatar="/tanos.png"
             created={formatDistance(new Date(props.timestamp), new Date(), {
               addSuffix: true,
             })
               .replace("about", "")
+              .replace("less than", "")
               .trim()}
             character_type={props.winner?.name || "Player"}
-            amount_defeats="3"
-            owner={beautifyAddress(props.address_owner)}
+            owner={props.address_owner}
           />
           <JoinChallenge
             onAction={handleJoinChallenge}
