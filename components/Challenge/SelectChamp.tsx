@@ -3,7 +3,7 @@
 import type { SwordTypes } from "@/lib/types";
 import type { Token } from "@/lib/atoms";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { toast } from "sonner";
 import Link from "next/link";
 import { zeroAddress } from "viem";
@@ -20,6 +20,7 @@ import { FighterData, useCreateChallenge } from "@/lib/cartesi";
 import { Choosepj } from "./Choosepj";
 import { Cancel } from "@radix-ui/react-alert-dialog";
 import { generateFighterHash, useHeroData, useHeroes } from "@/lib/heroes";
+import { cn } from "@/lib/utils";
 
 export const ActionContinue = ({ onClick }: { onClick?: any }) => (
   <div className="w-full justify-end py-8 px-4 flex">
@@ -96,49 +97,58 @@ export default function SelectChamp({
       </AlertDialogTrigger>
       <AlertDialogContent className="flex  bg-arena-black flex-col ">
         <AlertDialogCancel />
-        <AlertDialogTitle className="gradient-text-name-character text-5xl">
-          Select your warrior
+        <AlertDialogTitle
+          className={cn(
+            "gradient-text-name-character text-5xl",
+            externalSelectedHero?.name && "mb-12",
+          )}
+        >
+          {externalSelectedHero?.name
+            ? "Let's start the battle"
+            : "Select your warrior"}
         </AlertDialogTitle>
-        <Choosepj
-          onChangeAtack={(atk) =>
-            setPartialFighter({
-              atk,
-            })
-          }
-          onChangeDefense={(def) =>
-            setPartialFighter({
-              def,
-            })
-          }
-          onChangeHealth={(hp) =>
-            setPartialFighter({
-              hp,
-            })
-          }
-          onChangeSpeed={(spd) =>
-            setPartialFighter({
-              spd,
-            })
-          }
-        />
-        <div className="flex gap-3   flex-row justify-end items-center">
+
+        {externalSelectedHero?.name ? null : (
+          <Fragment>
+            <Choosepj
+              onChangeAtack={(atk) =>
+                setPartialFighter({
+                  atk,
+                })
+              }
+              onChangeDefense={(def) =>
+                setPartialFighter({
+                  def,
+                })
+              }
+              onChangeHealth={(hp) =>
+                setPartialFighter({
+                  hp,
+                })
+              }
+              onChangeSpeed={(spd) =>
+                setPartialFighter({
+                  spd,
+                })
+              }
+            />
+          </Fragment>
+        )}
+        <div className="flex gap-3 flex-row justify-end items-center">
           <Cancel asChild>
             <Button asChild className="w-56 py-5" variant="arena-main">
               <Link className="text-arena-orange " href="/challenge">
-                go back
+                Go Back
               </Link>
             </Button>
           </Cancel>
           <Button
             onClick={handleCreateChallenge}
-            asChild
             type="button"
             className="w-56 py-5"
             variant="arena-main"
           >
-            <Link className="text-arena-orange" href="/challenge">
-              Create Challenge
-            </Link>
+            {externalSelectedHero?.name ? "Start Battle" : "Create Challenge"}
           </Button>
         </div>
       </AlertDialogContent>
