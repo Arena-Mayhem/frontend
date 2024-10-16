@@ -19,6 +19,7 @@ const ABI = parseAbi([
 export type FighterData = {
   name: string;
   weapon: string;
+  imageURL?: string;
   hp: number;
   atk: number;
   def: number;
@@ -121,10 +122,15 @@ export const useCreateChallenge = () => {
     createChallenge: async ({
       isETHChallenge,
       fighterHash,
+      fighterMetadata,
       amount,
       token,
     }: {
       fighterHash: string;
+      fighterMetadata: {
+        name?: string;
+        imageURL?: string;
+      };
       token: Address;
       amount: bigint;
       isETHChallenge?: boolean;
@@ -132,6 +138,10 @@ export const useCreateChallenge = () => {
       await addCartesiInput({
         method: isETHChallenge ? "create_challenge_eth" : "create_challenge",
         fighter_hash: fighterHash,
+        fighterMetadata: {
+          name: fighterMetadata.name || "Nameless Hero",
+          imageURL: fighterMetadata.imageURL || "/shaman.png",
+        },
         token: isETHChallenge ? null : token,
         amount: amount.toString(),
       });

@@ -1,14 +1,15 @@
+import type { FighterData } from "@/lib/cartesi";
+
 import { useState } from "react";
 import { toast } from "sonner";
+import { useHeroes } from "@/lib/heroes";
 
-import { FighterData } from "@/lib/cartesi";
 import { CharacterConfig } from "@/components/Challenge/ModalPlayer";
 import ArenaInput from "@/components/ArenaInput";
 import { Button } from "@/components/ui/button";
 import { validateHeroConfig } from "@/components/Challenge/SelectChamp";
-import { useHeroes } from "@/lib/heroes";
 
-import { CarouselCharacter } from "./CarouselCharacter";
+import CarouselCharacter from "./CarouselCharacter";
 import SelectWeapon from "./SelectWeapon";
 
 export default function CharacterCreation({
@@ -95,7 +96,13 @@ export default function CharacterCreation({
         )}
       </div>
       <div className="flex flex-row items-center justify-center w-1/3 m-4 ">
-        <CarouselCharacter />
+        <CarouselCharacter
+          onSkinSelected={({ imageURL }) => {
+            partialSetHeroData({
+              imageURL,
+            });
+          }}
+        />
       </div>
     </div>
   );

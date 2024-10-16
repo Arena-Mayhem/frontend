@@ -13,6 +13,7 @@ export type GameData = {
   winner?: FighterData & { address: Address };
   status: "pending" | "accepted" | "finished";
   token: Address | null;
+  input?: { fighterMetadata?: { name: string; imageURL: string } };
 };
 
 export const QUERY_NOTICES = gql`
@@ -24,6 +25,7 @@ export const QUERY_NOTICES = gql`
           index
           input {
             timestamp
+            payload
           }
         }
       }
@@ -69,6 +71,7 @@ export const useNotices = () => {
           payload: string;
           input: {
             timestamp: string;
+            payload: string;
           };
         };
       }) => {
@@ -79,6 +82,7 @@ export const useNotices = () => {
           ...payload,
           address_opponent: payload?.opponent,
           address_owner: payload?.owner,
+          input: payloadToJson(node?.input?.payload),
           timestamp: Number(node?.input?.timestamp || 0) * 1_000,
         };
       },
@@ -123,7 +127,6 @@ export const useChallenges = () => {
         const { fighters, opponent_id, winner, owner_id } = gameResult;
 
         const winnerIndex = winner.id; // 0 or 1 as index
-        const winnerAddress = winnerIndex === 0 ? owner_id : opponent_id;
 
         const PLAYER1 = fighters[0];
         const PLAYER2 = fighters[1];

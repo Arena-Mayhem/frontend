@@ -1,13 +1,14 @@
-import { toFinitePositive } from "@/lib/numbers";
-import { WithClassName } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import type { WithClassName } from "@/lib/types";
 import Image from "next/image";
+
+import { useHeroData } from "@/lib/heroes";
+import { toFinitePositive } from "@/lib/numbers";
+import { cn } from "@/lib/utils";
+
 import { BsFillHeartPulseFill } from "react-icons/bs";
 import { GiPointySword } from "react-icons/gi";
 import { GiRunningNinja } from "react-icons/gi";
 import { GiShoulderArmor } from "react-icons/gi";
-
-// TODO: Unify with components/Character/CharacterPoints.tsx
 
 export type GenericOnChangeHandlers = {
   onChangeSpeed: (value: number) => void;
@@ -17,17 +18,15 @@ export type GenericOnChangeHandlers = {
 };
 
 export default function ModalPlayer({
-  type,
-  avatar,
-  amount_defeats,
-  victories,
+  fighterHash,
   ...props
-}: {
-  type: string;
-  avatar: string;
-  amount_defeats: string;
-  victories: string;
-} & Partial<GenericOnChangeHandlers>) {
+}: Partial<
+  GenericOnChangeHandlers & {
+    fighterHash?: string;
+  }
+>) {
+  const { challengesData, data: hero } = useHeroData(fighterHash || "");
+
   return (
     <article className="flex flex-row mx-auto bg-arena-black w-full  items-center justify-center  rounded-2xl ">
       <div className="rounded-[55px] bg-arena-bg items-center flex justify-center">
@@ -35,22 +34,34 @@ export default function ModalPlayer({
           className=" rounded-xl w-[260px] object-cover h-[350px]"
           width={150}
           height={321}
-          src={avatar}
+          src={hero?.imageURL || "/shaman.png"}
           alt=""
         />
       </div>
       <div className=" flex flex-row-reverse items-center justify-between py-2 gap-16 ">
         <div className="flex flex-col gap-2 justify-between">
           <div className="text-3xl text-white px-4 w-full uppercase">
-            {type}
+            {hero?.name || "Nameless Hero"}
           </div>
 
           <div className="flex flex-row gap-8 p-4">
-            <p className="text-green-500 text-xl">V-{victories}</p>
-            <p className="text-red-500 text-xl">L-{amount_defeats}</p>
+            <p className="text-green-500 text-xl">
+              V-{challengesData.totalWon}
+            </p>
+            <p className="text-red-500 text-xl">L-{challengesData.totalLost}</p>
           </div>
 
-          <CharacterConfig className="pl-4" {...props} />
+          <CharacterConfig
+            defaultValues={{
+              speed: hero?.spd,
+              atack: hero?.atk,
+              defense: hero?.def,
+              health: hero?.hp,
+            }}
+            disabled={Boolean(fighterHash)}
+            className="pl-4"
+            {...props}
+          />
         </div>
       </div>
     </article>
@@ -58,15 +69,29 @@ export default function ModalPlayer({
 }
 
 export function CharacterConfig({
+  defaultValues,
   onChangeAtack,
   onChangeDefense,
   onChangeHealth,
   onChangeSpeed,
   className,
-}: WithClassName<Partial<GenericOnChangeHandlers>>) {
+  disabled,
+}: WithClassName<
+  Partial<GenericOnChangeHandlers> & {
+    disabled?: boolean;
+    defaultValues?: {
+      speed?: number;
+      atack?: number;
+      defense?: number;
+      health?: number;
+    };
+  }
+>) {
   return (
     <div className={cn("grid gap-3 grid-cols-2", className)}>
       <ConfigInput
+        disabled={disabled}
+        defaultValue={defaultValues?.speed}
         onInput={onChangeSpeed}
         label="SPEED"
         icon={
@@ -75,12 +100,16 @@ export function CharacterConfig({
       />
 
       <ConfigInput
+        disabled={disabled}
+        defaultValue={defaultValues?.atack}
         onInput={onChangeAtack}
         label="ATTACK"
         icon={<GiPointySword className="text-arena-orange shrink-0 text-3xl" />}
       />
 
       <ConfigInput
+        disabled={disabled}
+        defaultValue={defaultValues?.defense}
         onInput={onChangeDefense}
         label="DEFENSE"
         icon={
@@ -89,6 +118,8 @@ export function CharacterConfig({
       />
 
       <ConfigInput
+        disabled={disabled}
+        defaultValue={defaultValues?.health}
         onInput={onChangeHealth}
         label="HEALTH"
         icon={
@@ -102,12 +133,18 @@ export function CharacterConfig({
 function ConfigInput({
   onInput,
   label,
+  defaultValue,
+  disabled,
   icon,
 }: {
   onInput?: (value: number) => void;
+  defaultValue?: number;
+  disabled?: boolean;
   icon: JSX.Element;
   label: string;
 }) {
+  const DEFAULT_VALUE = `${defaultValue || 25}`;
+
   return (
     <div
       aria-note-dev="pack-text-icon"
@@ -127,9 +164,11 @@ function ConfigInput({
       <p className="text-white uppercase">{label}</p>
 
       <input
+        disabled={disabled}
+        value={disabled ? DEFAULT_VALUE : undefined}
         className="outline-none font-light border-orange-400 border-[1px] rounded-md  py-1 text-center w-24 text-white bg-transparent"
         onChange={(e) => onInput?.(toFinitePositive(Number(e.target.value)))}
-        placeholder="25"
+        placeholder={DEFAULT_VALUE}
         autoComplete="off"
         autoCorrect="off"
         spellCheck="false"

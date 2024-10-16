@@ -1,5 +1,4 @@
 import Image from "next/image";
-import PayforCreate from "./PayforCreate";
 
 export default function StageBar({
   action,

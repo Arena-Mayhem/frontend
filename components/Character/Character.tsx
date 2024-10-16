@@ -31,6 +31,8 @@ function Champs({
 }) {
   const { data: hero, challengesData } = useHeroData(fighterHash);
 
+  console.debug({ hero });
+
   return (
     <div className="bg-arena-bg p-8 border border-b-[0.1px] border-white/20 rounded-lg w-full  shadow-padentro ">
       <div className="div-oblicuo bg-arena-black  gradient-border relative ">
@@ -45,7 +47,7 @@ function Champs({
         <div className="flex justify-between">
           <Image
             className="object-cover w-24"
-            src="/shaman.png"
+            src={hero?.imageURL || "/shaman.png"}
             alt=""
             width={800}
             height={800}

@@ -41,9 +41,14 @@ function ActiveChallenge(props: GameData) {
   const isGameAccepted = props.status === "accepted";
 
   function handleJoinChallenge() {
-    console.debug({ hero });
+    if (isGameAccepted) {
+      return startMatch({
+        challenge_id: props.id,
+        fighter: hero!,
+      });
+    }
+
     const JOIN_GAME_STATE = {
-      // We must show the fighter modal here
       challenge_id: props.id,
       fighter: {
         spd: 15,
@@ -54,13 +59,6 @@ function ActiveChallenge(props: GameData) {
         weapon: "sword",
       },
     };
-
-    if (isGameAccepted) {
-      return startMatch({
-        challenge_id: props.id,
-        fighter: hero || JOIN_GAME_STATE.fighter,
-      });
-    }
 
     joinChallenge(JOIN_GAME_STATE);
   }
@@ -86,8 +84,8 @@ function ActiveChallenge(props: GameData) {
           >
             <Image
               className="object-cover w-full h-full"
-              src="/shaman.png"
-              alt="champsword"
+              src={props.input?.fighterMetadata?.imageURL || "/shaman.png"}
+              alt=""
               width={1000}
               height={1000}
             />
@@ -100,7 +98,7 @@ function ActiveChallenge(props: GameData) {
               .replace("about", "")
               .replace("less than", "")
               .trim()}
-            character_type={props.winner?.name || "Player"}
+            character_type={props?.input?.fighterMetadata?.name || "Player"}
             owner={props.address_owner}
           />
           <JoinChallenge

@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/alert-dialog-selectchamp";
 import { Button } from "@/components/ui/button";
 import { FighterData, useCreateChallenge } from "@/lib/cartesi";
-import { Choosepj } from "./Choosepj";
+import HeroSelection from "./HeroSelection";
 import { Cancel } from "@radix-ui/react-alert-dialog";
 import { generateFighterHash, useHeroData, useHeroes } from "@/lib/heroes";
 import { cn } from "@/lib/utils";
@@ -44,49 +44,26 @@ export default function SelectChamp({
   selectedFighterHash?: string;
 }) {
   const { data: externalSelectedHero } = useHeroData(selectedFighterHash || "");
+  const [hero, setHero] = useState<FighterData>({} as any);
 
-  const { appendHero } = useHeroes();
   const { createChallenge } = useCreateChallenge();
-
-  const [name, setName] = useState("Leonardo");
-  const [weapon, setWeapon] = useState<SwordTypes>("sword");
-  const [fighter, setFighter] = useState({
-    spd: 0,
-    atk: 0,
-    def: 0,
-    hp: 0,
-  });
-
-  const setPartialFighter = (config: Partial<typeof fighter>) =>
-    setFighter((prev) => ({ ...prev, ...config }));
 
   function handleCreateChallenge() {
     if (!token) return toast.error("Select a token");
     if (!amount) return toast.error("Enter a valid amount");
 
-    const LOCAL_FIGHTER = {
-      atk: fighter.atk,
-      def: fighter.def,
-      hp: fighter.hp,
-      spd: fighter.spd,
-      name,
-      weapon,
-    };
-
-    const FIGHTER = externalSelectedHero || LOCAL_FIGHTER;
-
+    const FIGHTER = externalSelectedHero || hero;
     if (!validateHeroConfig(FIGHTER)) return;
-
-    if (!selectedFighterHash) {
-      // Append the hero to the list of heroes
-      appendHero(FIGHTER);
-    }
 
     createChallenge({
       amount,
       isETHChallenge: token.address === zeroAddress,
       token: token.address,
       fighterHash: generateFighterHash(FIGHTER),
+      fighterMetadata: {
+        name: FIGHTER.name,
+        imageURL: FIGHTER.imageURL,
+      },
     });
   }
 
@@ -109,31 +86,9 @@ export default function SelectChamp({
         </AlertDialogTitle>
 
         {externalSelectedHero?.name ? null : (
-          <Fragment>
-            <Choosepj
-              onChangeAtack={(atk) =>
-                setPartialFighter({
-                  atk,
-                })
-              }
-              onChangeDefense={(def) =>
-                setPartialFighter({
-                  def,
-                })
-              }
-              onChangeHealth={(hp) =>
-                setPartialFighter({
-                  hp,
-                })
-              }
-              onChangeSpeed={(spd) =>
-                setPartialFighter({
-                  spd,
-                })
-              }
-            />
-          </Fragment>
+          <HeroSelection onHeroSelected={setHero} />
         )}
+
         <div className="flex gap-3 flex-row justify-end items-center">
           <Cancel asChild>
             <Button asChild className="w-56 py-5" variant="arena-main">
@@ -164,11 +119,11 @@ export default function SelectChamp({
 export function validateHeroConfig(
   fighter: Omit<FighterData, "name" | "weapon">,
 ) {
-  const formattedFighter: typeof fighter = {
-    atk: fighter.atk || 0,
-    def: fighter.def || 0,
-    hp: fighter.hp || 0,
-    spd: fighter.spd || 0,
+  const formattedFighter = {
+    atk: Number(fighter.atk || 0),
+    def: Number(fighter.def || 0),
+    hp: Number(fighter.hp || 0),
+    spd: Number(fighter.spd || 0),
   };
 
   if (Object.values(formattedFighter).some((v) => v < 1)) {
