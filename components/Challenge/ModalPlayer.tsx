@@ -1,4 +1,6 @@
 import { toFinitePositive } from "@/lib/numbers";
+import { WithClassName } from "@/lib/types";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { BsFillHeartPulseFill } from "react-icons/bs";
 import { GiPointySword } from "react-icons/gi";
@@ -18,11 +20,8 @@ export default function ModalPlayer({
   type,
   avatar,
   amount_defeats,
-  onChangeAtack,
-  onChangeDefense,
-  onChangeHealth,
-  onChangeSpeed,
   victories,
+  ...props
 }: {
   type: string;
   avatar: string;
@@ -42,143 +41,100 @@ export default function ModalPlayer({
       </div>
       <div className=" flex flex-row-reverse items-center justify-between py-2 gap-16 ">
         <div className="flex flex-col gap-2 justify-between">
-          <div className=" text-3xl text-white px-4 w-full uppercase">
+          <div className="text-3xl text-white px-4 w-full uppercase">
             {type}
           </div>
-          <div className=" flex flex-row gap-8 p-4 ">
-            <p className="text-green-500 text-xl">V-{victories}</p>
-            <p className="text-red-500  text-xl">L-{amount_defeats}</p>
-          </div>
-          <div
-            aria-note-dev="caja-main-container"
-            className="flex flex-row items-center justify-center"
-          >
-            <div
-              aria-note-dev="caja-container-speed-atack"
-              className="  w-full  "
-            >
-              <div
-                aria-note-dev="pack-text-icon"
-                className="flex gap-2 div-oblicuo-cajita relative m-4 items-center justify-center gradient-border p-4 flex-row"
-              >
-                <img
-                  src="/square.svg"
-                  className="absolute top-0 -left-0 pointer-events-none"
-                />
-                <img
-                  src="/square.svg"
-                  className="absolute rotate-180 bottom-0 right-0 pointer-events-none"
-                />
-                <GiRunningNinja className="text-arena-orange" size="30px" />
-                <p className="text-white">SPEED</p>
 
-                <input
-                  className="outline-none font-light border-orange-400 border-[1px] rounded-md  py-1 text-center w-24 text-white bg-transparent"
-                  onChange={(e) =>
-                    onChangeSpeed?.(toFinitePositive(parseInt(e.target.value)))
-                  }
-                  placeholder="30"
-                  inputMode="decimal"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  spellCheck="false"
-                  type="text"
-                />
-              </div>
-              <div
-                aria-note-dev="pack-text-icon"
-                className="flex gap-2 div-oblicuo-cajita relative m-4 items-center justify-center gradient-border p-4 flex-row"
-              >
-                <img
-                  src="/square.svg"
-                  className="absolute top-0 -left-0 pointer-events-none"
-                />
-                <img
-                  src="/square.svg"
-                  className="absolute pointer-events-none rotate-180 bottom-0 right-0"
-                />
-                <GiPointySword className="text-arena-orange" size="30px" />
-                <p className="text-white">ATACK</p>
-                <input
-                  className="outline-none font-light  border-orange-400 border-[1px] rounded-md   py-1 text-center w-24 text-white bg-transparent "
-                  onChange={(e) =>
-                    onChangeAtack?.(toFinitePositive(parseInt(e.target.value)))
-                  }
-                  placeholder="30"
-                  inputMode="decimal"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  spellCheck="false"
-                  type="text"
-                />
-              </div>
-            </div>
-            <div aria-note-dev="caja-container-def-life" className="w-full">
-              <div
-                aria-note-dev="pack-text-icon"
-                className="flex gap-2 div-oblicuo-cajita relative m-4 items-center justify-center gradient-border p-4 flex-row"
-              >
-                <img
-                  src="/square.svg"
-                  className="absolute top-0 -left-0 pointer-events-none"
-                />
-                <img
-                  src="/square.svg"
-                  className="absolute rotate-180 pointer-events-none bottom-0 right-0"
-                />
-                <GiShoulderArmor className="text-arena-orange" size="30px" />
-                <p className="text-white">
-                  <p>DEFENSE</p>
-                </p>
-                <input
-                  className="outline-none font-light  border-orange-400 border-[1px] rounded-md   py-1 text-center w-24 text-white bg-transparent "
-                  onChange={(e) =>
-                    onChangeDefense?.(
-                      toFinitePositive(parseInt(e.target.value)),
-                    )
-                  }
-                  placeholder="30"
-                  inputMode="decimal"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  spellCheck="false"
-                  type="text"
-                />
-              </div>
-              <div
-                aria-note-dev="pack-text-icon"
-                className="flex gap-2 div-oblicuo-cajita relative m-4 items-center justify-center gradient-border p-4 flex-row"
-              >
-                <img
-                  src="/square.svg"
-                  className="absolute top-0 -left-0 pointer-events-none"
-                />
-                <img
-                  src="/square.svg"
-                  className="absolute rotate-180 pointer-events-none bottom-0 right-0"
-                />
-                <BsFillHeartPulseFill
-                  className="text-arena-orange"
-                  size="30px"
-                />
-                <p className="text-white">HEALTH</p>
-                <input
-                  className="outline-none font-light  border-orange-400 border-[1px] rounded-md   py-1 text-center w-24 text-white bg-transparent "
-                  onChange={(e) =>
-                    onChangeHealth?.(toFinitePositive(parseInt(e.target.value)))
-                  }
-                  placeholder="30"
-                  inputMode="decimal"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  spellCheck="false"
-                  type="text"
-                />
-              </div>
-            </div>
+          <div className="flex flex-row gap-8 p-4">
+            <p className="text-green-500 text-xl">V-{victories}</p>
+            <p className="text-red-500 text-xl">L-{amount_defeats}</p>
           </div>
+
+          <CharacterConfig className="pl-4" {...props} />
         </div>
       </div>
     </article>
+  );
+}
+
+export function CharacterConfig({
+  onChangeAtack,
+  onChangeDefense,
+  onChangeHealth,
+  onChangeSpeed,
+  className,
+}: WithClassName<Partial<GenericOnChangeHandlers>>) {
+  return (
+    <div className={cn("grid gap-3 grid-cols-2", className)}>
+      <ConfigInput
+        onInput={onChangeSpeed}
+        label="SPEED"
+        icon={
+          <GiRunningNinja className="text-arena-orange shrink-0 text-3xl" />
+        }
+      />
+
+      <ConfigInput
+        onInput={onChangeAtack}
+        label="ATTACK"
+        icon={<GiPointySword className="text-arena-orange shrink-0 text-3xl" />}
+      />
+
+      <ConfigInput
+        onInput={onChangeDefense}
+        label="DEFENSE"
+        icon={
+          <GiShoulderArmor className="text-arena-orange shrink-0 text-3xl" />
+        }
+      />
+
+      <ConfigInput
+        onInput={onChangeHealth}
+        label="HEALTH"
+        icon={
+          <BsFillHeartPulseFill className="text-arena-orange shrink-0 text-3xl" />
+        }
+      />
+    </div>
+  );
+}
+
+function ConfigInput({
+  onInput,
+  label,
+  icon,
+}: {
+  onInput?: (value: number) => void;
+  icon: JSX.Element;
+  label: string;
+}) {
+  return (
+    <div
+      aria-note-dev="pack-text-icon"
+      className="flex shrink-0 gap-2 div-oblicuo-cajita relative items-center gradient-border h-[4.5rem] px-4 flex-row"
+    >
+      <img
+        src="/square.svg"
+        className="absolute top-0 -left-0 pointer-events-none"
+      />
+      <img
+        src="/square.svg"
+        className="absolute rotate-180 bottom-0 right-0 pointer-events-none"
+      />
+
+      {icon}
+
+      <p className="text-white uppercase">{label}</p>
+
+      <input
+        className="outline-none font-light border-orange-400 border-[1px] rounded-md  py-1 text-center w-24 text-white bg-transparent"
+        onChange={(e) => onInput?.(toFinitePositive(Number(e.target.value)))}
+        placeholder="25"
+        autoComplete="off"
+        autoCorrect="off"
+        spellCheck="false"
+        type="text"
+      />
+    </div>
   );
 }

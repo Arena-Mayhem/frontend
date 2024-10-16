@@ -5,7 +5,6 @@ import JoinChallenge from "./JoinChallenge";
 import { type GameData, useChallenges } from "@/lib/queries";
 import { useTokenData } from "@/lib/tokens";
 import { formatUnits } from "viem";
-import { beautifyAddress } from "@/components/ui/button-connectwallet";
 import { useJoinChallenge, useStartMatch } from "@/lib/cartesi";
 
 import { formatDistance } from "date-fns";

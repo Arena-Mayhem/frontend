@@ -1,96 +1,36 @@
 import Image from "next/image";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
+
+import { useHeroData, useHeroes } from "@/lib/heroes";
 import CreateNewChallenge from "./CreateNewChallenge";
-import PayforCreate from "../Challenge/PayforCreate";
 
 export default function Cards() {
+  const { heroes } = useHeroes();
+
   return (
-    <>
-      <div className="flex items-center justify-center py-8 w-full pb-8 mx-8">
-        <div className="flex flex-col items-center justify-center w-fit gap-6">
+    <div className="flex items-center justify-center py-8 w-full pb-8 mx-8">
+      <div className="flex flex-col items-center justify-center w-fit gap-6">
+        {heroes.map((hero) => (
           <Champs
-            character="/wizard.png"
-            victories="5"
-            hp="/hp.svg"
-            ap="/ap.svg"
-            dp="/dp.svg"
-            sp="sp.svg"
-            hpoints="40"
-            apoints="40"
-            dpoints="10"
-            spoints="10"
-            trofeo="cup.svg"
-            amount_defeats="2"
-            character_type="wizard"
-            amount="27 USDC"
-          />
-          <Champs
-            character="/ogro.png"
-            victories="5"
-            hp="/hp.svg"
-            ap="/ap.svg"
-            dp="/dp.svg"
-            sp="sp.svg"
-            hpoints="25"
-            apoints="25"
-            dpoints="25"
-            spoints="25"
-            trofeo="cup.svg"
-            amount_defeats="2"
-            character_type="MONSTER"
-            amount="14 USDC"
-          />
-          <Champs
-            character="/knight.png"
-            victories="5"
-            hp="/hp.svg"
-            ap="/ap.svg"
-            dp="/dp.svg"
-            sp="sp.svg"
-            hpoints="10"
-            apoints="10"
-            dpoints="40"
-            spoints="40"
-            trofeo="cup.svg"
-            amount_defeats="2"
-            character_type="KNIGHT"
+            key={`hero-${hero.fighterHash}`}
+            fighterHash={hero.fighterHash}
             amount="8 USDC"
           />
-        </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 }
+
 function Champs({
-  character,
-  hp,
-  dp,
-  ap,
-  victories,
-  hpoints,
-  apoints,
-  dpoints,
-  spoints,
-  sp,
-  amount_defeats,
-  character_type,
+  fighterHash,
   amount,
 }: {
-  character: string;
-  hp: string;
-  dp: string;
-  ap: string;
-  sp: string;
-  victories: string;
-  trofeo: string;
-  hpoints: string;
-  apoints: string;
-  dpoints: string;
-  spoints: string;
-  amount_defeats: string;
-  character_type: string;
+  fighterHash: string;
   amount: string;
 }) {
+  const { data: hero, challengesData } = useHeroData(fighterHash);
+
   return (
     <div className="bg-arena-bg p-8 border border-b-[0.1px] border-white/20 rounded-lg w-full  shadow-padentro ">
       <div className="div-oblicuo bg-arena-black  gradient-border relative ">
@@ -102,89 +42,84 @@ function Champs({
           src="/square.svg"
           className="absolute rotate-180 bottom-0 right-0 pointer-events-none"
         />
-        <div
-          aria-dev-note="caja-contenedora-de-los-tres-elementos"
-          className="  flex justify-between  "
-        >
-          <div
-            aria-dev-note="caja-imagen"
-            className=" flex items-center mx-auto justify-center overflow-hidden  relative"
-          >
-            <Image
-              className="object-cover w-full  h-full "
-              src={character}
-              alt="champsword"
-              width={800}
-              height={800}
-            />
-          </div>
+        <div className="flex justify-between">
+          <Image
+            className="object-cover w-24"
+            src="/shaman.png"
+            alt=""
+            width={800}
+            height={800}
+          />
+
           <div
             aria-note-dev="caja-names-points"
             className="flex flex-col px-8 w-full mx-auto justify-center"
           >
-            {" "}
             <p className="text-4xl text-white pt-4 font-bold">
-              {character_type}
+              {hero?.name || "Nameless Hero"}
             </p>
-            <div className=" flex flex-row gap-8 pt-4 ">
-              <p className="text-green-500 text-xl">V-{victories}</p>
-              <p className="text-red-500  text-xl">L-{amount_defeats}</p>
+            <div className="flex flex-row gap-8 pt-4">
+              <p className="text-green-500 text-xl">
+                V-{challengesData.totalWon}
+              </p>
+              <p className="text-red-500 text-xl">
+                L-{challengesData.totalLost}
+              </p>
             </div>
             <div className="flex flex-row gap-4 py-8">
               <div className="flex gap-1 items-center">
                 <Image
-                  className="size-6  "
-                  src={hp}
-                  alt="champ"
+                  alt=""
+                  className="size-6"
+                  src="/hp.svg"
                   width={24}
                   height={24}
                 />
-                <p className="text-white text-xl">{hpoints}</p>
+                <p className="text-white text-xl">{hero?.hp || "0"}</p>
               </div>
               <div className="flex gap-1 items-center">
                 <Image
-                  className="size-6  "
-                  src={sp}
-                  alt="champ"
+                  alt=""
+                  className="size-6"
+                  src="/sp.svg"
                   width={24}
                   height={24}
                 />
-                <p className="text-white text-xl">{spoints}</p>
+                <p className="text-white text-xl">{hero?.spd || "0"}</p>
               </div>
               <div className="flex gap-1 items-center">
                 <Image
-                  className="size-6  "
-                  src={ap}
-                  alt="champ"
+                  alt=""
+                  className="size-6"
+                  src="/ap.svg"
                   width={24}
                   height={24}
                 />
-                <p className="text-white text-xl">{apoints}</p>
+                <p className="text-white text-xl">{hero?.atk || "0"}</p>
               </div>
               <div className="flex gap-1 items-center">
                 <Image
-                  className="size-6  "
-                  src={dp}
-                  alt="champ"
+                  alt=""
+                  className="size-6"
+                  src="/dp.svg"
                   width={24}
                   height={24}
                 />
-                <p className="text-white text-xl">{dpoints}</p>
+                <p className="text-white text-xl">{hero?.def || "0"}</p>
               </div>
             </div>
           </div>
-          <div
-            aria-note-dev="caja-join-challenge"
-            className="flex border-l  relative  items-center justify-center  div-oblicuo gradient-border-left  "
-          >
+          <div className="flex border-l relative items-center justify-center div-oblicuo gradient-border-left">
             <img
               src="/square.svg"
               className="absolute top-0 left-0 pointer-events-none"
             />
+
             <img
               src="/square.svg"
               className="absolute rotate-180 bottom-0 right-0 pointer-events-none"
             />
+
             <div
               aria-note-dev="box-contain button and profit"
               className="flex w-36 flex-grow gap-4 items-center flex-col"
@@ -193,27 +128,24 @@ function Champs({
                 <Image
                   className="size-20 block"
                   src="/sword.svg"
-                  alt="arrow"
+                  alt=""
                   width={20}
                   height={20}
                 />
               </div>
-              <div className="hover:animate-wiggle ">
+              <div className="hover:animate-wiggle">
                 <Image
                   className="size-20"
                   src="/potion.svg"
-                  alt="arrow"
+                  alt=""
                   width={20}
                   height={20}
                 />
               </div>
             </div>
           </div>
-          <div
-            aria-note-dev="new/edit character"
-            className="flex gap-4 relative gradient-border-left items-center justify-center p-8 flex-col  div-oblicuo-final-character  "
-          >
-            <CreateNewChallenge />
+          <div className="flex gap-4 relative gradient-border-left items-center justify-center p-8 flex-col  div-oblicuo-final-character  ">
+            <CreateNewChallenge selectedFighterHash={fighterHash} />
             <Button
               className="gradient-button px-6 py-4 gap-2 text-arena-orange text-lg"
               variant="arena-main"

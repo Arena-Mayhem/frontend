@@ -14,9 +14,10 @@ const PotionsTypes = ["Skullbrew", "Stormfire", "Windsbane"];
 
 export default function CarouselPotions() {
   return (
-    <div className="flex mx-auto  justify-center items-end">
-      <Carousel className="">
-        <p className="text-white  text-xl text-center pb-8">POTION SELECTION</p>
+    <div className="flex mx-auto justify-center items-end">
+      <Carousel>
+        <p className="text-white text-xl text-center pb-8">POTION SELECTION</p>
+
         <CarouselContent>
           {images.map((imageUrl, index) => (
             <CarouselItem key={index}>
