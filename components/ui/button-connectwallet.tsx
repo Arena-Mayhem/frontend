@@ -22,7 +22,6 @@ const pollingConfig = createConfig({
 });
 
 export const ButtonWallet = () => {
-  const connectors = useConnectors();
   const { openAccountModal } = useRkAccountModal();
   const { address } = useAccount();
   const { data: ensName } = useEnsName({
@@ -38,7 +37,7 @@ export const ButtonWallet = () => {
         ? ensName
           ? ensName
           : beautifyAddress(address)
-        : "Conect Wallet"}
+        : "Connect Wallet"}
     </Button>
   );
 };

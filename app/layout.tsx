@@ -24,7 +24,17 @@ const cinzel = Cinzel({
 const config = getDefaultConfig({
   appName: "arena-mayhem",
   projectId: "f5dc276367eb7e124550036ec4aab6df",
-  chains: [localhost, hardhat, anvil, holesky],
+  chains: [
+    {
+      ...anvil,
+      name: "Anvil (Arena Mayhem)",
+      rpcUrls: {
+        default: {
+          http: ["https://ton-coast-disclaimer-progressive.trycloudflare.com"],
+        },
+      },
+    },
+  ],
   // using localhost chain for development
   ssr: true,
   // If your dApp uses server side rendering (SSR)
@@ -33,7 +43,7 @@ const config = getDefaultConfig({
 const queryClient = new QueryClient();
 
 const urqlClient = new Client({
-  url: "http://localhost:8080/graphql",
+  url: "https://classifieds-fastest-kong-cases.trycloudflare.com/graphql",
   exchanges: [cacheExchange, fetchExchange],
 });
 
