@@ -27,8 +27,7 @@ export default function Stage() {
           <DashboardAssets />
         ) : !isConnected ? (
           <NoAddress
-            imageUrl="/woodensword.svg"
-            tittle="NOTHING OVER HERE"
+            title="NOTHING OVER HERE"
             description="You must connect your wallet to get started!"
           />
         ) : (

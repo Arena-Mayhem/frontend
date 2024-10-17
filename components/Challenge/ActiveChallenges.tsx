@@ -9,25 +9,32 @@ import { useJoinChallenge, useStartMatch } from "@/lib/cartesi";
 
 import { formatDistance } from "date-fns";
 import { useHeroData } from "@/lib/heroes";
+import NoAddress from "../Character/NoAddress";
 
 function ActiveChallenges() {
   const { challenges } = useChallenges();
 
+  const activeChallenges = challenges.filter(
+    ({ status }) => status != "finished",
+  );
+
+  if (activeChallenges.length <= 0) {
+    return (
+      <NoAddress
+        title="NOTHING OVER HERE"
+        description="Create a challenge to get started!"
+      />
+    );
+  }
+
   return (
-    <>
-      <div className="flex items-center justify-center py-8 w-full pb-8 mx-8">
-        <div className="flex flex-col items-center justify-center w-full gap-6">
-          {challenges
-            .filter(({ status }) => status != "finished")
-            .map((challenge) => (
-              <ActiveChallenge
-                key={`challenge-${challenge.id}`}
-                {...challenge}
-              />
-            ))}
-        </div>
+    <div className="flex items-center justify-center py-8 w-full pb-8 mx-8">
+      <div className="flex flex-col items-center justify-center w-full gap-6">
+        {activeChallenges.map((challenge) => (
+          <ActiveChallenge key={`challenge-${challenge.id}`} {...challenge} />
+        ))}
       </div>
-    </>
+    </div>
   );
 }
 

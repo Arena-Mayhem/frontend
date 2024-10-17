@@ -1,6 +1,7 @@
 import type { Address } from "viem";
 import { gql, useQuery } from "urql";
 import { FighterData } from "./cartesi";
+import useSWR from "swr";
 
 export type GameData = {
   id: number;
@@ -60,6 +61,14 @@ const payloadToJson = (payload?: string) => {
 export const useNotices = () => {
   const [{ error, fetching: isLoading, data }, revalidate] = useQuery({
     query: QUERY_NOTICES,
+  });
+
+  useSWR("notices.list", {
+    refreshInterval: 7_500,
+    fetcher: () => {
+      if (isLoading) return;
+      revalidate({ requestPolicy: "network-only" });
+    },
   });
 
   return {

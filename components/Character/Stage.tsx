@@ -13,10 +13,10 @@ import CreateNew from "./CreateNew";
 import NoAddress from "./NoAddress";
 
 export default function Stage() {
-  const pathname = usePathname();
-  const isActive = (path: string) => path === pathname;
-  const isOngoing = isActive("/character");
   const { isConnected } = useAccount();
+  const pathname = usePathname();
+  const isInventory = pathname.startsWith("/character/inventory");
+
   return (
     <>
       <StageBar
@@ -41,16 +41,15 @@ export default function Stage() {
       />
       <div className="flex md:flex-row flex-col">
         <NavBarCharacter />
-        {isOngoing && isConnected ? (
-          <Character />
-        ) : !isConnected ? (
+        {!isConnected ? (
           <NoAddress
-            imageUrl="/woodensword.svg"
-            tittle="NOTHING OVER HERE"
-            description="You must create your first character to get started!"
+            title="NOTHING OVER HERE"
+            description="You must connect your wallet to get started!"
           />
-        ) : (
+        ) : isInventory ? (
           <Inventory />
+        ) : (
+          <Character />
         )}
       </div>
     </>

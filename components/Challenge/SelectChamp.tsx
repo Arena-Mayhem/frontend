@@ -3,7 +3,7 @@
 import type { SwordTypes } from "@/lib/types";
 import type { Token } from "@/lib/atoms";
 
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { toast } from "sonner";
 import Link from "next/link";
 import { zeroAddress } from "viem";
@@ -38,15 +38,17 @@ export default function SelectChamp({
   token,
   amount,
   selectedFighterHash,
+  onChallengeCreated,
 }: {
   token: Token;
   amount: bigint;
   selectedFighterHash?: string;
+  onChallengeCreated?: (txHash: string) => void;
 }) {
   const { data: externalSelectedHero } = useHeroData(selectedFighterHash || "");
   const [hero, setHero] = useState<FighterData>({} as any);
 
-  const { createChallenge } = useCreateChallenge();
+  const { createChallenge, data: txHash } = useCreateChallenge();
 
   function handleCreateChallenge() {
     if (!token) return toast.error("Select a token");
@@ -66,6 +68,12 @@ export default function SelectChamp({
       },
     });
   }
+
+  useEffect(() => {
+    if (txHash) {
+      onChallengeCreated?.(txHash);
+    }
+  }, [txHash]);
 
   return (
     <AlertDialog>
@@ -127,11 +135,11 @@ export function validateHeroConfig(
   };
 
   if (Object.values(formattedFighter).some((v) => v < 1)) {
-    return toast.error("Value should be greater than 0"), false;
+    return toast.error("Values should be greater than 0"), false;
   }
 
   if (Object.values(formattedFighter).some((v) => v > 40)) {
-    return toast.error("Single values should be less than 40"), false;
+    return toast.error("Single values should be <= 40"), false;
   }
 
   if (Object.values(formattedFighter).reduce((a, b) => a + b, 0) > 100) {

@@ -20,18 +20,27 @@ import IconSkull from "@/components/icons/IconSkull";
 
 import { FighterData } from "@/lib/cartesi";
 import { useAccount } from "wagmi";
+import NoAddress from "@/components/Character/NoAddress";
 
 export default function History() {
   const { challenges } = useChallenges();
+  const history = challenges.filter(({ status }) => status === "finished");
+
+  if (history.length <= 0) {
+    return (
+      <NoAddress
+        title="NOTHING OVER HERE"
+        description="Create a challenge to get started!"
+      />
+    );
+  }
 
   return (
     <div className="flex items-center justify-center py-8 w-full pb-8 mx-8">
       <div className="flex flex-col items-center justify-center w-fit gap-6">
-        {challenges
-          .filter(({ status }) => status === "finished")
-          .map((challenge) => (
-            <Ended {...challenge} key={`challenge-h-${challenge.id}`} />
-          ))}
+        {history.map((challenge) => (
+          <Ended {...challenge} key={`challenge-h-${challenge.id}`} />
+        ))}
       </div>
     </div>
   );

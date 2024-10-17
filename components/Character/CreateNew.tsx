@@ -10,7 +10,13 @@ import {
 
 import CharacterCreation from "./CharacterCreation";
 
-export default function CreateNew({ trigger }: { trigger: JSX.Element }) {
+export default function CreateNew({
+  trigger,
+  isEditingHeroHash,
+}: {
+  trigger: JSX.Element;
+  isEditingHeroHash?: string;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -18,7 +24,10 @@ export default function CreateNew({ trigger }: { trigger: JSX.Element }) {
       <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
       <AlertDialogContent className="flex items-center flex-col bg-arena-black justify-center">
         <AlertDialogCancel />
-        <CharacterCreation onCreateHero={() => setIsOpen(false)} />
+        <CharacterCreation
+          isEditingHeroHash={isEditingHeroHash}
+          onCreateHero={() => setIsOpen(false)}
+        />
       </AlertDialogContent>
     </AlertDialog>
   );

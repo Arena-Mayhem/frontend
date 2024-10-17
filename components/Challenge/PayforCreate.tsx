@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { toast } from "sonner";
+import { useState } from "react";
 
 import {
   AlertDialog,
@@ -16,6 +17,7 @@ import CreateNew from "@/components/Character/CreateNew";
 import SelectChamp, { ActionContinue } from "./SelectChamp";
 
 export default function PayforCreate() {
+  const [isOpen, setIsOpen] = useState(false);
   const { heroes } = useHeroes();
   const isHeroCreated = heroes.length > 0;
 
@@ -33,7 +35,7 @@ export default function PayforCreate() {
   );
 
   return isHeroCreated ? (
-    <AlertDialog>
+    <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger asChild>{TRIGGER}</AlertDialogTrigger>
       <AlertDialogContent className="flex items-center flex-col bg-arena-black justify-center">
         <AlertDialogCancel />
@@ -43,7 +45,16 @@ export default function PayforCreate() {
         <Bet>
           {({ isValidBet, token, value }) => {
             if (isValidBet) {
-              return <SelectChamp amount={value} token={token} />;
+              return (
+                <SelectChamp
+                  onChallengeCreated={() => {
+                    setIsOpen(false);
+                    toast.success("Challenge created");
+                  }}
+                  amount={value}
+                  token={token}
+                />
+              );
             }
             return (
               <ActionContinue

@@ -3,9 +3,20 @@ import { Button } from "@/components/ui/button";
 
 import { useHeroData, useHeroes } from "@/lib/heroes";
 import CreateNewChallenge from "./CreateNewChallenge";
+import NoAddress from "./NoAddress";
+import CreateNew from "./CreateNew";
 
-export default function Cards() {
+export default function Character() {
   const { heroes } = useHeroes();
+
+  if (heroes.length <= 0) {
+    return (
+      <NoAddress
+        title="NOTHING OVER HERE"
+        description="Create a character to get started"
+      />
+    );
+  }
 
   return (
     <div className="flex items-center justify-center py-8 w-full pb-8 mx-8">
@@ -148,13 +159,18 @@ function Champs({
           </div>
           <div className="flex gap-4 relative gradient-border-left items-center justify-center p-8 flex-col  div-oblicuo-final-character  ">
             <CreateNewChallenge selectedFighterHash={fighterHash} />
-            <Button
-              className="gradient-button px-6 py-4 gap-2 text-arena-orange text-lg"
-              variant="arena-main"
-            >
-              EDIT CHARACTER
-              <Image src="/edit.svg" alt="arrow" width={20} height={20} />
-            </Button>
+            <CreateNew
+              isEditingHeroHash={fighterHash}
+              trigger={
+                <Button
+                  className="gradient-button px-6 py-4 gap-2 text-arena-orange text-lg"
+                  variant="arena-main"
+                >
+                  EDIT CHARACTER
+                  <Image src="/edit.svg" alt="arrow" width={20} height={20} />
+                </Button>
+              }
+            />
             <p className="text-white pt-4 text-center text-sm font-bold">
               Earnings: {amount}
             </p>

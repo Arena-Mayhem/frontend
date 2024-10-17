@@ -1,4 +1,5 @@
 "use client";
+
 import History from "@/components/Challenge/History";
 import ActiveChallenges from "./ActiveChallenges";
 import StageBar from "./StageBar";
@@ -9,10 +10,9 @@ import { useAccount } from "wagmi";
 import NoAddress from "../Character/NoAddress";
 
 export default function Stage() {
-  const pathname = usePathname();
-  const isActive = (path: string) => path === pathname;
-  const isOngoing = isActive("/challenge") || pathname === "/";
   const { isConnected } = useAccount();
+  const pathname = usePathname();
+  const isHistory = pathname === "/challenge/history";
 
   return (
     <>
@@ -23,16 +23,15 @@ export default function Stage() {
       />
       <div className="flex md:flex-row flex-col">
         <NavBarChallenge />
-        {isOngoing && isConnected ? (
-          <ActiveChallenges />
-        ) : !isConnected ? (
+        {!isConnected ? (
           <NoAddress
-            imageUrl="/woodensword.svg"
-            tittle="NOTHING OVER HERE"
-            description="You must create your first challenge to get started!"
+            title="NOTHING OVER HERE"
+            description="You must connect your wallet to get started!"
           />
-        ) : (
+        ) : isHistory ? (
           <History />
+        ) : (
+          <ActiveChallenges />
         )}
       </div>
     </>

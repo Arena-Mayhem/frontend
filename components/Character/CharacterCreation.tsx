@@ -1,8 +1,8 @@
 import type { FighterData } from "@/lib/cartesi";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useHeroes } from "@/lib/heroes";
+import { generateFighterHash, useHeroData, useHeroes } from "@/lib/heroes";
 
 import { CharacterConfig } from "@/components/Challenge/ModalPlayer";
 import ArenaInput from "@/components/ArenaInput";
@@ -14,13 +14,17 @@ import SelectWeapon from "./SelectWeapon";
 
 export default function CharacterCreation({
   onCreateHero,
+  isEditingHeroHash,
 }: {
   onCreateHero?: () => void;
+  isEditingHeroHash?: string;
 }) {
+  const { data: editHeroData } = useHeroData(isEditingHeroHash || "");
+
   const [isModalWeaponOpen, setIsModalWeaponOpen] = useState(false);
   const [isWeaponSelected, setIsWeaponSelected] = useState(false);
   const [heroData, setHeroData] = useState({} as FighterData);
-  const { appendHero } = useHeroes();
+  const { appendHero, forceSetHeroes } = useHeroes();
 
   const partialSetHeroData = (partialData: Partial<FighterData>) => {
     setHeroData((prev) => ({ ...prev, ...partialData }));
@@ -34,19 +38,42 @@ export default function CharacterCreation({
     if (!validateHeroConfig(heroData)) return;
 
     if (isWeaponSelected) {
-      appendHero(heroData);
+      if (editHeroData) {
+        forceSetHeroes((prev) =>
+          prev.map((hero) =>
+            hero.fighterHash === editHeroData.fighterHash
+              ? {
+                  ...heroData,
+                  fighterHash: generateFighterHash(heroData),
+                  // We update heroHash to match the new hero data
+                }
+              : hero,
+          ),
+        );
+      } else appendHero(heroData);
+
       onCreateHero?.();
-      return toast.success("Hero created successfully");
+      return toast.success(
+        `Hero ${editHeroData ? "updated" : "created"} successfully`,
+      );
     }
 
     setIsModalWeaponOpen(true);
   }
 
+  useEffect(() => {
+    if (editHeroData) {
+      setHeroData(editHeroData);
+    }
+  }, [editHeroData]);
+
   return (
     <div className="flex gap-8 flex-row items-center justify-center">
       <div className="w-1/2 -mx-2 ">
         <h1 className="text-5xl gradient-text-name-character">
-          It's time to customize your warrior!
+          {editHeroData
+            ? "Let's edit your hero data"
+            : "It's time to customize your warrior!"}
         </h1>
 
         <p className="text-white text-base pt-8">
@@ -71,6 +98,12 @@ export default function CharacterCreation({
         />
 
         <CharacterConfig
+          defaultValues={{
+            atack: editHeroData?.atk,
+            defense: editHeroData?.def,
+            health: editHeroData?.hp,
+            speed: editHeroData?.spd,
+          }}
           onChangeAtack={(atk) => partialSetHeroData({ atk })}
           onChangeDefense={(def) => partialSetHeroData({ def })}
           onChangeHealth={(hp) => partialSetHeroData({ hp })}
@@ -91,7 +124,11 @@ export default function CharacterCreation({
             variant="simple"
             className="px-10 py-2 h-auto text-clip bg-orange-400 to-amber-400 text-transparent bg-gradient-to-tl transition animate-duration-1100 animate-delay-2000 from-yellow-200 via-amber-700 bg-300% bg-clip-text animate-gradient animated-gradient gradient-border gap-3"
           >
-            {isWeaponSelected ? "Create Hero" : "Continue"}
+            {isWeaponSelected
+              ? isEditingHeroHash
+                ? "Update Hero"
+                : "Create Hero"
+              : "Continue"}
           </Button>
         )}
       </div>

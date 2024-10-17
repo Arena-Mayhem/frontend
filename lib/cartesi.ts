@@ -116,9 +116,10 @@ export const useAddCartesiInput = () => {
 };
 
 export const useCreateChallenge = () => {
-  const { addCartesiInput } = useAddCartesiInput();
+  const { addCartesiInput, ...query } = useAddCartesiInput();
 
   return {
+    ...query,
     createChallenge: async ({
       isETHChallenge,
       fighterHash,

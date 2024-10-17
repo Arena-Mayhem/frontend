@@ -16,37 +16,32 @@ const RenderContent = () => {
   return isConnected ? (
     isActive("/marketplace") ? (
       <>
-        {" "}
         <div className="flex flex-col bg-arena-bg border-b-[0.1px] border-white/20 shadow-padentro rounded-xl p-8 m-8 bg-cover w-[1100px]">
           <SkinsCards />{" "}
         </div>
       </>
     ) : isActive("/marketplace/weapons") ? (
       <>
-        {" "}
         <div className="flex flex-col bg-arena-bg border-b-[0.1px] border-white/20 shadow-padentro rounded-xl p-8 m-8 bg-cover w-[1100px]">
           <WeaponsCards />{" "}
         </div>
       </>
     ) : isActive("/marketplace/potions") ? (
       <>
-        {" "}
         <div className="flex flex-col bg-arena-bg border-b-[0.1px] border-white/20 shadow-padentro rounded-xl p-8 m-8 bg-cover w-[1100px]">
           <PotionsCards />{" "}
         </div>
       </>
     ) : isActive("/marketplace/random") ? (
       <>
-        {" "}
         <div className="flex flex-col bg-arena-bg border-b-[0.1px] border-white/20 shadow-padentro rounded-xl p-8 m-8 bg-cover w-[1100px]">
-          <RandomBoxStage />{" "}
+          <RandomBoxStage />
         </div>
       </>
     ) : null
   ) : (
     <NoAddress
-      imageUrl="/woodensword.svg"
-      tittle="NOTHING OVER HERE"
+      title="NOTHING OVER HERE"
       description="You must connect your wallet to get started!"
     />
   );
