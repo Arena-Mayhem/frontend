@@ -30,7 +30,7 @@ const config = getDefaultConfig({
       name: "Anvil (Arena Mayhem)",
       rpcUrls: {
         default: {
-          http: ["https://ton-coast-disclaimer-progressive.trycloudflare.com"],
+          http: ["https://am-rpc.onlemon.cloud/graphql"],
         },
       },
     },
@@ -43,7 +43,7 @@ const config = getDefaultConfig({
 const queryClient = new QueryClient();
 
 const urqlClient = new Client({
-  url: "https://classifieds-fastest-kong-cases.trycloudflare.com/graphql",
+  url: "https://am-ql.onlemon.cloud/graphql",
   exchanges: [cacheExchange, fetchExchange],
 });
 
