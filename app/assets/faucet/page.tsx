@@ -56,6 +56,22 @@ export default function Balance() {
           >
             CLAIM ETH
           </Button>
+
+          <hr className="mt-4" />
+
+          <table className="mt-2">
+            <tbody>
+              <tr>
+                <td>RPC</td>
+                <td className="px-8 py-2">https://am-rpc.onlemon.cloud</td>
+              </tr>
+
+              <tr>
+                <td>Chain ID</td>
+                <td className="px-8">31337</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </>
