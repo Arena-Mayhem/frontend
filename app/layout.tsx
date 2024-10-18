@@ -5,7 +5,6 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { Cinzel } from "next/font/google";
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
-import { localhost, hardhat, anvil, holesky } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import {
   Client,
@@ -14,6 +13,7 @@ import {
   fetchExchange,
 } from "urql";
 import { Toaster } from "@/components/ui/sonner";
+import { cartesi } from "@/lib/chains";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -24,17 +24,7 @@ const cinzel = Cinzel({
 const config = getDefaultConfig({
   appName: "arena-mayhem",
   projectId: "f5dc276367eb7e124550036ec4aab6df",
-  chains: [
-    {
-      ...anvil,
-      name: "Anvil (Arena Mayhem)",
-      rpcUrls: {
-        default: {
-          http: ["https://am-rpc.onlemon.cloud/graphql"],
-        },
-      },
-    },
-  ],
+  chains: [cartesi],
   // using localhost chain for development
   ssr: true,
   // If your dApp uses server side rendering (SSR)
