@@ -43,7 +43,8 @@ export const useAccountDeposits = (token: Address) => {
 
         return null;
       },
-      refreshInterval: ONE_SECOND_IN_MS * 5, // 5 seconds
+      revalidateOnMount: true,
+      refreshInterval: ONE_SECOND_IN_MS * 60, // 1 minute
     },
   );
 
@@ -74,7 +75,8 @@ export const useAccountDeposits = (token: Address) => {
 
         return null;
       },
-      refreshInterval: ONE_SECOND_IN_MS * 5, // 5 seconds
+      revalidateOnMount: true,
+      refreshInterval: ONE_SECOND_IN_MS * 60, // 1 minute
     },
   );
 

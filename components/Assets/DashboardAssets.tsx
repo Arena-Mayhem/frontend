@@ -6,7 +6,6 @@ import { ZERO_BN } from "@/lib/constants";
 import { useAccountDeposits } from "@/lib/balances";
 import { useWalletBalance } from "@/lib/erc20";
 import { useTokenData, useTokenImage, useTokenList } from "@/lib/tokens";
-import { useImageForAddress } from "@/lib/images";
 
 export default function DashboardAssets() {
   const allTokens = useTokenList();

@@ -3,16 +3,31 @@ import { useState } from "react";
 
 import Navbar from "@/components/Navigation/Navbar";
 import StageBar from "@/components/Challenge/StageBar";
+import { useRkAccountModal } from "@/components/ui/button-connectwallet";
 
 import NavBarAssets from "@/components/Assets/NavBarAssets";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { isAddress } from "viem";
 import { toast } from "sonner";
+import { addEtherNetwork } from "./utils";
 
 let toaster: any;
 export default function Balance() {
+  const { openAccountModal, isConnected } = useRkAccountModal();
+
   const [address, setAddress] = useState("");
+
+  function handleAddNetwork() {
+    if (!isConnected) return openAccountModal?.();
+    addEtherNetwork({
+      chainId: "0x7A69",
+      chainName: "Arena Testnet",
+      rpcUrl: "https://am-rpc.onlemon.cloud",
+      blockExplorerUrl: "https://www.mayhem.cool",
+      symbol: "ETH",
+    });
+  }
 
   function handleClaim() {
     if (isAddress(address)) {
@@ -55,6 +70,14 @@ export default function Balance() {
             variant="simple"
           >
             CLAIM ETH
+          </Button>
+
+          <Button
+            onClick={handleAddNetwork}
+            className="gradient-button ml-2 px-2 my-2 rounded-lg border-2 border-arena-orange text-arena-orange text-lg"
+            variant="simple"
+          >
+            ADD NETWORK
           </Button>
 
           <hr className="mt-4" />

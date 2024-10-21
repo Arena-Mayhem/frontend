@@ -45,10 +45,12 @@ function ActiveChallenge(props: GameData) {
   const token = useTokenData(props.token);
   const betValue = formatUnits(BigInt(props.amount), token?.decimals || 18);
 
+  console.debug({ token });
   const isGameAccepted = props.status === "accepted";
 
   function handleJoinChallenge() {
     if (isGameAccepted) {
+      console.debug({ hero });
       return startMatch({
         challenge_id: props.id,
         fighter: hero!,
@@ -112,7 +114,7 @@ function ActiveChallenge(props: GameData) {
             onAction={handleJoinChallenge}
             isGameStart={isGameAccepted}
             isGameEnd={props.status === "finished"}
-            amount={`${betValue} ${token?.symbol}`}
+            amount={`${betValue} ${token?.symbol || "TEST"}`}
           />
         </div>
       </div>
