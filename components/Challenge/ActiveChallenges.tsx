@@ -42,15 +42,15 @@ function ActiveChallenge(props: GameData) {
   const { data: hero } = useHeroData(props.fighter_hash);
   const { joinChallenge } = useJoinChallenge();
   const { startMatch } = useStartMatch();
+
   const token = useTokenData(props.token);
   const betValue = formatUnits(BigInt(props.amount), token?.decimals || 18);
 
-  console.debug({ token });
   const isGameAccepted = props.status === "accepted";
 
   function handleJoinChallenge() {
     if (isGameAccepted) {
-      console.debug({ hero });
+      console.debug({ hero, id: props.id });
       return startMatch({
         challenge_id: props.id,
         fighter: hero!,

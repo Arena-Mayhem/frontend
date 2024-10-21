@@ -86,8 +86,6 @@ export const useDepositERC20Token = ({
 export const useAddCartesiInput = () => {
   const { writeContract, error, ...write } = useWriteContract();
 
-  console.debug({ error });
-
   return {
     ...write,
     addCartesiInput: async (

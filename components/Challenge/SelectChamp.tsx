@@ -1,9 +1,8 @@
 "use client";
 
-import type { SwordTypes } from "@/lib/types";
 import type { Token } from "@/lib/atoms";
 
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import Link from "next/link";
 import { zeroAddress } from "viem";

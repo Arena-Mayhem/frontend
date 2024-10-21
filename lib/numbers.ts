@@ -14,10 +14,12 @@ export function toPrecision(n: number | string, precision: number = 1) {
 
   // Get the last valuable (non-zero-followed) part of the decimal part
   if (lastValuablePart) {
-    return `${whole}.${decimal.slice(
-      0,
-      decimal.indexOf(lastValuablePart) + lastValuablePart.length,
-    )}`;
+    return `${whole}.${
+      decimal?.slice(
+        0,
+        decimal.indexOf(lastValuablePart) + lastValuablePart.length,
+      ) ?? ""
+    }`;
   }
   return `${whole}.${decimal}`;
 }

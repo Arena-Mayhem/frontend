@@ -58,7 +58,7 @@ export default function BoxRandomType({
             </p>
             <Image
               src={itemsUrlOne}
-              alt="sword"
+              alt=""
               height={1000}
               width={1000}
               className="size-36 animate-pulse "
@@ -76,7 +76,7 @@ export default function BoxRandomType({
             </p>
             <Image
               src={itemsUrlTwo}
-              alt="sword"
+              alt=""
               height={1000}
               width={1000}
               className="size-36 animate-pulse"
@@ -94,7 +94,7 @@ export default function BoxRandomType({
             </p>
             <Image
               src={itemsUrlThree}
-              alt="sword"
+              alt=""
               height={1000}
               width={1000}
               className="size-36 animate-pulse"

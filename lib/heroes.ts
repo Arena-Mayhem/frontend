@@ -6,7 +6,7 @@ import { useChallenges } from "./queries";
 import { useAccount } from "wagmi";
 
 const atomHeroes = atomWithStorage(
-  "platform.heroes",
+  "cartesi.mayhem.heroes",
   [] as Array<
     FighterData & {
       fighterHash: string;

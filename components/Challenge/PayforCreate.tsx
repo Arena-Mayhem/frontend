@@ -22,7 +22,7 @@ export default function PayforCreate() {
   const isHeroCreated = heroes.length > 0;
 
   const TRIGGER = (
-    <Button variant="simple" className="text-white  gap-3">
+    <Button variant="simple" className="text-white gap-3">
       Create Challenge
       <Image
         src="/plus.svg"

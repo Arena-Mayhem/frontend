@@ -23,7 +23,9 @@ export default function CharacterCreation({
 
   const [isModalWeaponOpen, setIsModalWeaponOpen] = useState(false);
   const [isWeaponSelected, setIsWeaponSelected] = useState(false);
-  const [heroData, setHeroData] = useState({} as FighterData);
+  const [heroData, setHeroData] = useState({
+    weapon: "sword", // Default weapon
+  } as FighterData);
   const { appendHero, forceSetHeroes } = useHeroes();
 
   const partialSetHeroData = (partialData: Partial<FighterData>) => {
@@ -63,7 +65,7 @@ export default function CharacterCreation({
 
   useEffect(() => {
     if (editHeroData) {
-      setHeroData(editHeroData);
+      partialSetHeroData(editHeroData);
     }
   }, [editHeroData]);
 
@@ -90,7 +92,7 @@ export default function CharacterCreation({
           value={heroData.name}
           onChange={(e) => {
             partialSetHeroData({
-              name: e.target.value?.toLocaleUpperCase()?.trim() || "",
+              name: e.target.value?.toLocaleUpperCase() || "",
             });
           }}
           className="uppercase"
