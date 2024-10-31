@@ -14,6 +14,7 @@ import {
 } from "urql";
 import { Toaster } from "@/components/ui/sonner";
 import { cartesi } from "@/lib/chains";
+import { localhost, anvil, hardhat, Chain } from "viem/chains";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -21,10 +22,13 @@ const cinzel = Cinzel({
   display: "auto",
 });
 
+const IS_DEV = process.env.NODE_ENV === "development";
+const DEV_CHAINS = IS_DEV ? [localhost, anvil, hardhat] : [];
+
 const config = getDefaultConfig({
   appName: "arena-mayhem",
   projectId: "f5dc276367eb7e124550036ec4aab6df",
-  chains: [cartesi],
+  chains: [...DEV_CHAINS, cartesi] as any,
   // using localhost chain for development
   ssr: true,
   // If your dApp uses server side rendering (SSR)
@@ -33,7 +37,9 @@ const config = getDefaultConfig({
 const queryClient = new QueryClient();
 
 const urqlClient = new Client({
-  url: "https://am-ql.onlemon.cloud/graphql",
+  url: IS_DEV
+    ? "http://localhost:8080/graphql"
+    : "https://am-ql.onlemon.cloud/graphql",
   exchanges: [cacheExchange, fetchExchange],
 });
 
