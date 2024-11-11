@@ -120,44 +120,73 @@ export const useReports = () => {
 export const useChallenges = () => {
   const { data = [] } = useNotices();
 
+  const rawStates = data
+    .filter(({ fighter_hash }: any) => Boolean(fighter_hash))
+    .map((props: any) => {
+      // id is the challenge id for pending/accepted challenges
+      // game_id is the challenge id for finished challenges
+
+      const gameResult = data.find(({ game_id }: any) => game_id === props.id);
+
+      if (!gameResult || props.status === "pending") return props;
+
+      const { fighters, opponent_id, winner, owner_id } = gameResult;
+
+      const winnerIndex = winner.id; // 0 or 1 as index
+
+      const PLAYER1 = fighters[0];
+      const PLAYER2 = fighters[1];
+
+      const players = [
+        {
+          ...PLAYER1,
+          address: owner_id,
+        },
+        {
+          ...PLAYER2,
+          address: opponent_id,
+        },
+      ];
+
+      return {
+        ...props,
+        players,
+        status: "finished",
+        winner: players[winnerIndex],
+      };
+    }) as GameData[];
+
+  const mergedStates = rawStates.map(({ id }, _, states) => {
+    const findForState = (status: GameData["status"]) => {
+      return states.find(
+        // Element status, Element id
+        ({ status: es, id: eid }) => es === status && eid === id,
+      );
+    };
+
+    const finishedState = findForState("finished");
+    const acceptedState = findForState("accepted");
+    const pendingState = findForState("pending");
+
+    return {
+      // We merge all the states into one
+      ...pendingState,
+      ...acceptedState,
+      ...finishedState,
+      input: {
+        ...pendingState?.input,
+        ...acceptedState?.input,
+        ...finishedState?.input,
+      },
+    } as GameData;
+  });
+
   return {
-    challenges: data
-      .filter(({ fighter_hash }: any) => Boolean(fighter_hash))
-      .map((props: any) => {
-        // id is the challenge id for pending/accepted challenges
-        // game_id is the challenge id for finished challenges
-
-        const gameResult = data.find(
-          ({ game_id }: any) => game_id === props.id,
-        );
-
-        if (!gameResult || props.status === "pending") return props;
-
-        const { fighters, opponent_id, winner, owner_id } = gameResult;
-
-        const winnerIndex = winner.id; // 0 or 1 as index
-
-        const PLAYER1 = fighters[0];
-        const PLAYER2 = fighters[1];
-
-        const players = [
-          {
-            ...PLAYER1,
-            address: owner_id,
-          },
-          {
-            ...PLAYER2,
-            address: opponent_id,
-          },
-        ];
-
-        return {
-          ...props,
-          players,
-          status: "finished",
-          winner: players[winnerIndex],
-        };
-      }) as GameData[],
+    challenges: mergedStates.filter(
+      // Filter out duplicates
+      ({ id }, index, states) =>
+        states.findIndex(({ id: eid }) => eid === id) === index,
+    ),
   };
 };
 
@@ -172,15 +201,15 @@ export const useAcceptedChallenges = (address: Address) => {
       ),
   );
 
-  const challengesWon = accountChallenges.filter(
+  const finishedChallenges = accountChallenges.filter(
+    ({ status }) => status === "finished",
+  );
+
+  const challengesWon = finishedChallenges.filter(
     ({ winner }) => winner?.address === FORMAT_ADDRESS,
   );
 
-  const totalLost = accountChallenges.filter(
-    ({ winner, id }) =>
-      winner?.address !== FORMAT_ADDRESS &&
-      !challengesWon.some((challenge) => challenge.id === id),
-  ).length;
+  const totalLost = finishedChallenges.length - challengesWon.length;
 
   return {
     totalWon: challengesWon.length,

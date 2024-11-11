@@ -52,6 +52,7 @@ function ActiveChallenge(props: GameData) {
   const isWaitingForOpponent = props.status === "pending";
 
   function handleJoinChallenge() {
+    console.debug({ props, hero });
     if (isWaitingForOpponent) {
       return setIsJoining(true);
     }
