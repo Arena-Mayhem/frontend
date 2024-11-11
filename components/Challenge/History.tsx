@@ -116,9 +116,11 @@ function PlayerInfo({
   className,
   address,
   name,
+  imageURL,
 }: WithClassName<
   FighterData & {
     address: Address;
+    imageURL?: string;
   }
 >) {
   const { totalLost, totalWon } = useAcceptedChallenges(address);
@@ -157,7 +159,7 @@ function PlayerInfo({
       <figure className="shrink-0 size-40">
         <Image
           className="object-cover w-full h-full"
-          src={"/shaman.png"}
+          src={imageURL || "/shaman.png"}
           alt=""
           width={400}
           height={400}
