@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { FighterData, useCreateChallenge } from "@/lib/cartesi";
 import HeroSelection from "./HeroSelection";
 import { Cancel } from "@radix-ui/react-alert-dialog";
-import { generateFighterHash, useHeroData, useHeroes } from "@/lib/heroes";
+import { generateFighterHash, useHeroData } from "@/lib/heroes";
 import { cn } from "@/lib/utils";
 
 export const ActionContinue = ({ onClick }: { onClick?: any }) => (

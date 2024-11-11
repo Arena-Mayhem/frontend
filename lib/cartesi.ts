@@ -149,9 +149,10 @@ export const useCreateChallenge = () => {
 };
 
 export const useJoinChallenge = () => {
-  const { addCartesiInput } = useAddCartesiInput();
+  const { addCartesiInput, ...query } = useAddCartesiInput();
 
   return {
+    ...query,
     joinChallenge: async ({
       challenge_id,
       fighter,

@@ -1,15 +1,17 @@
 import Image from "next/image";
+import { formatUnits } from "viem";
+import { formatDistance } from "date-fns";
+import { useState } from "react";
 
-import ChallengeInfo from "./ChallengeInfo";
-import JoinChallenge from "./JoinChallenge";
+import { useHeroData } from "@/lib/heroes";
 import { type GameData, useChallenges } from "@/lib/queries";
 import { useTokenData } from "@/lib/tokens";
-import { formatUnits } from "viem";
-import { useJoinChallenge, useStartMatch } from "@/lib/cartesi";
+import { useStartMatch } from "@/lib/cartesi";
 
-import { formatDistance } from "date-fns";
-import { useHeroData } from "@/lib/heroes";
+import JoinChallengeButton from "./JoinChallengeButton";
+import ChallengeInfo from "./ChallengeInfo";
 import NoAddress from "../Character/NoAddress";
+import ModalJoinChallenge from "./ModalJoinChallenge";
 
 function ActiveChallenges() {
   const { challenges } = useChallenges();
@@ -39,37 +41,27 @@ function ActiveChallenges() {
 }
 
 function ActiveChallenge(props: GameData) {
+  const [isJoining, setIsJoining] = useState(false);
   const { data: hero } = useHeroData(props.fighter_hash);
-  const { joinChallenge } = useJoinChallenge();
   const { startMatch } = useStartMatch();
 
   const token = useTokenData(props.token);
   const betValue = formatUnits(BigInt(props.amount), token?.decimals || 18);
 
   const isGameAccepted = props.status === "accepted";
+  const isWaitingForOpponent = props.status === "pending";
 
   function handleJoinChallenge() {
+    if (isWaitingForOpponent) {
+      return setIsJoining(true);
+    }
+
     if (isGameAccepted) {
-      console.debug({ hero, id: props.id });
       return startMatch({
         challenge_id: props.id,
         fighter: hero!,
       });
     }
-
-    const JOIN_GAME_STATE = {
-      challenge_id: props.id,
-      fighter: {
-        spd: 15,
-        atk: 35,
-        def: 25,
-        hp: 25,
-        name: "Leonardo",
-        weapon: "sword",
-      },
-    };
-
-    joinChallenge(JOIN_GAME_STATE);
   }
 
   return (
@@ -110,7 +102,13 @@ function ActiveChallenge(props: GameData) {
             character_type={props?.input?.fighterMetadata?.name || "Player"}
             owner={props.address_owner}
           />
-          <JoinChallenge
+          {isJoining && (
+            <ModalJoinChallenge
+              challengeId={props.id}
+              onClose={() => setIsJoining(false)}
+            />
+          )}
+          <JoinChallengeButton
             onAction={handleJoinChallenge}
             isGameStart={isGameAccepted}
             isGameEnd={props.status === "finished"}
