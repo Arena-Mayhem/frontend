@@ -72,7 +72,7 @@ export default function Navbar() {
           className="lg:hidden mx-auto p-8"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <ImMenu className="text-xl text-arena-orange fill-current" /> // hola
+          <ImMenu className="text-xl text-arena-orange fill-current" /> {/*hola */}
         </button>
       </nav>
       <section
