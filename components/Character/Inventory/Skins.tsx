@@ -28,7 +28,7 @@ export default function SkinsCards() {
         src="/square.svg"
         className="rotate-180 absolute bottom-0 right-0 pointer-events-non"
       />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-left">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-left">
         {availableSkins.map((skin, index) => (
           <Skins
             key={index}
