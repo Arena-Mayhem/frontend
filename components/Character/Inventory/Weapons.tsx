@@ -8,7 +8,7 @@ export default function WeaponsCards() {
   const isInventory = isActive("/character/inventory/weapons");
   return (
     <>
-      <div className="div-oblicuo-inventory gap-7  relative pt-8 bg-arena-black gradient-border flex flex-wrap justify-center  w-full m-8 flex-row">
+      <div className="div-oblicuo-inventory gap-2 relative pt-2 bg-arena-black gradient-border flex flex-wrap justify-left p-9 m-8 flex-row">
         <img
           src="/square.svg"
           className="absolute top-0 left-0 pointer-events-none"
@@ -17,97 +17,103 @@ export default function WeaponsCards() {
           src="/square.svg"
           className="absolute rotate-180 pointer-events-none bottom-0 right-0"
         />
-        {isInventory ? (
-          <>
-            <Weapons urlImage="/ironsword.svg" WeaponName="sword" />
-            <Weapons urlImage="/clasicspare.svg" WeaponName="spare" />
-            <Weapons urlImage="/basicaxe.svg" WeaponName="axe" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-            <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
-          </>
-        ) : (
-          <>
-            <Weapons
-              urlImage="/ironsword.svg"
-              WeaponName="SWORD"
-              price="30USDC"
-            />
-            <Weapons
-              urlImage="/clasicspare.svg"
-              WeaponName="SPARE"
-              price="30USDC"
-            />
-            <Weapons urlImage="/basicaxe.svg" WeaponName="AXE" price="30USDC" />
-            <Weapons
-              urlImage="/lock_weapon.png"
-              WeaponName="locked"
-              price="30USDC"
-            />
-            <Weapons
-              urlImage="/lock_weapon.png"
-              WeaponName="locked"
-              price="30USDC"
-            />
-            <Weapons
-              urlImage="/lock_weapon.png"
-              WeaponName="locked"
-              price="30USDC"
-            />
-            <Weapons
-              urlImage="/lock_weapon.png"
-              WeaponName="locked"
-              price="30USDC"
-            />
-            <Weapons
-              urlImage="/lock_weapon.png"
-              WeaponName="locked"
-              price="30USDC"
-            />
-            <Weapons
-              urlImage="/lock_weapon.png"
-              WeaponName="locked"
-              price="30USDC"
-            />
-            <Weapons
-              urlImage="/lock_weapon.png"
-              WeaponName="locked"
-              price="30USDC"
-            />
-            <Weapons
-              urlImage="/lock_weapon.png"
-              WeaponName="locked"
-              price="30USDC"
-            />
-            <Weapons
-              urlImage="/lock_weapon.png"
-              WeaponName="locked"
-              price="30USDC"
-            />
-          </>
-        )}
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-6 justify-center">
+          {isInventory ? (
+            <>
+              <Weapons urlImage="/ironsword.svg" WeaponName="sword" />
+              <Weapons urlImage="/clasicspare.svg" WeaponName="spare" />
+              <Weapons urlImage="/basicaxe.svg" WeaponName="axe" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+              <Weapons urlImage="/lock_weapon.png" WeaponName="locked" />
+            </>
+          ) : (
+            <>
+              <Weapons
+                urlImage="/ironsword.svg"
+                WeaponName="SWORD"
+                price="30USDC"
+              />
+              <Weapons
+                urlImage="/clasicspare.svg"
+                WeaponName="SPARE"
+                price="30USDC"
+              />
+              <Weapons
+                urlImage="/basicaxe.svg"
+                WeaponName="AXE"
+                price="30USDC"
+              />
+              <Weapons
+                urlImage="/lock_weapon.png"
+                WeaponName="locked"
+                price="30USDC"
+              />
+              <Weapons
+                urlImage="/lock_weapon.png"
+                WeaponName="locked"
+                price="30USDC"
+              />
+              <Weapons
+                urlImage="/lock_weapon.png"
+                WeaponName="locked"
+                price="30USDC"
+              />
+              <Weapons
+                urlImage="/lock_weapon.png"
+                WeaponName="locked"
+                price="30USDC"
+              />
+              <Weapons
+                urlImage="/lock_weapon.png"
+                WeaponName="locked"
+                price="30USDC"
+              />
+              <Weapons
+                urlImage="/lock_weapon.png"
+                WeaponName="locked"
+                price="30USDC"
+              />
+              <Weapons
+                urlImage="/lock_weapon.png"
+                WeaponName="locked"
+                price="30USDC"
+              />
+              <Weapons
+                urlImage="/lock_weapon.png"
+                WeaponName="locked"
+                price="30USDC"
+              />
+              <Weapons
+                urlImage="/lock_weapon.png"
+                WeaponName="locked"
+                price="30USDC"
+              />
+            </>
+          )}
+        </div>
       </div>
     </>
   );

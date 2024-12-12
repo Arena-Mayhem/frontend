@@ -6,42 +6,39 @@ export default function SkinsCards() {
   const pathname = usePathname();
   const isActive = (path: string) => path === pathname;
   const isInventory = isActive("/character/inventory");
+
+  const availableSkins = [
+    { image: "/giant_troll.png", name: "giant troll" },
+    { image: "/knight.png", name: "medival knight" },
+    { image: "/shaman.png", name: "shaman" },
+    { image: "/locked.png", name: "locked" },
+    { image: "/locked.png", name: "locked" },
+    { image: "/locked.png", name: "locked" },
+    { image: "/locked.png", name: "locked" },
+    { image: "/locked.png", name: "locked" },
+  ];
+
   return (
-    <>
-      <div className="div-oblicuo-inventory gap-6 relative pt-8 bg-arena-black gradient-border flex flex-wrap justify-center p-8 m-8 flex-row">
-        <img
-          src="/square.svg"
-          className="absolute top-0 left-0  pointer-events-none"
-        />
-        <img
-          src="/square.svg"
-          className="absolute rotate-180 pointer-events-none bottom-0 right-0"
-        />
-        {isInventory ? (
-          <>
-            <Skins urlImage="/knight.png" ChampName="KNIGHT" />
-            <Skins urlImage="/barak.png" ChampName="BARAK" />
-            <Skins urlImage="/shaman.png" ChampName="SHAMAN" />
-            <Skins urlImage="/locked.png" ChampName="locked" />
-            <Skins urlImage="/locked.png" ChampName="locked" />
-            <Skins urlImage="/locked.png" ChampName="locked" />
-            <Skins urlImage="/locked.png" ChampName="locked" />
-            <Skins urlImage="/locked.png" ChampName="locked" />
-          </>
-        ) : (
-          <>
-            <Skins urlImage="/knight.png" ChampName="KNIGHT" price="30USDC" />
-            <Skins urlImage="/barak.png" ChampName="BARAK" price="30USDC" />
-            <Skins urlImage="/shaman.png" ChampName="SHAMAN" price="30USDC" />
-            <Skins urlImage="/locked.png" ChampName="locked" price="30USDC" />
-            <Skins urlImage="/locked.png" ChampName="locked" price="30USDC" />
-            <Skins urlImage="/locked.png" ChampName="locked" price="30USDC" />
-            <Skins urlImage="/locked.png" ChampName="locked" price="30USDC" />
-            <Skins urlImage="/locked.png" ChampName="locked" price="30USDC" />
-          </>
-        )}
+    <div className="div-oblicuo-inventory gap-2 relative bg-arena-black gradient-border flex flex-wrap justify-left p-9 m-8 flex-row">
+      <img
+        src="/square.svg"
+        className="absolute top-0 left-0 pointer-events-non"
+      />
+      <img
+        src="/square.svg"
+        className="rotate-180 absolute bottom-0 right-0 pointer-events-non"
+      />
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-left">
+        {availableSkins.map((skin, index) => (
+          <Skins
+            key={index}
+            urlImage={skin.image}
+            ChampName={skin.name}
+            price={!isInventory ? "30USDC" : undefined}
+          />
+        ))}
       </div>
-    </>
+    </div>
   );
 }
 
@@ -62,11 +59,11 @@ function Skins({
           alt={ChampName}
           height={100}
           width={100}
-          className="h-[269px] w-[190px] bg-arena-bg object-cover overflow-hidden rounded-2xl"
+          className="h-[264px] w-[200px] bg-arena-bg object-cover overflow-hidden rounded-2xl"
         />
         <p className="text-white text-center py-2">{ChampName}</p>
         {price && (
-          <Button className="gradient-border items-center justify-center flex flex-row gap-2 p-2 w-[190px]">
+          <Button className="gradient-border items-center justify-center flex flex-row gap-2 p-2 w-[200px]">
             <p className="text-arena-orange">BUY FOR</p>
             <p className="text-white">{price}</p>
           </Button>

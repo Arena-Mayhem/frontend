@@ -49,8 +49,7 @@ body {
   }
 
   .gradient-border {
-    border-radius: 4px;
-    border: 3px solid var(--Orange-Linear, #f9b208);
+    border: 1px solid var(--Orange-Linear, #f9b208);
     border-image: linear-gradient(to bottom, #f9b208, #c14003) 1;
   }
 
@@ -68,37 +67,34 @@ body {
 
   .div-oblicuo {
     clip-path: polygon(
-      2.2% 0,
-      100% 0,
-      100% 0%,
-      100% 88.8%,
-      97.8% 100%,
-      0% 100%,
-      0% 12.2%
+      18px 0px,
+      /* Top left cut */ 100% 0px,
+      /* Top right */ 100% calc(100% - 18px),
+      /* Bottom right */ calc(100% - 18px) 100%,
+      /* Bottom right inner point */ 0px 100%,
+      /* Bottom left */ 0px 18px /* Top left inner point */
     );
   }
 
   .div-oblicuo-cajita {
     clip-path: polygon(
-      9.5% 0,
-      /* horizontal superior izquierda */ 90% 0,
-      100% 0%,
-      100% 71%,
-      /* lateral inferior derecho*/ 90.5% 100%,
-      /* horizontal inferior derecha */ 0% 100%,
-      0% 31% /* lateral inferior izquierdo */
+      18px 0px,
+      /* Top left cut */ 100% 0px,
+      /* Top right */ 100% calc(100% - 18px),
+      /* Bottom right */ calc(100% - 18px) 100%,
+      /* Bottom right inner point */ 0px 100%,
+      /* Bottom left */ 0px 18px /* Top left inner point */
     );
   }
-
+  /*aqui esta*----------------------------------------------------------------------------------------------------------------------------*/
   .div-oblicuo-inventory {
     clip-path: polygon(
-      2.5% 0,
-      /* horizontal superior izquierda */ 100% 0,
-      100% 0%,
-      100% 96.8%,
-      /* lateral inferior derecho*/ 97.5% 100%,
-      /* horizontal inferior derecha */ 0% 100%,
-      0% 3.4% /* lateral inferior izquierdo */
+      18px 0px,
+      /* Top left cut */ 100% 0px,
+      /* Top right */ 100% calc(100% - 18px),
+      /* Bottom right */ calc(100% - 18px) 100%,
+      /* Bottom right inner point */ 0px 100%,
+      /* Bottom left */ 0px 18px /* Top left inner point */
     );
   }
 

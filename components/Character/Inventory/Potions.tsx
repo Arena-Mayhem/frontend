@@ -17,97 +17,99 @@ export default function PotionsCards() {
           src="/square.svg"
           className="absolute rotate-180 bottom-0 pointer-events-none right-0"
         />
-        {isInventory ? (
-          <>
-            <Potions urlImage="/potionred.svg" PotionName=" HEALTH" />
-            <Potions urlImage="/purplepotion.svg" PotionName="SPEED" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-            <Potions urlImage="/potionlock.svg" PotionName="locked" />
-          </>
-        ) : (
-          <>
-            <Potions
-              urlImage="/potionred.svg"
-              PotionName="HEALTH"
-              price="30USDC"
-            />
-            <Potions
-              urlImage="/purplepotion.svg"
-              PotionName="SPEED"
-              price="30USDC"
-            />
-            <Potions
-              urlImage="/potionlock.svg"
-              PotionName="locked"
-              price="30USDC"
-            />
-            <Potions
-              urlImage="/potionlock.svg"
-              PotionName="locked"
-              price="30USDC"
-            />
-            <Potions
-              urlImage="/potionlock.svg"
-              PotionName="locked"
-              price="30USDC"
-            />
-            <Potions
-              urlImage="/potionlock.svg"
-              PotionName="locked"
-              price="30USDC"
-            />
-            <Potions
-              urlImage="/potionlock.svg"
-              PotionName="locked"
-              price="30USDC"
-            />
-            <Potions
-              urlImage="/potionlock.svg"
-              PotionName="locked"
-              price="30USDC"
-            />
-            <Potions
-              urlImage="/potionlock.svg"
-              PotionName="locked"
-              price="30USDC"
-            />
-            <Potions
-              urlImage="/potionlock.svg"
-              PotionName="locked"
-              price="30USDC"
-            />
-            <Potions
-              urlImage="/potionlock.svg"
-              PotionName="locked"
-              price="30USDC"
-            />
-            <Potions
-              urlImage="/potionlock.svg"
-              PotionName="locked"
-              price="30USDC"
-            />
-          </>
-        )}
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-6 justify-center">
+          {isInventory ? (
+            <>
+              <Potions urlImage="/potionred.svg" PotionName=" HEALTH" />
+              <Potions urlImage="/purplepotion.svg" PotionName="SPEED" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+              <Potions urlImage="/potionlock.svg" PotionName="locked" />
+            </>
+          ) : (
+            <>
+              <Potions
+                urlImage="/potionred.svg"
+                PotionName="HEALTH"
+                price="30USDC"
+              />
+              <Potions
+                urlImage="/purplepotion.svg"
+                PotionName="SPEED"
+                price="30USDC"
+              />
+              <Potions
+                urlImage="/potionlock.svg"
+                PotionName="locked"
+                price="30USDC"
+              />
+              <Potions
+                urlImage="/potionlock.svg"
+                PotionName="locked"
+                price="30USDC"
+              />
+              <Potions
+                urlImage="/potionlock.svg"
+                PotionName="locked"
+                price="30USDC"
+              />
+              <Potions
+                urlImage="/potionlock.svg"
+                PotionName="locked"
+                price="30USDC"
+              />
+              <Potions
+                urlImage="/potionlock.svg"
+                PotionName="locked"
+                price="30USDC"
+              />
+              <Potions
+                urlImage="/potionlock.svg"
+                PotionName="locked"
+                price="30USDC"
+              />
+              <Potions
+                urlImage="/potionlock.svg"
+                PotionName="locked"
+                price="30USDC"
+              />
+              <Potions
+                urlImage="/potionlock.svg"
+                PotionName="locked"
+                price="30USDC"
+              />
+              <Potions
+                urlImage="/potionlock.svg"
+                PotionName="locked"
+                price="30USDC"
+              />
+              <Potions
+                urlImage="/potionlock.svg"
+                PotionName="locked"
+                price="30USDC"
+              />
+            </>
+          )}
+        </div>
       </div>
     </>
   );
