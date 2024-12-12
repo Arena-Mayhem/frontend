@@ -43,7 +43,7 @@ function Champs({
   const { data: hero, challengesData } = useHeroData(fighterHash);
 
   return (
-    <div className="bg-arena-bg p-8 border border-b-[0.1px] border-white/20 rounded-lg w-full  shadow-padentro ">
+    <div className="bg-arena-bg bg-red-400 p-8 border border-b-[0.1px] border-white/20 rounded-lg w-full shadow-padentro ">
       <div className="div-oblicuo bg-arena-black  gradient-border relative ">
         <img
           src="/square.svg"

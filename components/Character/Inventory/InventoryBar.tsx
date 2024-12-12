@@ -8,18 +8,18 @@ export default function InventoryBar() {
   const isActive = (path: string) => path === pathname;
 
   return (
-    <div className="flex  gap-16 ">
+    <div className="flex gap-14">
       <Button
         asChild
         variant={"simple"}
         className={
           isActive("/character/inventory")
-            ? " text-arena-orange/25 gradient-text-name-character"
-            : " "
+            ? " text-arena-orange/25 gradient-text-name-character font-bold"
+            : "font-normal"
         }
       >
         <Link href="/character/inventory/">
-          <p className="text-2xl text-left py-1">SKINS</p>
+          <p className="text-3xl text-left py-1 m-3">SKINS</p>
         </Link>
       </Button>
 
@@ -33,7 +33,7 @@ export default function InventoryBar() {
         }
       >
         <Link href="/character/inventory/weapons">
-          <p className="text-2xl text-left py-1">WEAPONS</p>
+          <p className="text-3xl text-left py-1">WEAPONS</p>
         </Link>
       </Button>
       <Button
@@ -46,7 +46,7 @@ export default function InventoryBar() {
         }
       >
         <Link href="/character/inventory/potions">
-          <p className="text-2xl text-left py-1">POTIONS</p>
+          <p className="text-3xl text-left py-1">POTIONS</p>
         </Link>
       </Button>
     </div>

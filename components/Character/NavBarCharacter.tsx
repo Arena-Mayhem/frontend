@@ -25,8 +25,8 @@ export default function NavBarChallenge() {
         title="INVENTORY"
         description={
           <Fragment>
-            Watch your past matches, check them and improve <br />
-            your game strategies.
+            Here you can see all the items you have accumulated:
+            <br /> skins, weapons and potions.
           </Fragment>
         }
       />
