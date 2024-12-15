@@ -8,7 +8,7 @@ export default function PotionsCards() {
   const isInventory = isActive("/character/inventory/potions");
   return (
     <>
-      <div className="div-oblicuo-inventory gap-7  relative pt-8 bg-arena-black gradient-border flex flex-wrap justify-center  w-full m-8 flex-row">
+      <div className="div-oblicuo gap-7  relative pt-8 bg-arena-black gradient-border flex flex-wrap justify-center  w-full m-8 flex-row">
         <img
           src="/square.svg"
           className="absolute top-0 left-0 pointer-events-none"
