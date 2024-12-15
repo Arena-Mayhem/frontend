@@ -61,53 +61,47 @@ body {
 
   .gradient-border-left {
     border-radius: 4px;
-    border-left: 3px solid var(--Orange-Linear, #f9b208);
+    border-left: 1px solid var(--Orange-Linear, #f9b208);
     border-image: linear-gradient(to bottom, #f9b208, #c14003) 1;
   }
 
+  /* Top left cut */
+  /* Top right */
+  /* Bottom right */
+  /* Bottom right inner point */
+  /* Bottom left */
+  /* Top left inner point */
   .div-oblicuo {
     clip-path: polygon(
-      18px 0px,
-      /* Top left cut */ 100% 0px,
-      /* Top right */ 100% calc(100% - 18px),
-      /* Bottom right */ calc(100% - 18px) 100%,
-      /* Bottom right inner point */ 0px 100%,
-      /* Bottom left */ 0px 18px /* Top left inner point */
+      19px 0px,
+      100% 0px,
+      100% calc(100% - 19px),
+      calc(100% - 19px) 100%,
+      0px 100%,
+      0px 19px
     );
   }
 
   .div-oblicuo-cajita {
     clip-path: polygon(
-      18px 0px,
-      /* Top left cut */ 100% 0px,
-      /* Top right */ 100% calc(100% - 18px),
-      /* Bottom right */ calc(100% - 18px) 100%,
-      /* Bottom right inner point */ 0px 100%,
-      /* Bottom left */ 0px 18px /* Top left inner point */
-    );
-  }
-  /*aqui esta*----------------------------------------------------------------------------------------------------------------------------*/
-  .div-oblicuo-inventory {
-    clip-path: polygon(
-      18px 0px,
-      /* Top left cut */ 100% 0px,
-      /* Top right */ 100% calc(100% - 18px),
-      /* Bottom right */ calc(100% - 18px) 100%,
-      /* Bottom right inner point */ 0px 100%,
-      /* Bottom left */ 0px 18px /* Top left inner point */
+      19px 0px,
+      100% 0px,
+      100% calc(100% - 19px),
+      calc(100% - 19px) 100%,
+      0px 100%,
+      0px 19px
     );
   }
 
   .div-oblicuo-final-character {
     clip-path: polygon(
-      0% 0,
-      /* esquina superior izquierda */ 0% 0,
-      /* repetir esquina superior izquierda */ 100% 0%,
-      /* esquina superior derecha */ 100% 100%,
-      /* esquina inferior derecha */ 100% 100%,
-      /* nueva posición para cortar */ 0% 90%,
-      /* esquina inferior izquierda */ 0% 0%
-        /* repetir esquina superior izquierda */
+      0px 0px,
+      0px 0px,
+      100% 0px,
+      100% 100%,
+      100% 100%,
+      0px calc(100% - 19px),
+      0px 0px
     );
   }
 

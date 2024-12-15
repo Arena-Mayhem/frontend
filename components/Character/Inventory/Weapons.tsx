@@ -8,7 +8,7 @@ export default function WeaponsCards() {
   const isInventory = isActive("/character/inventory/weapons");
   return (
     <>
-      <div className="div-oblicuo-inventory gap-2 relative pt-2 bg-arena-black gradient-border flex flex-wrap justify-left p-9 m-8 flex-row">
+      <div className="div-oblicuo gap-2 relative pt-2 bg-arena-black gradient-border flex flex-wrap justify-left p-9 m-8 flex-row">
         <img
           src="/square.svg"
           className="absolute top-0 left-0 pointer-events-none"
