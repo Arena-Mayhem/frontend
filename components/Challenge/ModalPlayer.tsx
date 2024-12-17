@@ -148,7 +148,7 @@ function ConfigInput({
   return (
     <div
       aria-note-dev="pack-text-icon"
-      className="flex shrink-0 gap-2 div-oblicuo-cajita relative items-center gradient-border h-[4.5rem] px-4 flex-row"
+      className="flex shrink-0 gap-2 div-oblicuo relative items-center gradient-border h-[4.5rem] px-4 flex-row"
     >
       <img
         src="/square.svg"

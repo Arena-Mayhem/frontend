@@ -65,6 +65,13 @@ body {
     border-image: linear-gradient(to bottom, #f9b208, #c14003) 1;
   }
 
+  .gradient-border-horizontal {
+    border-radius: 4px;
+    border-top: 1px solid var(--Orange-Linear, #f9b208);
+    border-image: linear-gradient(to right, #f9b208, #c14003) 1;
+  }
+
+
   /* Top left cut */
   /* Top right */
   /* Bottom right */
@@ -72,17 +79,6 @@ body {
   /* Bottom left */
   /* Top left inner point */
   .div-oblicuo {
-    clip-path: polygon(
-      19px 0px,
-      100% 0px,
-      100% calc(100% - 19px),
-      calc(100% - 19px) 100%,
-      0px 100%,
-      0px 19px
-    );
-  }
-
-  .div-oblicuo-cajita {
     clip-path: polygon(
       19px 0px,
       100% 0px,

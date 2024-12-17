@@ -55,7 +55,7 @@ export default function Navbar() {
 
   const MobileLinks = () => (
     <div className="flex flex-col w-full">
-      <div className="w-full border-b border-white/10">
+      <div className="w-full border-b border-white/10 transition-colors hover:bg-white/5">
         <div className="py-4">
           <NavItem
             href="/challenge"
@@ -65,7 +65,7 @@ export default function Navbar() {
           </NavItem>
         </div>
       </div>
-      <div className="w-full border-b border-white/10">
+      <div className="w-full border-b border-white/10 transition-colors hover:bg-white/5">
         <div className="py-4">
           <NavItem
             href="/character"
@@ -75,14 +75,14 @@ export default function Navbar() {
           </NavItem>
         </div>
       </div>
-      <div className="w-full border-b border-white/10">
+      <div className="w-full border-b border-white/10 transition-colors hover:bg-white/5">
         <div className="py-4">
           <NavItem href="/assets" isActive={pathname.startsWith("/assets")}>
             Assets
           </NavItem>
         </div>
       </div>
-      <div className="w-full border-b border-white/10">
+      <div className="w-full border-b border-white/10 transition-colors hover:bg-white/5">
         <div className="py-4">
           <NavItem
             href="/marketplace"
@@ -92,7 +92,7 @@ export default function Navbar() {
           </NavItem>
         </div>
       </div>
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center transition-colors hover:bg-white/5">
         <div className="py-4">
           <ButtonWallet />
         </div>
