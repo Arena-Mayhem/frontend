@@ -28,23 +28,23 @@ export default function ModalPlayer({
   const { challengesData, data: hero } = useHeroData(fighterHash || "");
 
   return (
-    <article className="flex flex-row mx-auto bg-arena-black w-full  items-center justify-center  rounded-2xl ">
-      <div className="rounded-[55px] bg-arena-bg items-center flex justify-center">
+    <article className="flex flex-row mx-auto bg-arena-black w-full items-center justify-center rounded-2xl p-6">
+      <div className="rounded-[55px] bg-arena-bg items-center flex justify-center mr-2 md:mr-8">
         <Image
-          className=" rounded-xl w-[260px] object-cover h-[350px]"
+          className="rounded-xl md: w-[260px] object-cover h-[350px]"
           width={150}
           height={321}
           src={hero?.imageURL || "/shaman.png"}
           alt=""
         />
       </div>
-      <div className=" flex flex-row-reverse items-center justify-between py-2 gap-16 ">
-        <div className="flex flex-col gap-2 justify-between">
-          <div className="text-3xl text-white px-4 w-full uppercase">
+      <div className="flex flex-row-reverse items-center justify-between md:py-4 gap-2 md:gap-20">
+        <div className="flex flex-col gap-2 md:gap-6 justify-between">
+          <div className="text-xs md:text-3xl text-white px-2 md:px-4 md:w-full uppercase mb-1 md:mb-4">
             {hero?.name || "Nameless Hero"}
           </div>
 
-          <div className="flex flex-row gap-8 p-4">
+          <div className="flex flex-row gap-12 p-4">
             <p className="text-green-500 text-xl">
               V-{challengesData.totalWon}
             </p>
@@ -59,7 +59,7 @@ export default function ModalPlayer({
               health: hero?.hp,
             }}
             disabled={Boolean(fighterHash)}
-            className="pl-4"
+            className="md:pl-6"
             {...props}
           />
         </div>
@@ -88,14 +88,14 @@ export function CharacterConfig({
   }
 >) {
   return (
-    <div className={cn("grid gap-3 grid-cols-2", className)}>
+    <div className={cn("grid gap-x-2 md:gap-x-16 gap-y-2 md:gap-y-6 grid-cols-2", className)}>
       <ConfigInput
         disabled={disabled}
         defaultValue={defaultValues?.speed}
         onInput={onChangeSpeed}
         label="SPEED"
         icon={
-          <GiRunningNinja className="text-arena-orange shrink-0 text-3xl" />
+          <GiRunningNinja className="text-arena-orange shrink-0 text-lg md:text-3xl" />
         }
       />
 
@@ -104,7 +104,7 @@ export function CharacterConfig({
         defaultValue={defaultValues?.atack}
         onInput={onChangeAtack}
         label="ATTACK"
-        icon={<GiPointySword className="text-arena-orange shrink-0 text-3xl" />}
+        icon={<GiPointySword className="text-arena-orange shrink-0 text-lg md:text-3xl" />}
       />
 
       <ConfigInput
@@ -113,7 +113,7 @@ export function CharacterConfig({
         onInput={onChangeDefense}
         label="DEFENSE"
         icon={
-          <GiShoulderArmor className="text-arena-orange shrink-0 text-3xl" />
+          <GiShoulderArmor className="text-arena-orange shrink-0 text-lg text-3xl" />
         }
       />
 
@@ -123,7 +123,7 @@ export function CharacterConfig({
         onInput={onChangeHealth}
         label="HEALTH"
         icon={
-          <BsFillHeartPulseFill className="text-arena-orange shrink-0 text-3xl" />
+          <BsFillHeartPulseFill className="text-arena-orange shrink-0 text-lg text-3xl" />
         }
       />
     </div>
@@ -148,7 +148,7 @@ function ConfigInput({
   return (
     <div
       aria-note-dev="pack-text-icon"
-      className="flex shrink-0 gap-2 div-oblicuo relative items-center gradient-border h-[4.5rem] px-4 flex-row"
+      className="flex shrink-0 gap-2 div-oblicuo relative items-center gradient-border h-12  md:h-16 w-40 md:w-64 px-2 md:px-6"
     >
       <img
         src="/square.svg"
@@ -161,12 +161,12 @@ function ConfigInput({
 
       {icon}
 
-      <p className="text-white uppercase">{label}</p>
+      <p className="text-white uppercase text-xs md:text-base">{label}</p>
 
       <input
         disabled={disabled}
         value={disabled ? DEFAULT_VALUE : undefined}
-        className="outline-none font-light border-orange-400 border-[1px] rounded-md  py-1 text-center w-24 text-white bg-transparent"
+        className="outline-none font-light border-orange-400 border-[1px] rounded-md md:py-1 text-center w-10 md:w-24 text-white bg-transparent ml-1 md:ml-auto"
         onChange={(e) => onInput?.(toFinitePositive(Number(e.target.value)))}
         placeholder={DEFAULT_VALUE}
         autoComplete="off"

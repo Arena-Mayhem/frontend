@@ -8,45 +8,46 @@ export default function InventoryBar() {
   const isActive = (path: string) => path === pathname;
 
   return (
-    <div className="flex gap-14">
+    <div className="flex items-center justify-center md:justify-start gap-0 sm:gap-1 md:gap-4 w-full m-0">
       <Button
         asChild
         variant={"simple"}
-        className={
+        className={`m-0 whitespace-nowrap ${
           isActive("/character/inventory")
-            ? " text-arena-orange/25 gradient-text-name-character font-bold"
+            ? "text-arena-orange/25 gradient-text-name-character font-bold"
             : "font-normal"
-        }
+        }`}
       >
         <Link href="/character/inventory/">
-          <p className="text-3xl text-left py-1 m-3">SKINS</p>
+          <p className="text-sm sm:text-base md:text-3xl py-0.5 sm:py-1 md:py-1 m-0">SKINS</p>
         </Link>
       </Button>
 
       <Button
         asChild
         variant={"simple"}
-        className={
+        className={`m-0 whitespace-nowrap ${
           isActive("/character/inventory/weapons")
-            ? " text-arena-orange/25 gradient-text-name-character"
-            : " "
-        }
+            ? "text-arena-orange/25 gradient-text-name-character"
+            : ""
+        }`}
       >
         <Link href="/character/inventory/weapons">
-          <p className="text-3xl text-left py-1">WEAPONS</p>
+          <p className="text-sm sm:text-base md:text-3xl py-0.5 sm:py-1 md:py-1 m-0">WEAPONS</p>
         </Link>
       </Button>
+
       <Button
         asChild
         variant={"simple"}
-        className={
+        className={`m-0 whitespace-nowrap ${
           isActive("/character/inventory/potions")
-            ? " text-arena-orange/25 gradient-text-name-character"
-            : " "
-        }
+            ? "text-arena-orange/25 gradient-text-name-character"
+            : ""
+        }`}
       >
         <Link href="/character/inventory/potions">
-          <p className="text-3xl text-left py-1">POTIONS</p>
+          <p className="text-sm sm:text-base md:text-3xl py-0.5 sm:py-1 md:py-1 m-0">POTIONS</p>
         </Link>
       </Button>
     </div>
