@@ -19,16 +19,20 @@ export default function SkinsCards() {
   ];
 
   return (
-    <div className="div-oblicuo gap-2 relative bg-arena-black gradient-border flex flex-wrap justify-left p-9 m-8 flex-row">
+    <div className="flex justify-center items-center w-full">
+    <div className="div-oblicuo gap-4 relative bg-arena-black gradient-border flex flex-wrap p-4 sm:p-9 m-4 sm:m-8">
       <img
         src="/square.svg"
-        className="absolute top-0 left-0 pointer-events-non"
+        className="absolute top-0 left-0 pointer-events-none"
+        alt="decorative square"
       />
       <img
         src="/square.svg"
-        className="rotate-180 absolute bottom-0 right-0 pointer-events-non"
+        className="absolute bottom-0 right-0 rotate-180 pointer-events-none"
+        alt="decorative square"
       />
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-left">
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
         {availableSkins.map((skin, index) => (
           <Skins
             key={index}
@@ -38,6 +42,7 @@ export default function SkinsCards() {
           />
         ))}
       </div>
+    </div>
     </div>
   );
 }
@@ -52,23 +57,26 @@ function Skins({
   price?: string;
 }) {
   return (
-    <>
-      <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center w-full">
+      <div className="h-[264px] w-full max-w-[200px]">
         <Image
           src={urlImage}
           alt={ChampName}
-          height={100}
-          width={100}
-          className="h-[264px] w-[200px] bg-arena-bg object-cover overflow-hidden rounded-2xl"
+          height={264}
+          width={200}
+          className="h-full w-full bg-arena-bg object-cover rounded-2xl"
         />
-        <p className="text-white text-center py-2">{ChampName}</p>
+      </div>
+      
+      <div className="flex flex-col items-center justify-center w-full max-w-[200px] mt-2">
+        <p className="text-white text-center mb-2">{ChampName}</p>
         {price && (
-          <Button className="gradient-border items-center justify-center flex flex-row gap-2 p-2 w-[200px]">
+          <Button className="gradient-border items-center justify-center flex flex-row gap-2 p-2 w-full">
             <p className="text-arena-orange">BUY FOR</p>
             <p className="text-white">{price}</p>
           </Button>
         )}
       </div>
-    </>
+    </div>
   );
 }

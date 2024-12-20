@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import {
   Carousel,
   type CarouselApi,
@@ -32,25 +31,33 @@ export default function CarouselCharacter({
   }, [api]);
 
   return (
-    <div className="flex items-center mx-auto justify-between">
-      <Carousel setApi={setApi} className="w-full">
-        <p className="gradient-text-name-character text-xl text-center pb-8">
+    <div className="flex items-center md:mx-auto justify-between md:ml-16">
+      <Carousel 
+        setApi={setApi} 
+        className="w-full"
+        opts={{
+          align: "center",
+          containScroll: "trimSnaps"
+        }}
+      >
+        <p className="gradient-text-name-character text-base md:text-xl text-center pb-1 md:pb-8">
           SKIN SELECTION
         </p>
         <CarouselContent>
           {HERO_LIST.map(({ imageURL, name }, index) => (
-            <CarouselItem key={index}>
-              <div className=" m-2  relative items-center justify-center flex h-[490px]">
+            <CarouselItem key={index} className="basis-full">
+              <div className="md:m-10 relative items-center justify-center flex h-48 md:h-96">
                 <Image
                   src={imageURL}
-                  className="object-cover items-center justify-center flex bg-arena-bg rounded-[55px] h-full"
-                  alt=""
+                  className="object-cover items-center justify-center flex bg-arena-bg rounded-xl md:rounded-[55px] h-full md:w-5/6"
+                  alt={name}
                   width={300}
                   height={500}
+                  priority={index === 0}
                 />
               </div>
 
-              <p className="gradient-text-name-character text-lg text-center pt-8">
+              <p className="gradient-text-name-character text-lg text-center pt-4">
                 {name}
               </p>
             </CarouselItem>
@@ -70,7 +77,7 @@ const HERO_LIST = [
   },
   {
     name: "Monster",
-    imageURL: "/ogro.png",
+    imageURL: "/giant_troll.png",
   },
   {
     name: "Knight",

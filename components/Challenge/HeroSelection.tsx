@@ -12,7 +12,7 @@ import ModalPlayer from "./ModalPlayer";
 import { useHeroes } from "@/lib/heroes";
 import { useEffect, useState } from "react";
 
-export const IMAGES_HEROES = ["/shaman.png", "/wizard.png", "/ogro.png"];
+export const IMAGES_HEROES = ["/shaman.png", "/wizard.png", "/giant_troll.png"];
 
 export default function HeroSelection({
   onHeroSelected,
