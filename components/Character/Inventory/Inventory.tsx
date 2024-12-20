@@ -12,7 +12,7 @@ export default function Inventory() {
   const isPotions = isActive("/character/inventory/potions");
   return (
     <>
-      <div className="flex flex-col bg-arena-bg border-b-[0.1px] border-white/20 shadow-padentro rounded-xl p-8 m-8 bg-no-repeat">
+      <div className="flex flex-col bg-arena-bg border-b-[0.1px] border-white/20 shadow-padentro rounded-xl p-1 m-2 md:pt-10 bg-no-repeat">
         <InventoryBar />
         <div className="flex items-left justify-left">
           {isOngoing ? (
