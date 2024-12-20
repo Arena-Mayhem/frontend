@@ -19,7 +19,7 @@ export default function InventoryBar() {
         }`}
       >
         <Link href="/character/inventory/">
-          <p className="text-2xl md:text-3xl pt-4 md:pt-0 m-0 md:m-4">SKINS</p>
+          <p className="text-xl md:text-3xl pt-4 md:pt-0 m-0 md:m-4">SKINS</p>
         </Link>
       </Button>
 
@@ -33,7 +33,7 @@ export default function InventoryBar() {
         }`}
       >
         <Link href="/character/inventory/weapons">
-          <p className="text-2xl md:text-3xl pt-4 md:pt-0 m-0 md:m-4">WEAPONS</p>
+          <p className="text-xl md:text-3xl pt-4 md:pt-0 m-0 md:m-4">WEAPONS</p>
         </Link>
       </Button>
 
@@ -47,7 +47,7 @@ export default function InventoryBar() {
         }`}
       >
         <Link href="/character/inventory/potions">
-          <p className="text-2xl  md:text-3xl pt-4 md:pt-0 m-0 md:m-5">POTIONS</p>
+          <p className="text-xl  md:text-3xl pt-4 md:pt-0 m-0 md:m-5">POTIONS</p>
         </Link>
       </Button>
     </div>

@@ -19,30 +19,30 @@ export default function SkinsCards() {
   ];
 
   return (
-    <div className="flex justify-center items-center w-full">
-    <div className="div-oblicuo gap-4 relative bg-arena-black gradient-border flex flex-wrap p-4 sm:p-9 m-4 sm:m-8">
-      <img
-        src="/square.svg"
-        className="absolute top-0 left-0 pointer-events-none"
-        alt="decorative square"
-      />
-      <img
-        src="/square.svg"
-        className="absolute bottom-0 right-0 rotate-180 pointer-events-none"
-        alt="decorative square"
-      />
-      
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
-        {availableSkins.map((skin, index) => (
-          <Skins
-            key={index}
-            urlImage={skin.image}
-            ChampName={skin.name}
-            price={!isInventory ? "30USDC" : undefined}
-          />
-        ))}
+    <div className="flex justify-center items-center h-full w-full">
+      <div className="div-oblicuo gap-6 relative bg-arena-black gradient-border flex flex-wrap p-4 sm:p-10 m-4 sm:m-8">
+        <img
+          src="/square.svg"
+          className="absolute top-0 left-0 pointer-events-none"
+          alt="decorative square"
+        />
+        <img
+          src="/square.svg"
+          className="absolute bottom-0 right-0 rotate-180 pointer-events-none"
+          alt="decorative square"
+        />
+        
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
+          {availableSkins.map((skin, index) => (
+            <Skins
+              key={index}
+              urlImage={skin.image}
+              ChampName={skin.name}
+              price={!isInventory ? "30USDC" : undefined}
+            />
+          ))}
+        </div>
       </div>
-    </div>
     </div>
   );
 }
@@ -80,3 +80,4 @@ function Skins({
     </div>
   );
 }
+
