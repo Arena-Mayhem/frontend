@@ -1,3 +1,4 @@
+import type { FighterData } from "@/lib/cartesi";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { generateFighterHash, useHeroData, useHeroes } from "@/lib/heroes";
@@ -19,7 +20,7 @@ export default function CharacterCreation({
   const [isModalWeaponOpen, setIsModalWeaponOpen] = useState(false);
   const [isWeaponSelected, setIsWeaponSelected] = useState(false);
   const [heroData, setHeroData] = useState({
-    weapon: "sword",
+    weapon: "sword", // Default weapon
   } as FighterData);
   const { appendHero, forceSetHeroes } = useHeroes();
 
