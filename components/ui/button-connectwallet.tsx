@@ -13,6 +13,7 @@ import {
   useEnsName,
 } from "wagmi";
 import { mainnet } from "viem/chains";
+import { ComponentProps } from "react";
 
 const pollingConfig = createConfig({
   chains: [mainnet],
@@ -21,7 +22,13 @@ const pollingConfig = createConfig({
   },
 });
 
-export const ButtonWallet = () => {
+type SizeType = "default" | "mobile";
+
+type ButtonWalletProps = Omit<ComponentProps<typeof Button>, 'size'> & {
+  size?: SizeType;
+};
+
+export const ButtonWallet = ({ size = "default" as SizeType, ...props }: ButtonWalletProps) => {
   const { openAccountModal } = useRkAccountModal();
   const { address } = useAccount();
   const { data: ensName } = useEnsName({
@@ -31,13 +38,21 @@ export const ButtonWallet = () => {
     config: pollingConfig,
   });
 
+  const isMobile = size === "mobile";
+  const buttonText = address
+    ? ensName
+      ? ensName
+      : beautifyAddress(address)
+    : isMobile ? "Connect" : "Connect Wallet";
+
   return (
-    <Button onClick={openAccountModal} className="text-lg" variant="arena-main">
-      {address
-        ? ensName
-          ? ensName
-          : beautifyAddress(address)
-        : "Connect Wallet"}
+    <Button 
+      onClick={openAccountModal} 
+      variant="arena-main"
+      className={isMobile ? "text-xs px-1 py-1" : "text-lg"}
+      {...props}
+    >
+      {buttonText}
     </Button>
   );
 };

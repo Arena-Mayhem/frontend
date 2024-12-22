@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, PropsWithChildren, useState } from "react";
-import { ImMenu } from "react-icons/im";
+import { ImMenu, ImCross } from "react-icons/im";
 import { Button } from "../ui/button";
 import { ButtonWallet } from "../ui/button-connectwallet";
 import { usePathname } from "next/navigation";
@@ -106,13 +106,27 @@ export default function Navbar() {
         <div className="items-center max-w-screen-2xl mx-auto gap-16 justify-center hidden lg:flex w-full">
           <DesktopLinks />
         </div>
-        <button
-          type="button"
-          className="lg:hidden mx-auto p-8"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <ImMenu className="text-xl text-arena-orange fill-current" />
-        </button>
+        <div className="flex items-center justify-between w-full px-4 lg:hidden">
+          <button
+            type="button"
+            className="justify-center items-center flex"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? (
+              <ImCross className="ml-5 text-xl text-arena-orange fill-current" />
+            ) : (
+              <ImMenu className="ml-5 text-xl text-arena-orange fill-current" />
+            )}
+          </button>
+          <Link className="ml-6 w-48 h-20" href="/">
+            <Image
+              src={asset_logo}
+              alt=""
+              className="justify-center w-full"
+            />
+          </Link>
+          <ButtonWallet size="mobile" />
+        </div>
       </nav>
       <section
         className={`flex-col items-center w-full [&_button]:underline [&_button]:underline-offset-8 drop-shadow-lg bg-arena-bg border-b border-white/20 lg:hidden ${

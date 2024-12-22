@@ -20,7 +20,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         simple: "text-white text-lg",
         "arena-main":
-          "bg-primary text-sm shadow-parriba gradient-border border-4 border-arena-orange text-center px-10 py-2.5 text-arena-orange",
+          "bg-primary text-sm shadow-parriba gradient-border border-2 border-arena-orange text-center px-10 py-2.5 text-arena-orange",
       },
       size: {
         default: "h-10 px-4 py-2",
