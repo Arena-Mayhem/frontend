@@ -92,11 +92,6 @@ export default function Navbar() {
           </NavItem>
         </div>
       </div>
-      <div className="w-full flex justify-center transition-colors hover:bg-white/5">
-        <div className="py-4">
-          <ButtonWallet />
-        </div>
-      </div>
     </div>
   );
 
