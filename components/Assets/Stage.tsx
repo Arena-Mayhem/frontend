@@ -27,8 +27,8 @@ export default function Stage() {
           <DashboardAssets />
         ) : !isConnected ? (
           <NoAddress
-            title="NOTHING OVER HERE"
-            description="You must connect your wallet to get started!"
+            title="NOTHING TO SEE HERE"
+            description="Please connect before you continue"
           />
         ) : (
           <AdvancedStats />

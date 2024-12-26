@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { ButtonWallet } from "../ui/button-connectwallet";
+import { CreateChallengeButton } from "../ui/button-create-challenge";
+import { useAccount } from "wagmi";
 
 export default function NoAddress({
   title,
@@ -8,19 +10,21 @@ export default function NoAddress({
   title: string;
   description: string;
 }) {
+  const { address } = useAccount();
+
   return (
-    <div className="bg-arena-bg bg-cover p-8 border border-b-[0.1px] m-8 border-white/20 rounded-lg w-full shadow-padentro">
-      <div className="m-16 flex items-center justify-center flex-col">
+    <div className="bg-arena-bg bg-cover p-4 sm:p-8 border border-b mx-4 sm:m-8 border-white/20 rounded-lg sm:max-w-6xl w-full w-[calc(100%-2rem)] shadow-padentro mb-2 mt-4">
+      <div className="mx-10 my-10 sm:m-16 flex items-center justify-center flex-col">
         <Image
           src="/woodensword.svg"
           alt=""
           height={1000}
           width={1000}
-          className="size-56"
+          className="size-40 sm:size-56 mb-4"
         />
-        <h1 className="text-white text-center text-2xl p-2">{title}</h1>
-        <p className="text-white text-center pb-8">{description}</p>
-        <ButtonWallet />
+        <h1 className="text-white text-center text-xl sm:text-2xl p-2 sm:whitespace-normal whitespace-pre-line">{title}</h1>
+        <p className="text-white text-center pb-4 sm:pb-8 sm:whitespace-normal whitespace-pre-line">{description}</p>
+        {address ? <CreateChallengeButton /> : <ButtonWallet />}
       </div>
     </div>
   );
