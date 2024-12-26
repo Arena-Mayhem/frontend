@@ -23,8 +23,8 @@ function ActiveChallenges() {
   if (activeChallenges.length <= 0) {
     return (
       <NoAddress
-        title="NOTHING OVER HERE"
-        description="Create a challenge to get started!"
+        title="NOTHING TO SEE HERE"
+        description="Create a challenge to continue"
       />
     );
   }

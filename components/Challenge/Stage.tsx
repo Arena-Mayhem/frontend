@@ -25,8 +25,8 @@ export default function Stage() {
         <NavBarChallenge />
         {!isConnected ? (
           <NoAddress
-            title="NOTHING OVER HERE"
-            description="You must connect your wallet to get started!"
+            title="NOTHING TO SEE HERE"
+            description="Please connect before you continue"
           />
         ) : isHistory ? (
           <History />
