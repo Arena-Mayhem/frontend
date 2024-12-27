@@ -79,9 +79,24 @@ export default function ModalCustomAsset() {
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="simple" className="text-white gap-3">
+        <Button variant="simple" className="pt-3.5 text-sm md:text-base text-yellow-400 md:text-white flex flex-row items-center justify-end w-full md:w-auto">
+        <div className="flex">
           <span>Add Custom Asset</span>
-          <LuPlus className="text-2xl" />
+          <svg 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-4 h-4 md:w-6 md:h-6"
+          >
+          <path 
+          d="M12 5V19M5 12H19" 
+          stroke="currentColor" 
+          strokeWidth="2" 
+          strokeLinecap="round" 
+          strokeLinejoin="round"
+          />
+          </svg>
+          </div>
         </Button>
       </AlertDialogTrigger>
 
