@@ -1,14 +1,26 @@
 import { cartesi } from "@/lib/chains";
 import { kv } from "@vercel/kv";
-import { createWalletClient, http, parseEther } from "viem";
+import {
+  type Hex,
+  createWalletClient,
+  http,
+  parseEther,
+  zeroAddress,
+} from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 
 const ONE_DAY_IN_MS = 24 * 60 * 60 * 1000;
 
+const DEV_KEY = process.env.DEV_PRIVATE_KEY as Hex | undefined;
+
+if (!DEV_KEY) {
+  console.error("claim/[address]/route.ts:: DEV_PRIVATE_KEY not provided");
+}
+
 const walletClient = createWalletClient({
   transport: http(),
   chain: cartesi,
-  account: privateKeyToAccount(process.env.DEV_PRIVATE_KEY as any),
+  account: DEV_KEY ? privateKeyToAccount(DEV_KEY) : zeroAddress,
 });
 
 export async function POST(
