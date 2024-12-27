@@ -13,7 +13,7 @@ export default function NoAddress({
   const { address } = useAccount();
 
   return (
-    <div className="bg-arena-bg bg-cover p-4 sm:p-8 border border-b mx-4 sm:m-8 border-white/20 rounded-lg sm:max-w-6xl w-full w-[calc(100%-2rem)] shadow-padentro mb-2 mt-4">
+    <div className="bg-arena-bg bg-cover p-4 sm:p-8 border border-b mx-auto sm:m-8 border-white/20 rounded-lg sm:max-w-6xl w-[calc(100%-2rem)] shadow-padentro mb-2 mt-4">
       <div className="mx-10 my-10 sm:m-16 flex items-center justify-center flex-col">
         <Image
           src="/woodensword.svg"

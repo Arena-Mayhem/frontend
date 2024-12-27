@@ -23,15 +23,18 @@ export default function Stage() {
         action={
           <CreateNew
             trigger={
-              <Button variant="simple" className="text-white gap-3">
-                Create New Character
+              <Button variant="simple" className="pt-3.5 text-sm md:text-base text-yellow-400 md:text-white flex flex-row items-center justify-end w-full md:w-auto">
+                <div className="flex">
+                <span className="block md:hidden">New Character</span>
+                <span className="hidden md:block">Create New Character</span>
                 <Image
                   src="/plus.svg"
                   alt=""
                   width={1000}
                   height={1000}
-                  className="w-[24px] h-[24px] "
+                  className="w-4 h-4 md:w-6 md:h-6"
                 />
+                </div>
               </Button>
             }
           />
