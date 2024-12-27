@@ -114,11 +114,7 @@ export default function Navbar() {
             )}
           </button>
           <Link className="ml-6 w-48 h-20" href="/">
-            <Image
-              src={asset_logo}
-              alt=""
-              className="justify-center w-full"
-            />
+            <Image src={asset_logo} alt="" className="justify-center w-full" />
           </Link>
           <ButtonWallet size="mobile" />
         </div>

@@ -88,7 +88,12 @@ export function CharacterConfig({
   }
 >) {
   return (
-    <div className={cn("grid gap-x-2 md:gap-x-16 gap-y-2 md:gap-y-6 grid-cols-2", className)}>
+    <div
+      className={cn(
+        "grid gap-x-2 md:gap-x-16 gap-y-2 md:gap-y-6 grid-cols-2",
+        className,
+      )}
+    >
       <ConfigInput
         disabled={disabled}
         defaultValue={defaultValues?.speed}
@@ -104,7 +109,9 @@ export function CharacterConfig({
         defaultValue={defaultValues?.atack}
         onInput={onChangeAtack}
         label="ATTACK"
-        icon={<GiPointySword className="text-arena-orange shrink-0 text-lg md:text-3xl" />}
+        icon={
+          <GiPointySword className="text-arena-orange shrink-0 text-lg md:text-3xl" />
+        }
       />
 
       <ConfigInput

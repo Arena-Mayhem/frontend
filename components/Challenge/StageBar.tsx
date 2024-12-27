@@ -22,11 +22,7 @@ export default function StageBar({
         <h1 className="-mx-4 text-lg md:text-4xl text-white">{title}</h1>
       </div>
 
-      {action && (
-          <div className="md:mt-0 w-full md:w-auto">
-            {action}
-          </div>
-      )}
+      {action && <div className="md:mt-0 w-full md:w-auto">{action}</div>}
     </div>
   );
 }

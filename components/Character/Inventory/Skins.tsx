@@ -31,7 +31,7 @@ export default function SkinsCards() {
           className="absolute bottom-0 right-0 rotate-180 pointer-events-none"
           alt="decorative square"
         />
-        
+
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
           {availableSkins.map((skin, index) => (
             <Skins
@@ -67,7 +67,7 @@ function Skins({
           className="h-full w-full bg-arena-bg object-cover rounded-2xl"
         />
       </div>
-      
+
       <div className="flex flex-col items-center justify-center w-full max-w-[200px] mt-2">
         <p className="text-white text-center mb-2">{ChampName}</p>
         {price && (
@@ -80,4 +80,3 @@ function Skins({
     </div>
   );
 }
-

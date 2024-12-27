@@ -44,14 +44,14 @@ export default function CharacterCreation({
                   ...heroData,
                   fighterHash: generateFighterHash(heroData),
                 }
-              : hero
-          )
+              : hero,
+          ),
         );
       } else appendHero(heroData);
 
       onCreateHero?.();
       return toast.success(
-        `Hero ${editHeroData ? "updated" : "created"} successfully`
+        `Hero ${editHeroData ? "updated" : "created"} successfully`,
       );
     }
 

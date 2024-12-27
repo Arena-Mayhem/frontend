@@ -71,8 +71,12 @@ function Champs({
                 {hero?.name || "Nameless Hero"}
               </p>
               <div className="flex flex-row gap-4 justify-center min-[1322px]:justify-start">
-                <p className="text-green-500 text-xl">V-{challengesData.totalWon}</p>
-                <p className="text-red-500 text-xl">L-{challengesData.totalLost}</p>
+                <p className="text-green-500 text-xl">
+                  V-{challengesData.totalWon}
+                </p>
+                <p className="text-red-500 text-xl">
+                  L-{challengesData.totalLost}
+                </p>
               </div>
 
               {/* Stats section */}
@@ -108,7 +112,7 @@ function Champs({
               src="/square.svg"
               className="absolute rotate-180 bottom-0 right-0 pointer-events-none"
             />
-<div className="absolute bottom-0 right-0 w-full h-[1px] bg-gradient-to-r from-[#f9b208] to-[#c14003] min-[1322px]:hidden"></div>
+            <div className="absolute bottom-0 right-0 w-full h-[1px] bg-gradient-to-r from-[#f9b208] to-[#c14003] min-[1322px]:hidden"></div>
             <div className="flex w-full gap-4 items-center flex-row min-[1322px]:flex-col justify-center py-4 min-[1322px]:py-0">
               {["/sword.svg", "/potion.svg"].map((icon, index) => (
                 <div key={index} className="hover:animate-wiggle">

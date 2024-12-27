@@ -19,8 +19,8 @@ export default function NavBarChallenge() {
               title="ONGOING"
               description={
                 <Fragment>
-                  Active challenges. Pay the entrance fee and enter <br /> a duel
-                  where only the strongest will survive.
+                  Active challenges. Pay the entrance fee and enter <br /> a
+                  duel where only the strongest will survive.
                 </Fragment>
               }
             />
@@ -42,20 +42,20 @@ export default function NavBarChallenge() {
 
         {/* Yellow line divider */}
         <div className="px-4 -mt-2">
-        <div className="w-full h-px bg-yellow-400" />
-        <div className="px-2 mt-4 min-h-[60px]">
-          {(isActive("/challenge") || pathname === "/") && (
-            <p className="text-xs text-white">
-              Active challenges. Pay the entrance fee and enter a duel
-              where only the strongest will survive.
-            </p>
-          )}
-          {isActive("/challenge/history") && (
-            <p className="text-xs text-white">
-              Watch your past matches, check them and improve
-              your game strategies.
-            </p>
-          )}
+          <div className="w-full h-px bg-yellow-400" />
+          <div className="px-2 mt-4 min-h-[60px]">
+            {(isActive("/challenge") || pathname === "/") && (
+              <p className="text-xs text-white">
+                Active challenges. Pay the entrance fee and enter a duel where
+                only the strongest will survive.
+              </p>
+            )}
+            {isActive("/challenge/history") && (
+              <p className="text-xs text-white">
+                Watch your past matches, check them and improve your game
+                strategies.
+              </p>
+            )}
           </div>
         </div>
       </div>

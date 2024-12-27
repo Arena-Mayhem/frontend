@@ -32,12 +32,12 @@ export default function CarouselCharacter({
 
   return (
     <div className="flex items-center md:mx-auto justify-between md:ml-16">
-      <Carousel 
-        setApi={setApi} 
+      <Carousel
+        setApi={setApi}
         className="w-full"
         opts={{
           align: "center",
-          containScroll: "trimSnaps"
+          containScroll: "trimSnaps",
         }}
       >
         <p className="gradient-text-name-character text-base md:text-xl text-center pb-1 md:pb-8">

@@ -17,11 +17,17 @@ import SelectChamp, { ActionContinue } from "../Challenge/SelectChamp";
 // We keep the same type structure as ButtonWallet for consistency
 type SizeType = "default" | "mobile";
 
-type CreateChallengeButtonProps = Omit<ComponentProps<typeof Button>, 'size'> & {
+type CreateChallengeButtonProps = Omit<
+  ComponentProps<typeof Button>,
+  "size"
+> & {
   size?: SizeType;
 };
 
-export const CreateChallengeButton = ({ size = "default" as SizeType, ...props }: CreateChallengeButtonProps) => {
+export const CreateChallengeButton = ({
+  size = "default" as SizeType,
+  ...props
+}: CreateChallengeButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const { heroes } = useHeroes();
   const isHeroCreated = heroes.length > 0;
@@ -29,7 +35,7 @@ export const CreateChallengeButton = ({ size = "default" as SizeType, ...props }
 
   // The button content
   const ButtonContent = (
-    <Button 
+    <Button
       variant="arena-main"
       className={isMobile ? "text-xs px-1 py-1" : "text-lg"}
       {...props}

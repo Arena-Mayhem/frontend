@@ -24,11 +24,14 @@ const pollingConfig = createConfig({
 
 type SizeType = "default" | "mobile";
 
-type ButtonWalletProps = Omit<ComponentProps<typeof Button>, 'size'> & {
+type ButtonWalletProps = Omit<ComponentProps<typeof Button>, "size"> & {
   size?: SizeType;
 };
 
-export const ButtonWallet = ({ size = "default" as SizeType, ...props }: ButtonWalletProps) => {
+export const ButtonWallet = ({
+  size = "default" as SizeType,
+  ...props
+}: ButtonWalletProps) => {
   const { openAccountModal } = useRkAccountModal();
   const { address } = useAccount();
   const { data: ensName } = useEnsName({
@@ -43,11 +46,13 @@ export const ButtonWallet = ({ size = "default" as SizeType, ...props }: ButtonW
     ? ensName
       ? ensName
       : beautifyAddress(address)
-    : isMobile ? "Connect" : "Connect Wallet";
+    : isMobile
+      ? "Connect"
+      : "Connect Wallet";
 
   return (
-    <Button 
-      onClick={openAccountModal} 
+    <Button
+      onClick={openAccountModal}
       variant="arena-main"
       className={isMobile ? "text-xs px-1 py-1" : "text-lg"}
       {...props}

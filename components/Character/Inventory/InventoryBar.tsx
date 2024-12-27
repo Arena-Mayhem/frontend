@@ -47,7 +47,9 @@ export default function InventoryBar() {
         }`}
       >
         <Link href="/character/inventory/potions">
-          <p className="text-xl  md:text-3xl pt-4 md:pt-0 m-0 md:m-5">POTIONS</p>
+          <p className="text-xl  md:text-3xl pt-4 md:pt-0 m-0 md:m-5">
+            POTIONS
+          </p>
         </Link>
       </Button>
     </div>

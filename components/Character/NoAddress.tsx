@@ -22,8 +22,12 @@ export default function NoAddress({
           width={1000}
           className="size-40 sm:size-56 mb-4"
         />
-        <h1 className="text-white text-center text-xl sm:text-2xl p-2 sm:whitespace-normal whitespace-pre-line">{title}</h1>
-        <p className="text-white text-center pb-4 sm:pb-8 sm:whitespace-normal whitespace-pre-line">{description}</p>
+        <h1 className="text-white text-center text-xl sm:text-2xl p-2 sm:whitespace-normal whitespace-pre-line">
+          {title}
+        </h1>
+        <p className="text-white text-center pb-4 sm:pb-8 sm:whitespace-normal whitespace-pre-line">
+          {description}
+        </p>
         {address ? <CreateChallengeButton /> : <ButtonWallet />}
       </div>
     </div>
