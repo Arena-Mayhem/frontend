@@ -8,7 +8,6 @@ import {
   AlertDialogTrigger,
   AlertDialogCancel,
 } from "@/components/ui/alert-dialog";
-import Image from "next/image";
 import { toast } from "sonner";
 import Bet from "../Challenge/Bet";
 import { useHeroes } from "@/lib/heroes";
