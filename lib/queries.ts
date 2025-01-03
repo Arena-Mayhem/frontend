@@ -116,7 +116,7 @@ export const useReports = () => {
     revalidate,
   };
 };
-
+//to see these changes in action----------
 export const useChallenges = () => {
   const { data = [] } = useNotices();
 
@@ -181,14 +181,81 @@ export const useChallenges = () => {
     } as GameData;
   });
 
+//mock data---------------------------------------------------------------------------------------
+const gameDataArray: GameData[] = [
+  {
+    id: 1,
+    amount: "100",
+    fighter_hash: "hash1",
+    players: [
+      { address: "0x123", name: "Warrior", weapon: "Sword", hp: 100, atk: 80, def: 70, spd: 60 },
+      { address: "0x456", name: "Mage", weapon: "Staff", hp: 60, atk: 90, def: 50, spd: 70 }
+    ],
+    address_opponent: "0x789",
+    address_owner: "0x123",
+    timestamp: 1633036800 * 1000,
+    winner: { address: "0x123", name: "Warrior", weapon: "Sword", hp: 100, atk: 80, def: 70, spd: 60 },
+    status: "finished",
+    token: "0xabc",
+    input: { fighterMetadata: { name: "Warrior", imageURL: "/wizard.png" } }
+  },
+  
+  {
+    id: 2,
+    amount: "200",
+    fighter_hash: "hash2",
+    players: [
+      { address: "0x789", name: "Archer", weapon: "Bow", hp: 80, atk: 70, def: 60, spd: 90 },
+      { address: "0xabc", name: "Mage", weapon: "Staff", hp: 60, atk: 90, def: 50, spd: 70 }
+    ],
+    address_opponent: "0xdef",
+    address_owner: "0x789",
+    timestamp: 1633123200,
+    winner: { address: "0x789", name: "Archer", weapon: "Bow", hp: 80, atk: 70, def: 60, spd: 90 },
+    status: "accepted",
+    token: "0xdef",
+    input: { fighterMetadata: { name: "Archer", imageURL: "/wizard.png" } }
+  },
+  {
+    id: 3,
+    amount: "300",
+    fighter_hash: "hash3",
+    players: [
+      { address: "0xghi", name: "Mage", weapon: "Staff", hp: 60, atk: 90, def: 50, spd: 70 },
+      { address: "0xjkl", name: "Warrior", weapon: "Sword", hp: 100, atk: 80, def: 70, spd: 60 }
+    ],
+    address_opponent: "0xjkl",
+    address_owner: "0xghi",
+    timestamp: 1633209600,
+    winner: { address: "0xghi", name: "Mage", weapon: "Staff", hp: 60, atk: 90, def: 50, spd: 70 },
+    status: "pending",
+    token: "0xghi",
+    input: { fighterMetadata: { name: "Mage", imageURL: "/wizard.png" } }
+  },
+  {
+    id: 4,
+    amount: "150",
+    fighter_hash: "hash4",
+    players: [
+      { address: "0x9e8c9A41d22c6840104Bdc9B68B718da1C462955", name: "Troll1", weapon: "Staff", hp: 120, atk: 90, def: 50, spd: 70 },
+      { address: "0xdef", name: "Troll2", weapon: "Sword", hp: 100, atk: 80, def: 70, spd: 60 }
+    ],
+    address_opponent: "0xdef",
+    address_owner: "0x9e8c9A41d22c6840104Bdc9B68B718da1C462955",
+    timestamp: Date.now() - 1800000,
+    winner: { address: "0x9e8c9A41d22c6840104Bdc9B68B718da1C462955", name: "Troll1", weapon: "Staff", hp: 120, atk: 90, def: 50, spd: 70 },
+    status: "finished",
+    token: "0xabc",
+    input: { fighterMetadata: { name: "Troll1", imageURL: "/giant_troll.png" } }
+  }
+
+
+];
+//moked data---------------------------------------------------------------------------------------
   return {
-    challenges: mergedStates.filter(
-      // Filter out duplicates
-      ({ id }, index, states) =>
-        states.findIndex(({ id: eid }) => eid === id) === index,
-    ),
-  };
+    challenges: gameDataArray,};
 };
+//moked data---------------------------------------------------------------------------------------
 
 export const useAcceptedChallenges = (address: Address) => {
   const FORMAT_ADDRESS = address?.toLocaleLowerCase();
@@ -217,3 +284,4 @@ export const useAcceptedChallenges = (address: Address) => {
     totalLost,
   };
 };
+
