@@ -43,7 +43,7 @@ export default function NavBarChallenge() {
         {/* Yellow line divider */}
         <div className="px-4 -mt-2">
           <div className="w-full h-px bg-yellow-400" />
-          <div className="px-2 mt-4 min-h-[60px]">
+          <div className="px-2 mt-4 min-h-16">
             {(isActive("/challenge") || pathname === "/") && (
               <p className="text-xs text-white">
                 Active challenges. Pay the entrance fee and enter a duel where
