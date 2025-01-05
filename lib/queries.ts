@@ -230,6 +230,22 @@ const gameDataArray: GameData[] = [
     status: "pending",
     token: "0xghi",
     input: { fighterMetadata: { name: "Mage", imageURL: "/wizard.png" } }
+  },
+  {
+    id: 4,
+    amount: "150",
+    fighter_hash: "hash4",
+    players: [
+      { address: "0x9e8c9A41d22c6840104Bdc9B68B718da1C462955", name: "Troll1", weapon: "Staff", hp: 120, atk: 90, def: 50, spd: 70 },
+      { address: "0xdef", name: "Troll2", weapon: "Sword", hp: 100, atk: 80, def: 70, spd: 60 }
+    ],
+    address_opponent: "0xdef",
+    address_owner: "0x9e8c9A41d22c6840104Bdc9B68B718da1C462955",
+    timestamp: Date.now() - 1800000,
+    winner: { address: "0x9e8c9A41d22c6840104Bdc9B68B718da1C462955", name: "Troll1", weapon: "Staff", hp: 120, atk: 90, def: 50, spd: 70 },
+    status: "finished",
+    token: "0xabc",
+    input: { fighterMetadata: { name: "Troll1", imageURL: "/giant_troll.png" } }
   }
 ];
 //moked data---------------------------------------------------------------------------------------
@@ -265,3 +281,4 @@ export const useAcceptedChallenges = (address: Address) => {
     totalLost,
   };
 };
+
