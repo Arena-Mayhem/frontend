@@ -193,13 +193,12 @@ const gameDataArray: GameData[] = [
     ],
     address_opponent: "0x789",
     address_owner: "0x123",
-    timestamp: 1633036800 * 1000,
+    timestamp: 1633036800,
     winner: { address: "0x123", name: "Warrior", weapon: "Sword", hp: 100, atk: 80, def: 70, spd: 60 },
     status: "finished",
     token: "0xabc",
     input: { fighterMetadata: { name: "Warrior", imageURL: "/wizard.png" } }
   },
-  
   {
     id: 2,
     amount: "200",
@@ -248,8 +247,6 @@ const gameDataArray: GameData[] = [
     token: "0xabc",
     input: { fighterMetadata: { name: "Troll1", imageURL: "/giant_troll.png" } }
   }
-
-
 ];
 //moked data---------------------------------------------------------------------------------------
   return {
