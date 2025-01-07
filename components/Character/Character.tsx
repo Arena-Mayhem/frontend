@@ -17,7 +17,6 @@ export default function Character() {
     );
   }
 
-  // Main container with responsive width calculation to match NoAddress component
   return (
     <div className="flex items-center justify-center pt-2 lg:py-8 w-[calc(100%-1rem)] mx-auto sm:m-8">
       <div className="flex flex-col items-center justify-center w-full gap-6">
@@ -43,9 +42,8 @@ function Champs({
   const { data: hero, challengesData } = useHeroData(fighterHash);
 
   return (
-    // Outer container with full width to allow inner negative margins to work
     <div className="md:pt-8 lg:bg-arena-bg pb-4 lg:p-8 lg:border lg:border-b lg:border-white/20 lg:rounded-lg lg:shadow-padentro w-full">
-      {/* Inner black container with negative margins for mobile view */}
+ 
       <div className="mx-2 div-oblicuo bg-arena-black gradient-border relative">
         <img
           src="/square.svg"
@@ -57,7 +55,7 @@ function Champs({
         />
         
         <div className="pt-5 lg:pt-0 p-4 lg:p-0 flex flex-col lg:flex-row md:justify-between w-full">
-          {/* Hero Image Container */}
+
           <div className="pt-6 lg:pt-0 h-52 bg-arena-bg lg:!bg-none rounded-lg lg:rounded-none shadow-padentro lg:shadow-none w-full lg:w-auto flex justify-center lg:justify-start overflow-hidden">
             <div className="relative w-52 lg:w-44">
               <Image
@@ -70,7 +68,7 @@ function Champs({
             </div>
           </div>
 
-          {/* Hero Info Container */}
+
           <div className="flex flex-1 min-w-0 lg:max-w-[45%]">
             <div className="flex flex-col px-2 sm:px-4 w-full justify-center space-y-2 lg:space-y-4">
               <p className="pt-4 lg:pt-0 text-2xl lg:text-4xl text-white font-bold truncate text-center lg:text-left">
@@ -86,7 +84,7 @@ function Champs({
                 </p>
               </div>
 
-              {/* Stats section with responsive sizing */}
+
               <div className="pb-4 lg:pb-0 lg:mr-2 flex flex-row gap-4 justify-center lg:justify-start flex-wrap">
                 {[
                   { icon: "/hp.svg", value: hero?.hp },
@@ -109,7 +107,7 @@ function Champs({
             </div>
           </div>
 
-          {/* Icons section with responsive border and layout */}
+
           <div className="flex lg:border-l relative items-center justify-center lg:div-oblicuo gradient-border-horizontal lg:gradient-border-left lg:w-36">
             <img
               src="/square.svg"
@@ -136,7 +134,7 @@ function Champs({
             </div>
           </div>
 
-          {/* Buttons section */}
+
           <div className="flex gap-4 sm:gap-6 relative lg:gradient-border-left items-center justify-center p-4 pt-6 lg:p-8 flex-col div-oblicuo-final-character lg:w-auto">
             <CreateNewChallenge selectedFighterHash={fighterHash} />
             <CreateNew
