@@ -48,7 +48,7 @@ export default function WeaponsCards() {
           alt="decorative square"
         />
 
-        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 w-full auto-rows-[minmax(min-content,max-content)]">
+        <div className="mx-1 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 lg:gap-10 w-full auto-rows-[minmax(min-content,max-content)]">
           {availableWeapons.map((weapon, index) => (
             <Weapons
               key={index}
@@ -74,7 +74,7 @@ function Weapons({
 }) {
   return (
     <div className="flex flex-col m-2 items-center justify-center min-w-[80px]">
-      <div className="w-20 h-20 min-w-[80px] min-h-[80px]">
+      <div className="w-20 h-20 lg:w-24 lg:h-24 min-w-[80px] min-h-[80px]">
         <Image
           src={urlImage}
           alt={WeaponName}
