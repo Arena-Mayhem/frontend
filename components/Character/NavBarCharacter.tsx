@@ -26,7 +26,7 @@ export default function NavBarChallenge() {
         </div>
         <div className="w-auto">
           <ActiveRoute
-            isActive={isActive("/character/inventory")}
+            isActive={pathname.startsWith("/character/inventory")}
             path="/character/inventory"
             title="INVENTORY"
             description={
@@ -48,7 +48,7 @@ export default function NavBarChallenge() {
                 create new ones.
               </p>
             )}
-            {isActive("/character/inventory") && (
+            {pathname.startsWith("/character/inventory") && (
               <p className="text-xs text-white">
                 Here you can see all the items you have accumulated:
                  skins, weapons and potions.

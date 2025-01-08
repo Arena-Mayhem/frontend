@@ -26,7 +26,7 @@ function ActiveChallenges() {
     );
   }
 
-  // Updated container classes to extend mobile layout
+ 
   return (
     <div className="flex items-center justify-center pt-2 lg:py-8 w-full px-4 lg:mx-8">
       <div className="flex flex-col items-center justify-center w-full gap-6">

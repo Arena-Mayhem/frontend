@@ -36,7 +36,7 @@ export default function PotionsCards() {
 
   return (
     <div className="flex justify-center items-center w-full">
-      <div className="div-oblicuo gap-4 relative bg-arena-black gradient-border flex flex-wrap p-4 sm:p-9 m-4 sm:m-8">
+      <div className="div-oblicuo gap-4 relative bg-arena-black gradient-border flex flex-wrap p-4  sm:p-9 m-4 sm:m-8">
         <img
           src="/square.svg"
           className="absolute top-0 left-0 pointer-events-none"
@@ -48,7 +48,7 @@ export default function PotionsCards() {
           alt="decorative square"
         />
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 w-full auto-rows-[minmax(min-content,max-content)]">
+        <div className="mx-1 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 lg:gap-10 w-full auto-rows-[minmax(min-content,max-content)]">
           {availablePotions.map((potion, index) => (
             <Potions
               key={index}
@@ -74,7 +74,7 @@ function Potions({
 }) {
   return (
     <div className="flex flex-col m-2 items-center justify-center min-w-[80px]">
-      <div className="w-20 h-20 min-w-[80px] min-h-[80px]">
+      <div className="w-20 h-20 lg:w-24 lg:h-24 min-w-[80px] min-h-[80px]">
         <Image
           src={urlImage}
           alt={PotionName}
