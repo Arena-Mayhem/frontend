@@ -48,7 +48,7 @@ export default function PotionsCards() {
           alt="decorative square"
         />
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 w-full auto-rows-[minmax(min-content,max-content)]">
+        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 w-full auto-rows-[minmax(min-content,max-content)]">
           {availablePotions.map((potion, index) => (
             <Potions
               key={index}
