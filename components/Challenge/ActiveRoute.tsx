@@ -22,20 +22,19 @@ const ActiveRoute = ({
         className={`
           ${
             isActive
-              ? "md:bg-gradient-to-r md:gradient-border-left md:from-arena-orange/25 md:to-[#141414] relative items-start md:py-4 py-2 md:rounded-none md:h-30 flex flex-col md:w-full"
-              : "items-start md:rounded-none md:py-4 py-2 md:h-30 flex flex-col md:w-full"
+              ? "md:bg-gradient-to-r md:gradient-border-left md:from-arena-orange/25 md:to-[#141414] relative items-start md:py-4 py-2 md:rounded-none md:h-40 flex flex-col w-full md:w-96"
+              : "items-start md:rounded-none md:py-4 py-2 md:h-40 flex flex-col w-full md:w-102"
           }
-          w-auto h-auto
+          h-auto
         `}
       >
-        <Link href={path} className="w-full">
-          <div className="flex flex-col">
+        <Link href={path} className="w-full h-full">
+          <div className="flex flex-col h-full">
             <span className="inline-block">
               <p
                 className={`
                 text-lg md:text-2xl text-left py-0.5 md:py-1 
                 ${isActive ? "text-arena-orange relative" : "text-white"}
-                whitespace-nowrap
                 ${isActive ? "after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-[#c14003] after:to-[#f9b208] md:after:hidden" : ""}
                 inline-block
               `}
@@ -44,7 +43,7 @@ const ActiveRoute = ({
               </p>
             </span>
             {isActive && (
-              <div className="hidden md:block">
+              <div className="hidden md:block flex-1">
                 <br />
                 <p className="text-xs description mt-2 md:mt-0">
                   {description}
