@@ -77,7 +77,7 @@ export default function Deposit({
         <AlertDialogTrigger asChild>
           <div className=" ">
             <Button
-              className="items-center justify-between gradient-button px-6 py-4 gap-2   gradient-border shadow-parriba w-[168px] text-center h-[50px]"
+              className="items-center justify-between gradient-button  md:px-6 py-4 gap-2   gradient-border shadow-parriba w-72 md:w-40 text-center h-[50px]"
               variant="simple"
             >
               <p className="gradient-text-name-character">DEPOSIT</p>

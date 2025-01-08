@@ -17,7 +17,7 @@ export default function DropMenuAssets({ token }: { token: Address }) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          className="items-center justify-between gradient-button px-6 py-4 gap-2 gradient-border shadow-parriba w-[168px] text-center h-[50px]"
+          className="items-center justify-between gradient-button md:px-6 py-4 gap-2 gradient-border shadow-parriba w-72 md:w-40 text-center h-[50px]"
           variant="simple"
         >
           <p className="gradient-text-name-character">ACTIONS</p>
@@ -30,7 +30,7 @@ export default function DropMenuAssets({ token }: { token: Address }) {
           />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-arena-bg gradient-border w-40">
+      <DropdownMenuContent className="bg-arena-bg gradient-border w-72 md:w-40 flex flex-col">
         <Withdraw token={token} />
         <Transfer token={token} />
       </DropdownMenuContent>
