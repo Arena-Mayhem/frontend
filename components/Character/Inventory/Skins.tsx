@@ -8,14 +8,14 @@ export default function SkinsCards() {
   const isInventory = isActive("/character/inventory");
 
   const availableSkins = [
-    { image: "/giant_troll.png", name: "giant troll" },
-    { image: "/knight.png", name: "medival knight" },
-    { image: "/shaman.png", name: "shaman" },
-    { image: "/locked.png", name: "locked" },
-    { image: "/locked.png", name: "locked" },
-    { image: "/locked.png", name: "locked" },
-    { image: "/locked.png", name: "locked" },
-    { image: "/locked.png", name: "locked" },
+    { image: "/giant_troll.png", name: "giant troll", owned: true },
+    { image: "/knight.png", name: "medival knight", owned: true },
+    { image: "/shaman.png", name: "shaman", owned: true },
+    { image: "/locked.png", name: "locked", owned: false },
+    { image: "/locked.png", name: "locked", owned: false },
+    { image: "/locked.png", name: "locked", owned: false },
+    { image: "/locked.png", name: "locked", owned: false },
+    { image: "/locked.png", name: "locked", owned: false },
   ];
 
   return (
@@ -38,7 +38,8 @@ export default function SkinsCards() {
               key={index}
               urlImage={skin.image}
               ChampName={skin.name}
-              price={!isInventory ? "30USDC" : undefined}
+              isInventory={isInventory}
+              owned={skin.owned}
             />
           ))}
         </div>
@@ -51,10 +52,13 @@ function Skins({
   urlImage,
   ChampName,
   price,
+  isInventory,
+  owned,
 }: {
   urlImage: string;
   ChampName: string;
-  price?: string;
+  isInventory: boolean;
+  owned: boolean;
 }) {
   return (
     <div className="flex flex-col items-center w-full">
@@ -70,13 +74,21 @@ function Skins({
 
       <div className="flex flex-col items-center justify-center w-full max-w-[200px] mt-2">
         <p className="text-white text-center mb-2">{ChampName}</p>
-        {price && (
-          <Button className="gradient-border items-center justify-center flex flex-row gap-2 p-2 w-full">
-            <p className="text-arena-orange">BUY FOR</p>
-            <p className="text-white">{price}</p>
-          </Button>
-        )}
-      </div>
+        {!isInventory && (
+        <Button 
+          disabled={owned}
+          className={`items-center justify-center flex flex-row gap-2 p-2 w-full max-w-[180px] text-sm
+            ${owned 
+              ? 'gradient-border-gray cursor-default' 
+              : 'gradient-border hover:bg-yellow-600/10'
+            }`}
+        >
+          <p className={`${owned ? 'text-gray-400' : 'text-arena-orange'}`}>
+            {owned ? 'owned' : '30 USDC'}
+          </p>
+        </Button>
+      )}
+    </div>
     </div>
   );
 }

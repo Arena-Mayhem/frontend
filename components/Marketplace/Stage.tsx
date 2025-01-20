@@ -16,19 +16,19 @@ const RenderContent = () => {
   return isConnected ? (
     isActive("/marketplace") ? (
       <>
-        <div className="flex flex-col bg-arena-bg border-b-[0.1px] border-white/20 shadow-padentro rounded-xl p-8 m-8 bg-cover w-[1100px]">
+        <div className="bg-arena-bg bg-cover p-0 sm:p-8 border border-b mx-auto sm:m-8 border-white/20 rounded-lg sm:max-w-6xl w-[calc(100%-2rem)] shadow-padentro mb-2 mt-4">
           <SkinsCards />{" "}
         </div>
       </>
     ) : isActive("/marketplace/weapons") ? (
       <>
-        <div className="flex flex-col bg-arena-bg border-b-[0.1px] border-white/20 shadow-padentro rounded-xl p-8 m-8 bg-cover w-[1100px]">
+        <div className="bg-arena-bg bg-cover p-0 sm:p-8 border border-b mx-auto sm:m-8 border-white/20 rounded-lg sm:max-w-6xl w-[calc(100%-2rem)] shadow-padentro mb-2 mt-4">
           <WeaponsCards />{" "}
         </div>
       </>
     ) : isActive("/marketplace/potions") ? (
       <>
-        <div className="flex flex-col bg-arena-bg border-b-[0.1px] border-white/20 shadow-padentro rounded-xl p-8 m-8 bg-cover w-[1100px]">
+        <div className="bg-arena-bg bg-cover p-0 sm:p-8 border border-b mx-auto sm:m-8 border-white/20 rounded-lg sm:max-w-6xl w-[calc(100%-2rem)] shadow-padentro mb-2 mt-4">
           <PotionsCards />{" "}
         </div>
       </>

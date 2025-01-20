@@ -8,30 +8,30 @@ export default function PotionsCards() {
   const isInventory = isActive("/character/inventory/potions");
 
   const availablePotions = [
-    { image: "/potionred.svg", name: "HEALTH" },
-    { image: "/purplepotion.svg", name: "SPEED" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
-    { image: "/potionlock.svg", name: "locked" },
+    { image: "/potionred.svg", name: "HEALTH", owned: true },
+    { image: "/purplepotion.svg", name: "SPEED", owned: true },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
+    { image: "/potionlock.svg", name: "locked", owned: false },
   ];
 
   return (
@@ -54,7 +54,8 @@ export default function PotionsCards() {
               key={index}
               urlImage={potion.image}
               PotionName={potion.name}
-              price={!isInventory ? "30USDC" : undefined}
+              isInventory={isInventory}
+              owned={potion.owned}
             />
           ))}
         </div>
@@ -66,11 +67,13 @@ export default function PotionsCards() {
 function Potions({
   urlImage,
   PotionName,
-  price,
+  isInventory,
+  owned,
 }: {
   urlImage: string;
   PotionName: string;
-  price?: string;
+  isInventory: boolean;
+  owned: boolean;
 }) {
   return (
     <div className="flex flex-col m-2 items-center justify-center min-w-[80px]">
@@ -84,10 +87,18 @@ function Potions({
         />
       </div>
       <p className="text-white text-center py-2 text-sm">{PotionName}</p>
-      {price && (
-        <Button className="gradient-border items-center justify-center flex flex-row gap-2 p-2 w-full max-w-[180px] text-sm">
-          <p className="text-arena-orange">BUY FOR</p>
-          <p className="text-white">{price}</p>
+      {!isInventory && (
+        <Button 
+          disabled={owned}
+          className={`items-center justify-center flex flex-row gap-2 p-2 w-full max-w-[180px] text-sm
+            ${owned 
+              ? 'gradient-border-gray cursor-default' 
+              : 'gradient-border hover:bg-yellow-600/10'
+            }`}
+        >
+          <p className={`${owned ? 'text-gray-400' : 'text-arena-orange'}`}>
+            {owned ? 'owned' : '30 USDC'}
+          </p>
         </Button>
       )}
     </div>

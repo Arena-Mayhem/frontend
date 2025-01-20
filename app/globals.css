@@ -53,6 +53,11 @@ body {
     border-image: linear-gradient(to bottom, #f9b208, #c14003) 1;
   }
 
+  .gradient-border-gray {
+    border: 1px solid var(--Orange-Linear, #9e9c97);
+    border-image: linear-gradient(to bottom, #5f5e5b, #c2b2aa) 1;
+  }
+
   .gradient-border-fino {
     border-radius: 25px;
     border: 1px solid var(--Orange-Linear, #f9b208);
