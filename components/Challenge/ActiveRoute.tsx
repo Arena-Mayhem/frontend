@@ -23,7 +23,7 @@ const ActiveRoute = ({
           ${
             isActive
               ? "md:bg-gradient-to-r md:gradient-border-left md:from-arena-orange/25 md:to-[#141414] relative items-start md:py-4 py-2 md:rounded-none md:h-40 flex flex-col w-full md:w-96"
-              : "items-start md:rounded-none md:py-4 py-2 md:h-40 flex flex-col w-full md:w-102"
+              : "items-start md:rounded-none md:py-4 py-2 flex flex-col w-full md:w-102 md:h-fit"
           }
           h-auto
         `}
