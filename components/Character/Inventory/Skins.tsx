@@ -51,7 +51,6 @@ export default function SkinsCards() {
 function Skins({
   urlImage,
   ChampName,
-  price,
   isInventory,
   owned,
 }: {
