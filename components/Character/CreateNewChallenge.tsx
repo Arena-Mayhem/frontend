@@ -25,7 +25,7 @@ export default function CreateNewChallenge({
       <AlertDialogTrigger asChild>
         <Button
           variant="arena-main"
-          className="gradient-button px-6 py-4 gap-2 text-arena-orange text-lg"
+          className="gradient-button px-6 py-6 gap-2 text-arena-orange text-base"
         >
           New Challenge
           <Image
