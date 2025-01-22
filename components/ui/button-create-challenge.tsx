@@ -40,7 +40,7 @@ export const CreateChallengeButton = ({
       className={isMobile ? "text-xs px-1 py-1" : "text-lg"}
       {...props}
     >
-      Create
+      Create New
       <svg
         viewBox="0 0 24 24"
         fill="none"
