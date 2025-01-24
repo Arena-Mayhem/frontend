@@ -16,7 +16,7 @@ export default function CarouselPotions() {
   return (
     <div className="flex mx-auto justify-center items-end">
       <Carousel>
-        <p className="text-white text-xl text-center pb-8">POTION SELECTION</p>
+        <p className="text-white  text-xl text-center pt-4 md:pt-0 pb-1 md:pb-8">POTION SELECTION</p>
 
         <CarouselContent>
           {images.map((imageUrl, index) => (
@@ -31,7 +31,7 @@ export default function CarouselPotions() {
                 />
               </div>
 
-              <p className="gradient-text-name-character text-lg text-center uppercase pt-8">
+              <p className="gradient-text-name-character text-lg text-center uppercase pt-2 md:pt-8">
                 {PotionsTypes[index]}
               </p>
             </CarouselItem>
