@@ -51,19 +51,6 @@ export default function NavBarMarketplace() {
               }
             />
           </div>
-          <div className="w-auto">
-            <ActiveRoute
-              isActive={pathname.startsWith("/marketplace/random")}
-              path="/marketplace/random"
-              title="RANDOM BOX"
-              description={
-                <Fragment>
-                  Open a random box and get a random item <br /> to improve your
-                  character, rare items for you.
-                </Fragment>
-              }
-            />
-          </div>
         </div>
 
         {/* Yellow line divider */}
@@ -83,11 +70,6 @@ export default function NavBarMarketplace() {
             {pathname.startsWith("/marketplace/potions") && (
               <p className="text-xs text-white">
                 Discovery several usages, a large list of potions can increase your skills and lead you to victory.
-              </p>
-            )}
-            {pathname.startsWith("/marketplace/random") && (
-              <p className="text-xs text-white">
-                Open a random box and get a random item to improve your character, rare items for you.
               </p>
             )}
           </div>
@@ -126,17 +108,6 @@ export default function NavBarMarketplace() {
             <Fragment>
               Discovery several usages, a large list of potions <br /> can
               increase your skills and lead you to victory.
-            </Fragment>
-          }
-        />
-        <ActiveRoute
-          isActive={pathname.startsWith("/marketplace/random")}
-          path="/marketplace/random"
-          title="RANDOM BOX"
-          description={
-            <Fragment>
-              Open a random box and get a random item <br /> to improve your
-              character, rare items for you.
             </Fragment>
           }
         />

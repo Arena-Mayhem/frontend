@@ -15,7 +15,7 @@ export default function Losses({ data }: { data: lossesData[] }) {
           alt="losses"
           height={50}
           width={50}
-          className="size-4 "
+          className="size-6"
         />
         <h1 className="text-white text-2xl">LOSSES</h1>
       </div>
