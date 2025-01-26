@@ -31,6 +31,7 @@ export default function CarouselWeapons() {
     <div className="flex mx-auto justify-center items-end">
       <Carousel className="w-1/2">
         <p className="text-white  text-xl text-center pt-4 md:pt-0 pb-1 md:pb-8">WEAPON SELECTION</p>
+        
         <CarouselContent>
           {images.map((imageUrl, index) => (
             <CarouselItem key={index}>
