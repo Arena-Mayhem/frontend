@@ -31,22 +31,22 @@ export default function CarouselCharacter({
   }, [api]);
 
   return (
-    <div className="flex items-center md:mx-auto justify-between md:ml-16">
+    <div className="flex items-center md:mx-auto justify-between md:ml-8">
       <Carousel
         setApi={setApi}
-        className="w-full"
+        className="w-full max-w-[90%] mx-auto"
         opts={{
           align: "center",
           containScroll: "trimSnaps",
         }}
       >
-        <p className="gradient-text-name-character text-base md:text-xl text-center pb-1 md:pb-8">
+        <p className="gradient-text-name-character text-base md:text-xl text-center pb-1 md:pb-0">
           SKIN SELECTION
         </p>
         <CarouselContent>
           {HERO_LIST.map(({ imageURL, name }, index) => (
             <CarouselItem key={index} className="basis-full">
-              <div className="md:m-10 relative items-center justify-center flex h-48 md:h-96">
+              <div className="md:m-8 relative items-center justify-center flex h-48 md:h-96">
                 <Image
                   src={imageURL}
                   className="object-cover items-center justify-center flex bg-arena-bg rounded-xl md:rounded-[55px] h-full md:w-5/6"
