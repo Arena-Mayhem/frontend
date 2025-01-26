@@ -69,9 +69,10 @@ function Champs({
           </div>
 
 
-          <div className="min-w-[115px] flex flex-1 min-w-0 lg:max-w-[45%]">
+          <div className="min-w-[115px] flex flex-1 lg:max-w-[45%]">
             <div className="flex flex-col px-1 w-full justify-center space-y-2 lg:space-y-2">
-              <p className="pt-4 lg:pt-0 text-2xl lg:text-4xl text-white font-bold truncate text-center lg:text-left">
+              <p className="pt-4 lg:pt-0 text-2xl lg:text-4xl text-white font-bold truncate text-center lg:text-left"
+              title={hero?.name} >
                 {hero?.name || "Nameless Hero"}
               </p>
               <div className="flex flex-row gap-2 justify-center lg:justify-start">
