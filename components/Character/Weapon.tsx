@@ -5,7 +5,7 @@ export default function Weapon({ onConfirm }: { onConfirm?: () => void }) {
   return (
 <div className="flex flex-col md:flex-row items-center justify-center relative h-fit">
   <div className="w-1/2 mt-8 md:mt-0">
-    <h1 className="text-3xl md:text-5xl text-white text-center md:text-left">IT'S TIME TO SELECT YOUR WEAPON</h1>
+    <h1 className="text-3xl md:text-5xl text-white text-center md:text-left">NOW CHOOSE YOUR WEAPON</h1>
     <p className="text-white text-sm md:text-base pt-4 md:pt-8 text-center md:text-left">
       Choose your weapon wisely, each one has unique characteristics that will help you in battle.
     </p>

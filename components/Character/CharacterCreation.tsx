@@ -131,7 +131,7 @@ export default function CharacterCreation({
               <Button
                 onClick={handleCreateHero}
                 variant="simple"
-                className="px:2 md:px-10 py-2 h-auto text-clip bg-orange-400 to-amber-400 text-transparent bg-gradient-to-tl transition animate-duration-1100 animate-delay-2000 from-yellow-200 via-amber-700 bg-300% bg-clip-text animate-gradient animated-gradient gradient-border gap-3"
+                className="px-2 md:px-10 py-2 h-auto text-clip bg-orange-400 to-amber-400 text-transparent bg-gradient-to-tl transition animate-duration-1100 animate-delay-2000 from-yellow-200 via-amber-700 bg-300% bg-clip-text animate-gradient animated-gradient gradient-border gap-3"
               >
                 {isWeaponSelected
                   ? isEditingHeroHash
@@ -145,15 +145,15 @@ export default function CharacterCreation({
       </div>
 
       {/* Desktop Layout - Original version, hidden on mobile */}
-      <div className="hidden md:flex md:gap-8 flex-row items-center justify-center">
-        <div className="w-1/2 -mx-2">
-          <h1 className="text-base md:text-5xl gradient-text-name-character">
+      <div className="hidden md:flex md:gap-10 flex-row items-center justify-center">
+        <div className="w-[55%] -mx-2">
+          <h1 className="text-base md:text-5xl gradient-text-name-character ">
             {editHeroData
               ? "Let's edit your hero data"
               : "It's time to customize your warrior!"}
           </h1>
 
-          <p className="text-white text-xs md:text-base pt-1 md:pt-8">
+          <p className="text-white text-xs md:text-base pt-1 md:pt-4">
             You have 100 points to distribute among their attributes, but be
             careful! Each one has a maximum of 40 points ⛔.
             <br />
@@ -185,7 +185,7 @@ export default function CharacterCreation({
             onChangeDefense={(def) => partialSetHeroData({ def })}
             onChangeHealth={(hp) => partialSetHeroData({ hp })}
             onChangeSpeed={(spd) => partialSetHeroData({ spd })}
-            className="mt-12 mb-6"
+            className="mt-5 mb-6"
           />
 
           {isModalWeaponOpen ? (

@@ -3,10 +3,10 @@ import CarouselPotions from "./CarrouselPotions";
 
 export default function Potion({ onConfirm }: { onConfirm?: () => void }) {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center relative h-fit">
-      <div className="mt-8 md:mt-0">
-        <h1 className="text-3xl md:text-5xl text-white text-center md:text-left">SELECT YOUR POTION</h1>
-        <p className="text-white text-sm md:text-base pt-4 md:pt-8 text-center md:text-left">
+    <div className="flex flex-col md:flex-row items-center justify-center relative h-fit ">
+      <div className="md:w-1/2 mt-8 md:mt-0">
+        <h1 className="text-3xl md:text-5xl text-white text-center md:text-left ">LASTLY SELECT YOUR POTION</h1>
+        <p className="text-white text-sm md:text-base pt-4 md:pt-8 text-center md:text-left ">
           During the battle you can activate a potion to have more chances to
           win, this can be an attack, healing or speed potion.
         </p>
