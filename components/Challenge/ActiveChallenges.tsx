@@ -28,8 +28,8 @@ function ActiveChallenges() {
 
  
   return (
-    <div className="flex items-center justify-center pt-2 lg:py-8 w-full px-4 lg:mx-8">
-      <div className="flex flex-col items-center justify-center w-full gap-6">
+    <div className="flex justify-center lg:justify-start py-2 lg:py-8 w-full md:ml-8">
+      <div className="flex flex-col items-center lg:items-start w-full gap-6">
         {activeChallenges.map((challenge) => (
           <ActiveChallenge key={`challenge-${challenge.id}`} {...challenge} />
         ))}

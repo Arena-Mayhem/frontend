@@ -10,8 +10,8 @@ export default function DashboardAssets() {
   const allTokens = useTokenList();
 
   return (
-    <div className="flex items-center justify-center pt-2 lg:py-8 w-full px-4 lg:mx-8">
-      <div className="flex flex-col items-center justify-center w-full gap-6">
+    <div className="flex justify-center lg:justify-start py-2 lg:py-8 w-full md:ml-8">
+      <div className="flex flex-col items-center lg:items-start w-full gap-6">
         {allTokens.map((token) => (
           <AssetsCards key={`token-${token.address}`} address={token.address} />
         ))}
@@ -38,7 +38,7 @@ function AssetsCards({ address }: { address: Address }) {
           
           {/* Token image and symbol */}
           <div aria-dev-note="caja-imagen"
-               className="flex-shrink-0 md:px-6 pt-6 md:pt-0 relative flex flex-row items-center justify-center overflow-hidden h-full mx-auto">
+               className="flex-shrink-0 md:px-6 pt-6 md:pt-0 relative flex flex-row items-center justify-center overflow-hidden h-full mx-auto md:w-64 ">
             <figure className="size-[4.5rem] shadow-md rounded-full overflow-hidden">
               <img className="object-cover size-full" src={imageURL} alt="asset" />
             </figure>
@@ -51,17 +51,17 @@ function AssetsCards({ address }: { address: Address }) {
           <div className="w-72 mb-1 mt-1 flex items-center h-px bg-arena-orange lg:hidden"></div>
 
           {/* Wallet and Deposit info */}
-          <div className="mx-8 ml-14 flex flex-row items-center justify-center w-full gap-4 md:gap-8">
+          <div className="mx-8 ml-14 md:ml-2 flex flex-row items-center justify-center w-full gap-4 md:gap-8">
             <div aria-note-dev="caja-balance"
-                 className="justify-center flex-col items-center flex">
+                 className="justify-center flex-col items-center">
               <p className="text-white text-sm">YOUR WALLET</p>
-              <p className="text-white">
+              <p className="text-white px-8">
                 {Number(formatUnits(balance, DECIMALS)).toFixed(3)}
               </p>
             </div>
             <div aria-note-dev="caja-deposito"
-                 className="justify-center gradient-border-left flex-col items-center flex">
-              <p className="text-white text-sm px-4 md:px-8">YOUR DEPOSIT</p>
+                 className="justify-center gradient-border-left flex-col items-center flex px-4 md:px-8">
+              <p className="text-white text-sm">YOUR DEPOSIT</p>
               <p className="text-white px-8">
                 {Number(formatUnits(depositBalance.data?.amount || ZERO_BN, DECIMALS)).toFixed(3)}
               </p>
@@ -73,7 +73,7 @@ function AssetsCards({ address }: { address: Address }) {
 
           {/* Action buttons */}
           <div aria-note-dev="caja-join-challenge"
-               className="md:pt-3 flex lg:border-l relative items-center justify-center lg:div-oblicuo lg:gradient-border-left">
+               className="md:pt-3 flex lg:border-l relative items-center justify-center lg:div-oblicuo lg:gradient-border-left lg:w-64">
             <img src="/square.svg" className="absolute top-0 left-0 pointer-events-none hidden lg:block" />
             <div aria-note-dev="box-contain button and profit"
                  className="w-full mx-auto pb-6 md:py-8">

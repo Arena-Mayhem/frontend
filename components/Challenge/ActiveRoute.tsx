@@ -15,7 +15,7 @@ const ActiveRoute = ({
   description?: JSX.Element | string;
 }) => {
   return (
-    <div className="flex justify-start flex-col md:px-[64px] mt-2 md:mt-8">
+    <div className="flex justify-start flex-col md:px-[64px] mt-2 md:mt-8 ">
       <Button
         asChild
         variant={"simple"}

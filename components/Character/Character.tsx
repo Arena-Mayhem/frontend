@@ -18,7 +18,7 @@ export default function Character() {
   }
 
   return (
-    <div className="flex items-center justify-center pt-2 lg:pt-1 w-[calc(100%-1rem)] mx-auto sm:m-7">
+    <div className="flex justify-center lg:justify-start py-2 lg:py-1 w-[calc(100%-1rem)] mx-auto sm:m-7 md:ml-16">
       <div className="flex flex-col items-center justify-center w-full max-w-5xl gap-6">
         {heroes.map((hero) => (
           <Champs

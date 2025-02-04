@@ -31,8 +31,8 @@ export default function History() {
   }
 
   return (
-    <div className="flex items-center justify-center pt-2 md:py-8  px-4 lg:mx-8">
-      <div className="flex flex-col items-center justify-center w-full gap-6">
+    <div className="flex justify-center lg:justify-start py-2 md:py-8 px-4 md:px-0 md:ml-8">
+      <div className="flex flex-col items-center lg:items-start w-full gap-6">
         {history.map((challenge) => (
           <Ended {...challenge} key={`challenge-h-${challenge.id}`} />
         ))}
