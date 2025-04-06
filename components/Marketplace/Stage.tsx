@@ -6,7 +6,6 @@ import NavBarMarketplace from "./NavBarMarketplace";
 import { usePathname } from "next/navigation";
 import PotionsCards from "../Character/Inventory/Potions";
 import { useAccount } from "wagmi";
-import RandomBoxStage from "@/components/Marketplace/RandomBox/RandomBoxStage";
 import NoAddress from "../Character/NoAddress";
 
 const RenderContent = () => {
@@ -30,12 +29,6 @@ const RenderContent = () => {
       <>
         <div className="bg-arena-bg bg-cover p-0 sm:p-8 border border-b mx-auto sm:m-8 border-white/20 rounded-lg sm:max-w-6xl w-[calc(100%-2rem)] shadow-padentro mb-2 mt-4">
           <PotionsCards />{" "}
-        </div>
-      </>
-    ) : isActive("/marketplace/random") ? (
-      <>
-        <div className="flex flex-col bg-arena-bg border-b-[0.1px] border-white/20 shadow-padentro rounded-xl p-8 m-8 bg-cover w-[1100px]">
-          <RandomBoxStage />
         </div>
       </>
     ) : null
