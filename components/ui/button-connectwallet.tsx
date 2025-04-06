@@ -52,6 +52,7 @@ export const ButtonWallet = ({
 
   return (
     <Button
+      suppressHydrationWarning
       onClick={openAccountModal}
       variant="arena-main"
       className={isMobile ? "text-xs px-1 py-1" : "text-lg"}

@@ -14,12 +14,11 @@ import {
 } from "urql";
 import { Toaster } from "@/components/ui/sonner";
 import { cartesi } from "@/lib/chains";
-import { localhost, anvil, hardhat, Chain } from "viem/chains";
+import { localhost, anvil, hardhat } from "viem/chains";
 
-const cinzel = Cinzel({
-  subsets: ["latin"],
-  weight: "700",
-  display: "auto",
+const defaultFont = Cinzel({
+  subsets: [],
+  weight: ["800", "900"],
 });
 
 const IS_DEV = process.env.NODE_ENV === "development";
@@ -50,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning lang="en">
-      <body className={cinzel.className}>
+      <body className={`${defaultFont.className} antialiased`}>
         <Toaster />
         <URLQProvider value={urqlClient}>
           <WagmiProvider config={config}>
