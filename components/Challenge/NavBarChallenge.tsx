@@ -19,8 +19,8 @@ export default function NavBarChallenge() {
               title="ONGOING"
               description={
                 <Fragment>
-                  Active challenges. Pay the entrance fee and enter <br /> a
-                  duel where only the strongest will survive.
+                  Active challenges. Pay the entrance fee and enter a duel where
+                  only the strongest will survive.
                 </Fragment>
               }
             />
@@ -32,8 +32,8 @@ export default function NavBarChallenge() {
               title="HISTORY"
               description={
                 <Fragment>
-                  Watch your past matches, check them and improve <br />
-                  your game strategies.
+                  Watch your past matches, check them and improve your game
+                  strategies.
                 </Fragment>
               }
             />
@@ -61,15 +61,15 @@ export default function NavBarChallenge() {
       </div>
 
       {/* Desktop Layout - Unchanged */}
-      <div className="hidden md:flex md:flex-col">
+      <div className="hidden mt-8 md:flex md:flex-col">
         <ActiveRoute
           isActive={isActive("/challenge") || pathname === "/"}
           path="/challenge"
           title="ONGOING"
           description={
             <Fragment>
-              Active challenges. Pay the entrance fee and enter <br /> a duel
-              where only the strongest will survive.
+              Active challenges. Pay the entrance fee and enter a duel where
+              only the strongest will survive.
             </Fragment>
           }
         />
@@ -79,8 +79,8 @@ export default function NavBarChallenge() {
           title="HISTORY"
           description={
             <Fragment>
-              Watch your past matches, check them and improve <br />
-              your game strategies.
+              Watch your past matches, check them and improve your game
+              strategies.
             </Fragment>
           }
         />

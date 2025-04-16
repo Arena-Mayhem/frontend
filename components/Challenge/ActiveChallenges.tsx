@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Image from "next/image";
 import { formatUnits } from "viem";
 import { formatDistance } from "date-fns";
@@ -8,14 +8,16 @@ import { type GameData, useChallenges } from "@/lib/queries";
 import { useTokenData } from "@/lib/tokens";
 import { useStartMatch } from "@/lib/cartesi";
 
-import JoinChallengeButton from "./JoinChallengeButton";
+import JoinChallengeWidget from "./JoinChallengeWidget";
 import ChallengeInfo from "./ChallengeInfo";
 import NoAddress from "../Character/NoAddress";
 import ModalJoinChallenge from "./ModalJoinChallenge";
 
 function ActiveChallenges() {
   const { challenges } = useChallenges();
-  const activeChallenges = challenges.filter(({ status }) => status != "finished");
+  const activeChallenges = challenges.filter(
+    ({ status }) => status != "finished",
+  );
 
   if (activeChallenges.length <= 0) {
     return (
@@ -26,10 +28,9 @@ function ActiveChallenges() {
     );
   }
 
- 
   return (
     <div className="flex items-center justify-center pt-2 lg:py-8 w-full px-4 lg:mx-8">
-      <div className="flex flex-col items-center justify-center w-full gap-6">
+      <div className="flex flex-col items-center lg:items-stretch justify-center w-full gap-6">
         {activeChallenges.map((challenge) => (
           <ActiveChallenge key={`challenge-${challenge.id}`} {...challenge} />
         ))}
@@ -87,24 +88,31 @@ function ActiveChallenge(props: GameData) {
           </div>
           <ChallengeInfo
             avatar="/tanos.png"
-            created={formatDistance(new Date(props.timestamp * 1000), new Date(), {
-              addSuffix: true,
-            })
+            created={formatDistance(
+              new Date(props.timestamp * 1000),
+              new Date(),
+              {
+                addSuffix: true,
+              },
+            )
               .replace("about", "")
               .replace("less than", "")
               .trim()}
             character_type={props?.input?.fighterMetadata?.name || "Player"}
             owner={props.address_owner}
           />
-          <JoinChallengeButton
+          <JoinChallengeWidget
             onAction={handleJoinChallenge}
             isGameStart={isGameAccepted}
             isGameEnd={props.status === "finished"}
-            amount={`${betValue} ${token?.symbol || "TEST"}`}
+            symbol={token?.symbol || "TEST"}
+            amount={
+              Number(betValue) // force number
+            }
           />
         </div>
       </div>
-      
+
       {isJoining && (
         <ModalJoinChallenge
           challengeId={props.id}

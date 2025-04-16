@@ -6,8 +6,10 @@ export default function JoinChallengeButton({
   onAction,
   isGameStart,
   isGameEnd,
+  symbol,
 }: {
-  amount: string;
+  amount: number;
+  symbol: string;
   onAction?: () => void;
   isGameStart?: boolean;
   isGameEnd?: boolean;
@@ -29,20 +31,21 @@ export default function JoinChallengeButton({
           <Button
             onClick={onAction}
             disabled={isGameEnd}
-            className="gradient-button py-6 w-full max-w-md md:gap-2 md:px-6 text-arena-orange text-lg"
+            className="gradient-button py-6 w-[14rem] md:gap-2 md:px-6 text-arena-orange text-lg"
             variant="arena-main"
           >
             <span>
               {isGameEnd
                 ? "FINISHED"
                 : isGameStart
-                ? "START MATCH"
-                : "JOIN CHALLENGE"}
+                  ? "START MATCH"
+                  : "JOIN NOW"}
             </span>
             <Image src="/mayor.svg" alt="arrow" width={20} height={20} />
           </Button>
-          <p className="pt-4 text-white text-center text-xs md:text-sm font-bold">
-            {isGameEnd ? "Earned" : "Posible profit"}: {amount}
+          <p className="pt-4 whitespace-nowrap text-white text-center text-xs md:text-sm font-bold">
+            {isGameEnd ? "Earned" : "Reward"}:{" "}
+            {amount < 1e-4 ? "< 0.0001" : Number(amount.toFixed(4))} {symbol}
           </p>
         </div>
       </div>
