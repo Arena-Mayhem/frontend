@@ -5,17 +5,15 @@ import {
 } from "@rainbow-me/rainbowkit";
 
 import { Button } from "./button";
-import {
-  createConfig,
-  http,
-  useAccount,
-  useConnectors,
-  useEnsName,
-} from "wagmi";
+import { createConfig, http, useAccount, useEnsName } from "wagmi";
 import { mainnet } from "viem/chains";
 import { ComponentProps } from "react";
+import { cn } from "@/lib/utils";
 
-const pollingConfig = createConfig({
+/**
+ * We consume ENS from ethereum mainnet
+ */
+const mainnetConfig = createConfig({
   chains: [mainnet],
   transports: {
     [mainnet.id]: http(),
@@ -38,7 +36,7 @@ export const ButtonWallet = ({
     address,
     blockTag: "latest",
     chainId: mainnet.id,
-    config: pollingConfig,
+    config: mainnetConfig,
   });
 
   const isMobile = size === "mobile";
@@ -55,7 +53,10 @@ export const ButtonWallet = ({
       suppressHydrationWarning
       onClick={openAccountModal}
       variant="arena-main"
-      className={isMobile ? "text-xs px-1 py-1" : "text-lg"}
+      className={cn(
+        "whitespace-nowrap",
+        isMobile ? "text-xs px-1 py-1" : "text-lg",
+      )}
       {...props}
     >
       {buttonText}
