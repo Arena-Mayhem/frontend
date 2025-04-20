@@ -1,7 +1,7 @@
 "use client";
+
 import { useState } from "react";
 
-import Navbar from "@/components/Navigation/Navbar";
 import StageBar from "@/components/Challenge/StageBar";
 import { useRkAccountModal } from "@/components/ui/button-connectwallet";
 
@@ -48,7 +48,6 @@ export default function Balance() {
   }
   return (
     <>
-      <Navbar />
       <StageBar image="/assets.png" title="ASSETS" />
       <div className="flex md:flex-row flex-col text-white">
         <NavBarAssets />

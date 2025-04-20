@@ -11,7 +11,7 @@ export default function Character() {
   if (heroes.length <= 0) {
     return (
       <NoAddress
-        title="NOTHING OVER HERE"
+        title="NOTHING TO SEE HERE"
         description="Create a character to get started"
       />
     );
@@ -43,7 +43,6 @@ function Champs({
 
   return (
     <div className="lg:-ml-16 md:pt-8 lg:bg-arena-bg pb-4 lg:p-8 lg:border lg:border-b lg:border-white/20 lg:rounded-lg lg:shadow-padentro w-full">
- 
       <div className="mx-1 div-oblicuo bg-arena-black gradient-border relative">
         <img
           src="/square.svg"
@@ -53,9 +52,8 @@ function Champs({
           src="/square.svg"
           className="absolute rotate-180 bottom-0 right-0 pointer-events-none"
         />
-        
-        <div className="lg:-ml-4 pt-5 lg:pt-0 p-4 lg:p-0 flex flex-col lg:flex-row md:justify-between w-full">
 
+        <div className="lg:-ml-4 pt-5 lg:pt-0 p-4 lg:p-0 flex flex-col lg:flex-row md:justify-between w-full">
           <div className="lg:-mr-4 pt-6 lg:pt-0 h-52 bg-arena-bg lg:!bg-none rounded-lg lg:rounded-none shadow-padentro lg:shadow-none w-full lg:w-auto flex justify-center lg:justify-start overflow-hidden">
             <div className="relative w-52 lg:w-44">
               <Image
@@ -68,11 +66,12 @@ function Champs({
             </div>
           </div>
 
-
           <div className="min-w-[115px] flex flex-1 lg:max-w-[45%]">
             <div className="flex flex-col px-1 w-full justify-center space-y-2 lg:space-y-2">
-              <p className="pt-4 lg:pt-0 text-2xl lg:text-4xl text-white font-bold truncate text-center lg:text-left"
-              title={hero?.name} >
+              <p
+                className="pt-4 lg:pt-0 text-2xl lg:text-4xl text-white font-bold truncate text-center lg:text-left"
+                title={hero?.name}
+              >
                 {hero?.name || "Nameless Hero"}
               </p>
               <div className="flex flex-row gap-2 justify-center lg:justify-start">
@@ -85,7 +84,6 @@ function Champs({
                 </p>
               </div>
 
-            
               <div className="pb-4 lg:pb-0 lg:mr-1 flex flex-row gap-2 justify-center lg:justify-start flex-wrap">
                 {[
                   { icon: "/hp.svg", value: hero?.hp },
@@ -108,7 +106,6 @@ function Champs({
             </div>
           </div>
 
-
           <div className="flex lg:border-l relative items-center justify-center lg:div-oblicuo gradient-border-horizontal lg:gradient-border-left lg:w-36">
             <img
               src="/square.svg"
@@ -118,8 +115,7 @@ function Champs({
               src="/square.svg"
               className="absolute rotate-180 bottom-0 right-0 pointer-events-none hidden lg:block"
             />
-            
-            
+
             <div className="flex w-full lg:gap-4 items-center flex-row lg:flex-col justify-center py-4 lg:py-0">
               {["/sword.svg", "/potion.svg"].map((icon, index) => (
                 <div key={index} className="hover:animate-wiggle px-2 lg:px-0">
@@ -134,27 +130,26 @@ function Champs({
               ))}
             </div>
           </div>
-          <div className="pb-4 gradient-border-horizontal lg:hidden"/>
-
+          <div className="pb-4 gradient-border-horizontal lg:hidden" />
 
           <div className="lg:gradient-border-left lg:div-oblicuo-final-character">
             <div className="md:ml-8 md:mx-4 pt-2 md:pt-6 flex gap-4 sm:gap-6 flex-col ">
-            <CreateNewChallenge selectedFighterHash={fighterHash} />
-            <CreateNew
-              isEditingHeroHash={fighterHash}
-              trigger={
-                <Button
-                  className="gradient-button px-5 py-6 gap-2 text-arena-orange text-base"
-                  variant="arena-main"
-                >
-                  EDIT CHARACTER
-                  <Image src="/edit.svg" alt="arrow" width={20} height={20} />
-                </Button>
-              }
-            />
-            <p className="text-white pt-0 text-center text-sm font-bold">
-              earnings: {amount}
-            </p>
+              <CreateNewChallenge selectedFighterHash={fighterHash} />
+              <CreateNew
+                isEditingHeroHash={fighterHash}
+                trigger={
+                  <Button
+                    className="gradient-button px-5 py-6 gap-2 text-arena-orange text-base"
+                    variant="arena-main"
+                  >
+                    EDIT CHARACTER
+                    <Image src="/edit.svg" alt="arrow" width={20} height={20} />
+                  </Button>
+                }
+              />
+              <p className="text-white pt-0 text-center text-sm font-bold">
+                earnings: {amount}
+              </p>
             </div>
           </div>
         </div>

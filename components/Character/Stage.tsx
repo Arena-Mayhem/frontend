@@ -56,7 +56,7 @@ export default function Stage() {
         <NavBarCharacter />
         {!isConnected ? (
           <NoAddress
-            title="NOTHING OVER HERE"
+            title="NOTHING TO SEE HERE"
             description="You must connect your wallet to get started!"
           />
         ) : isInventory ? (
