@@ -1,5 +1,5 @@
 import Stage from "@/components/Assets/Stage";
 
-export default function Balance() {
+export default function PageAssets() {
   return <Stage />;
 }

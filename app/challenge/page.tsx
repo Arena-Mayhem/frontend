@@ -1,5 +1,1 @@
-import Stage from "@/components/Challenge/Stage";
-
-export default function PageChallenge() {
-  return <Stage />;
-}
+export { default } from "./[...slug]/page";

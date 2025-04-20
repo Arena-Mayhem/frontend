@@ -1,5 +1,5 @@
 import Stage from "@/components/Marketplace/Stage";
 
-export default function Weapons() {
+export default function PageMarketPlace() {
   return <Stage />;
 }

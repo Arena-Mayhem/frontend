@@ -1,5 +1,5 @@
 import Stage from "@/components/Challenge/Stage";
 
-export default function History() {
+export default function PageChallenges() {
   return <Stage />;
 }

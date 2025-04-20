@@ -1,5 +1,5 @@
 "use client";
-import StageBar from "../Challenge/StageBar";
+
 import SkinsCards from "../Character/Inventory/Skins";
 import WeaponsCards from "../Character/Inventory/Weapons";
 import NavBarMarketplace from "./NavBarMarketplace";
@@ -39,14 +39,12 @@ const RenderContent = () => {
     />
   );
 };
+
 export default function Stage() {
   return (
-    <>
-      <StageBar image="/charactericon.svg" title="MARKETPLACE" />
-      <div className="flex md:flex-row flex-col">
-        <NavBarMarketplace />
-        {RenderContent()}
-      </div>
-    </>
+    <div className="flex md:flex-row flex-col">
+      <NavBarMarketplace />
+      {RenderContent()}
+    </div>
   );
 }
