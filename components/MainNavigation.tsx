@@ -2,15 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, PropsWithChildren, useState } from "react";
-import { ImMenu, ImCross } from "react-icons/im";
-import { Button } from "../ui/button";
-import { ButtonWallet } from "../ui/button-connectwallet";
 import { usePathname } from "next/navigation";
+import { PropsWithChildren, useState } from "react";
+import { ImMenu, ImCross } from "react-icons/im";
+import { Button } from "@/components/ui/button";
+import { ButtonWallet } from "@/components/ui/button-connectwallet";
 
 import asset_logo from "@/public/logasion.png";
 
-export default function Navbar() {
+export default function MainNavigation() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const isRootPath = pathname === "/";

@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { formatUnits } from "viem";
 import { formatDistance } from "date-fns";
+
+import NoAddress from "@/components/characters/NoAddress";
 
 import { useHeroData } from "@/lib/heroes";
 import { type GameData, useChallenges } from "@/lib/queries";
@@ -10,7 +14,6 @@ import { useStartMatch } from "@/lib/cartesi";
 
 import JoinChallengeWidget from "./JoinChallengeWidget";
 import ChallengeInfo from "./ChallengeInfo";
-import NoAddress from "../Character/NoAddress";
 import ModalJoinChallenge from "./ModalJoinChallenge";
 
 function ActiveChallenges() {

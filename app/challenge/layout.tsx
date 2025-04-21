@@ -4,8 +4,9 @@ import DefaultPageLayout, {
   type PropsWithChildren,
 } from "@/components/DefaultPageLayout";
 
-import PayforCreate from "@/components/Challenge/PayforCreate";
+import PayforCreate from "@/components/challenges/PayforCreate";
 import PageSideBar from "@/components/PageSideBar";
+import WithForceConnect from "@/components/WithForceConnect";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
@@ -31,7 +32,8 @@ export default function Layout({ children }: PropsWithChildren) {
           },
         ]}
       />
-      {children}
+
+      <WithForceConnect>{children}</WithForceConnect>
     </DefaultPageLayout>
   );
 }

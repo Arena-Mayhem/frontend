@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -88,16 +90,17 @@ function Potions({
       </div>
       <p className="text-white text-center py-2 text-sm">{PotionName}</p>
       {!isInventory && (
-        <Button 
+        <Button
           disabled={owned}
           className={`items-center justify-center flex flex-row gap-2 p-2 w-full max-w-[180px] text-sm
-            ${owned 
-              ? 'gradient-border-gray cursor-default' 
-              : 'gradient-border hover:bg-yellow-600/10'
+            ${
+              owned
+                ? "gradient-border-gray cursor-default"
+                : "gradient-border hover:bg-yellow-600/10"
             }`}
         >
-          <p className={`${owned ? 'text-gray-400' : 'text-arena-orange'}`}>
-            {owned ? 'owned' : '30 USDC'}
+          <p className={`${owned ? "text-gray-400" : "text-arena-orange"}`}>
+            {owned ? "owned" : "30 USDC"}
           </p>
         </Button>
       )}

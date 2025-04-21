@@ -3,8 +3,9 @@ import DefaultPageLayout, {
 } from "@/components/DefaultPageLayout";
 
 import { Button } from "@/components/ui/button";
-import CreateNew from "@/components/Character/CreateNew";
+import CreateNew from "@/components/characters/CreateNew";
 import PageSideBar from "@/components/PageSideBar";
+import WithForceConnect from "@/components/WithForceConnect";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
@@ -60,7 +61,7 @@ export default function Layout({ children }: PropsWithChildren) {
         ]}
       />
 
-      {children}
+      <WithForceConnect>{children}</WithForceConnect>
     </DefaultPageLayout>
   );
 }

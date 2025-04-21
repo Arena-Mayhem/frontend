@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { ButtonWallet } from "../ui/button-connectwallet";
 import { CreateChallengeButton } from "../ui/button-create-challenge";

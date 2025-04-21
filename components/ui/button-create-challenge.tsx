@@ -9,10 +9,10 @@ import {
   AlertDialogCancel,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
-import Bet from "../Challenge/Bet";
+import Bet from "../challenges/Bet";
 import { useHeroes } from "@/lib/heroes";
-import CreateNew from "@/components/Character/CreateNew";
-import SelectChamp, { ActionContinue } from "../Challenge/SelectChamp";
+import CreateNew from "@/components/characters/CreateNew";
+import SelectChamp, { ActionContinue } from "../challenges/SelectChamp";
 
 // We keep the same type structure as ButtonWallet for consistency
 type SizeType = "default" | "mobile";
@@ -56,7 +56,7 @@ export const CreateChallengeButton = ({
         />
       </svg>
     </Button>
-    
+
   );
 
   // Return CreateNew component if no heroes exist

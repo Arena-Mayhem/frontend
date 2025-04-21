@@ -1,9 +1,8 @@
-import { Button } from "../ui/button";
-import { SelectToken } from "../Challenge/Select";
+import { Fragment } from "react";
 
 export default function Total() {
   return (
-    <>
+    <Fragment>
       <div className=" items-center border-y-[1px] border-arena-cyan justify-between flex flex-col sm:flex-row lg:max-w-[56rem] mx-auto">
         <div className="px-8 py-4 border-r-2 border-dashed border-arena-cyan">
           <p className="text-arena-green py-2 text-center">PROFIT</p>
@@ -51,6 +50,6 @@ export default function Total() {
           </div>
         </div>
       </div>
-    </>
+    </Fragment>
   );
 }

@@ -2,8 +2,9 @@ import DefaultPageLayout, {
   type PropsWithChildren,
 } from "@/components/DefaultPageLayout";
 
-import ModalCustomAsset from "@/components/Character/ModalCustomAsset";
+import ModalCustomAsset from "@/components/characters/ModalCustomAsset";
 import PageSideBar from "@/components/PageSideBar";
+import WithForceConnect from "@/components/WithForceConnect";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
@@ -34,7 +35,8 @@ export default function Layout({ children }: PropsWithChildren) {
           },
         ]}
       />
-      {children}
+
+      <WithForceConnect>{children}</WithForceConnect>
     </DefaultPageLayout>
   );
 }

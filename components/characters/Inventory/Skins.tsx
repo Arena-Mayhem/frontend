@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -74,20 +76,21 @@ function Skins({
       <div className="flex flex-col items-center justify-center w-full max-w-[200px] mt-2">
         <p className="text-white text-center mb-2">{ChampName}</p>
         {!isInventory && (
-        <Button 
-          disabled={owned}
-          className={`items-center justify-center flex flex-row gap-2 p-2 w-full max-w-[180px] text-sm
-            ${owned 
-              ? 'gradient-border-gray cursor-default' 
-              : 'gradient-border hover:bg-yellow-600/10'
+          <Button
+            disabled={owned}
+            className={`items-center justify-center flex flex-row gap-2 p-2 w-full max-w-[180px] text-sm
+            ${
+              owned
+                ? "gradient-border-gray cursor-default"
+                : "gradient-border hover:bg-yellow-600/10"
             }`}
-        >
-          <p className={`${owned ? 'text-gray-400' : 'text-arena-orange'}`}>
-            {owned ? 'owned' : '30 USDC'}
-          </p>
-        </Button>
-      )}
-    </div>
+          >
+            <p className={`${owned ? "text-gray-400" : "text-arena-orange"}`}>
+              {owned ? "owned" : "30 USDC"}
+            </p>
+          </Button>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import type { WithClassName } from "@/lib/types";
 import {
@@ -15,7 +17,7 @@ import IconCup from "@/components/icons/IconCup";
 import IconSkull from "@/components/icons/IconSkull";
 import { FighterData } from "@/lib/cartesi";
 import { useAccount } from "wagmi";
-import NoAddress from "@/components/Character/NoAddress";
+import NoAddress from "@/components/characters/NoAddress";
 
 export default function History() {
   const { challenges } = useChallenges();

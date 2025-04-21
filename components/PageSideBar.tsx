@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import ActiveRoute from "@/components/Challenge/ActiveRoute";
+import ActiveRoute from "@/components/challenges/ActiveRoute";
 
 export default function PageSideBar({
   routes,

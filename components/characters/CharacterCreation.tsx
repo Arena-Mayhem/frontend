@@ -2,9 +2,9 @@ import type { FighterData } from "@/lib/cartesi";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { generateFighterHash, useHeroData, useHeroes } from "@/lib/heroes";
-import { validateHeroConfig } from "@/components/Challenge/SelectChamp";
+import { validateHeroConfig } from "@/components/challenges/SelectChamp";
+import { CharacterConfig } from "@/components/challenges/ModalPlayer";
 import ArenaInput from "@/components/ArenaInput";
-import { CharacterConfig } from "@/components/Challenge/ModalPlayer";
 import CarouselCharacter from "./CarouselCharacter";
 import SelectWeapon from "./SelectWeapon";
 import { Button } from "@/components/ui/button";
@@ -67,34 +67,37 @@ export default function CharacterCreation({
   return (
     <>
       {/* Mobile Layout - Hidden on desktop */}
-      <div className="flex flex-col w-full min-h-0 space-y-1 sm:space-y-2 md:hidden"> {/* Changed spacing and added min-h-0 */}
-  <div className="text-center flex-shrink-0"> {/* Added flex-shrink-0 to prevent text compression */}
-    <h1 className="text-xl sm:text-2xl md:text-3xl gradient-text-name-character">
-      {editHeroData
-        ? "Let's edit your hero data"
-        : "It's time to customize your warrior!"}
-    </h1>
-
-    <p className="text-white text-xs sm:text-sm md:text-base pt-1 sm:pt-2 md:pt-8">
-      You have 100 points to distribute among their attributes, but be
-      careful! Each one has a maximum of 40 points ⛔.
-      <br />
-      <br />
-      Choose wisely to create a unique and powerful hero
-    </p>
-  </div>
-
-  <div className="md:w-full flex-shrink-0"> {/* Added flex-shrink-0 */}
-    <CarouselCharacter
-      onSkinSelected={({ imageURL }) => {
-        partialSetHeroData({
-          imageURL,
-        });
-      }}
-    />
-  </div>
-
-  <div className="space-y-4 sm:space-y-6 flex-1 overflow-y-auto"> 
+      <div className="flex flex-col w-full min-h-0 space-y-1 sm:space-y-2 md:hidden">
+        {" "}
+        {/* Changed spacing and added min-h-0 */}
+        <div className="text-center flex-shrink-0">
+          {" "}
+          {/* Added flex-shrink-0 to prevent text compression */}
+          <h1 className="text-xl sm:text-2xl md:text-3xl gradient-text-name-character">
+            {editHeroData
+              ? "Let's edit your hero data"
+              : "It's time to customize your warrior!"}
+          </h1>
+          <p className="text-white text-xs sm:text-sm md:text-base pt-1 sm:pt-2 md:pt-8">
+            You have 100 points to distribute among their attributes, but be
+            careful! Each one has a maximum of 40 points ⛔.
+            <br />
+            <br />
+            Choose wisely to create a unique and powerful hero
+          </p>
+        </div>
+        <div className="md:w-full flex-shrink-0">
+          {" "}
+          {/* Added flex-shrink-0 */}
+          <CarouselCharacter
+            onSkinSelected={({ imageURL }) => {
+              partialSetHeroData({
+                imageURL,
+              });
+            }}
+          />
+        </div>
+        <div className="space-y-4 sm:space-y-6 flex-1 overflow-y-auto">
           <ArenaInput
             value={heroData.name}
             onChange={(e) => {
