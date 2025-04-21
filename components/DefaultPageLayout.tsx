@@ -16,7 +16,7 @@ export default function DefaultPageLayout({
   return (
     <Fragment>
       <StageBar title={pageTitle} {...barProps} />
-      {children}
+      <div className="flex md:flex-row flex-col">{children}</div>
     </Fragment>
   );
 }

@@ -1,10 +1,10 @@
-"use client";
-
 import DefaultPageLayout, {
   type PropsWithChildren,
 } from "@/components/DefaultPageLayout";
+
 import { Button } from "@/components/ui/button";
 import CreateNew from "@/components/Character/CreateNew";
+import PageSideBar from "@/components/PageSideBar";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
@@ -41,6 +41,25 @@ export default function Layout({ children }: PropsWithChildren) {
       image="/charactericon.svg"
       pageTitle="CHARACTER"
     >
+      <PageSideBar
+        routes={[
+          {
+            path: "/character",
+            withSubRoutes: false,
+            title: "CHARACTER",
+            description:
+              "Here you can view your character, edit it, assign weapons or create new ones.",
+          },
+          {
+            path: "/character/inventory",
+            withSubRoutes: true,
+            title: "INVENTORY",
+            description:
+              "Here you can see all the items you have accumulated: skins, weapons and potions.",
+          },
+        ]}
+      />
+
       {children}
     </DefaultPageLayout>
   );

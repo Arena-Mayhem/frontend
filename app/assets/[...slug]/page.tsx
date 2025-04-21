@@ -1,5 +1,1 @@
-import Stage from "@/components/Assets/Stage";
-
-export default function PageAssets() {
-  return <Stage />;
-}
+export { default } from "@/components/Assets";

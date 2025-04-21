@@ -2,16 +2,16 @@
 
 import SkinsCards from "../Character/Inventory/Skins";
 import WeaponsCards from "../Character/Inventory/Weapons";
-import NavBarMarketplace from "./NavBarMarketplace";
 import { usePathname } from "next/navigation";
 import PotionsCards from "../Character/Inventory/Potions";
 import { useAccount } from "wagmi";
 import NoAddress from "../Character/NoAddress";
 
-const RenderContent = () => {
+export default function SectionMarketplace() {
   const { isConnected } = useAccount();
   const pathname = usePathname();
   const isActive = (path: string) => path === pathname;
+
   return isConnected ? (
     isActive("/marketplace") ? (
       <>
@@ -37,14 +37,5 @@ const RenderContent = () => {
       title="NOTHING TO SEE HERE"
       description="You must connect your wallet to get started!"
     />
-  );
-};
-
-export default function Stage() {
-  return (
-    <div className="flex md:flex-row flex-col">
-      <NavBarMarketplace />
-      {RenderContent()}
-    </div>
   );
 }
